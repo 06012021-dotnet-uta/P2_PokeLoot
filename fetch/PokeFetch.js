@@ -1,6 +1,6 @@
 /*Business need: retrieving any pokemon's info based on some integer that is given to the function (assums the function is given an array)
-1) Create simple fetch request for one pokemon - DONE
-2) Create simple fetech request and print out a single value for one pokemon -DONE
+1) Create simple fetch request for a single pokemon - DONE
+2) Create simple fetech request and print out a multiple values for one pokemon -DONE
 3) Scale script to work when given an array of integers 
 4) Scale script to work when given an array of integers and return multiple fields
 */ 
@@ -85,15 +85,64 @@ fetchloop();
 
   //function to populate images
   var counter = 0;
-  document.getElementById('view-collection').addEventListener('click', changeImg);
-  function changeImg() {
-    counter++;//maybe put an array here?
-    document.getElementById('picture').src = 'pic-' + counter + '.jpg';
-    document.getElementById('picture').alt = 'pic-' + counter + '.jpg';
+  var userCollection = [1,2,3];
+  document.getElementById('view-collection').addEventListener('click', changeImgs);
+  function changeImgs() {
+    
+    {
+      for(counter=0;counter<userCollection;counter++){      //takes counter & increments 
+        document.getElementById('picture'+`${i}`).src = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+`${i}`+".png";
+        document.getElementById('picture'+`${i}`).alt = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/"+`${i}`+".png";
+      }
+    }
+    
+     //logic to distinguish between shiny & normal?
+       /*
+        function changeShiny() {
+        counter++;//maybe put an array here?
+        document.getElementById('picture').src = 'pic-' + counter + '.jpg';
+        document.getElementById('picture').alt = 'pic-' + counter + '.jpg';*/
 }
+
+
 
 /*Return from break notes: 
 1. Create capability to inject fetch data into html
-2. Configure capability to alter image sources based on values from an array (usercollection array?)
-3. Fix loop to fetch pokemon from user array?
+2. Configure capability to alter image sources based on values from an array (usercollection array?) - DONE
 */
+var counter=0;
+var userCollection = [3,6,9];
+var userSprites = [];
+
+for(let i = 0; i < userCollection.length;i++ ){         
+    userSprites[i] = userCollection[i];
+}
+
+//console.log(userSprites)
+
+for(counter = 0;counter<userCollection;counter++) {                  
+    fetch(`https://pokeapi.co/api/v2/pokemon/${i}`)   
+      .then(res => { if(res.ok) return res.json()})
+      .then(res => console.log(res.sprites.front_default, res.sprites.front_shiny)) //don't print to console but save
+      .then(function handleData(data) {
+          return fetch('example.api')   // should be returned 1 time
+          .then(response => {
+              if(response.ok) return response.json();
+            })
+      })
+  };
+
+  //maybe learn how to do this in angular?
+
+  //------------------------------------------------------------------------------------------------
+  /*Pokemon rarity tiers based on base stats: 5 tiers
+  SSR: Specially Super Rare (650+ BS or 'legendaries')
+  SR: Super Rare            (501-650)
+  R: Rare                   (401-500)
+  C: Common                 (325-400)
+  VC: Very Common           (150-325 BS)
+
+  Because the PokeAPI doesn't support Sword and Shield, the functional ranges of pokemon base stats is [150,800].
+  
+  Source: https://www.reddit.com/r/MandJTV/comments/fvza5t/every_single_pokemon_base_stat_tier_list_finnaly/
+  */
