@@ -1,0 +1,183 @@
+
+Copperajah ImageCopperajah	122	130	69	80	69	30	500
+Aegislash ImageAegislash	60	50	140	50	140	60	500
+Claydol ImageClaydol	60	70	105	70	120	75	500
+Hawlucha ImageHawlucha	78	92	75	74	63	118	500
+Bewear ImageBewear	120	125	80	55	60	60	500
+Mudsdale ImageMudsdale	100	125	100	55	85	35	500
+Vikavolt ImageVikavolt	77	70	90	145	75	43	500
+Aegislash (Blade Forme) ImageAegislash (Blade Forme)	60	140	50	140	50	60	500
+Politoed ImagePolitoed	90	75	75	90	100	70	500
+Scizor ImageScizor	70	130	100	55	80	65	500
+Golduck ImageGolduck	80	82	78	95	80	85	500
+Alakazam ImageAlakazam	55	50	45	135	95	120	500
+Pinsir ImagePinsir	65	125	100	55	70	85	500
+Rapidash ImageRapidash	65	100	70	80	80	105	500
+Heracross ImageHeracross	80	125	75	40	95	85	500
+Stoutland ImageStoutland	85	110	90	45	90	80	500
+Scyther ImageScyther	70	110	80	55	80	105	500
+Bronzong ImageBronzong	67	89	116	79	116	33	500
+Galarian Rapidash ImageGalarian Rapidash	65	100	70	80	80	105	500
+Clawitzer ImageClawitzer	71	73	88	120	89	59	500
+Wailord ImageWailord	170	90	45	90	45	60	500
+Tyranitar ImageTyranitar	100	125	100	55	85	35	500
+Calyrex ImageCalyrex	100	80	80	80	80	80	500
+Carbink ImageCarbink	50	50	150	50	150	50	500
+Drapion ImageDrapion	70	90	110	60	75	95	500
+Gengar ImageGengar	60	65	60	130	75	110	500
+Barbaracle ImageBarbaracle	72	105	115	54	86	68	500
+Toxtricity ImageToxtricity	75	98	70	114	70	75	502
+Arctozolt ImageArctozolt	90	100	90	90	80	55	505
+Dracozolt ImageDracozolt	90	100	90	80	70	75	505
+Orbeetle ImageOrbeetle	60	45	110	80	120	90	505
+Conkeldurr ImageConkeldurr	105	140	95	55	65	45	505
+Alolan Ninetales ImageAlolan Ninetales	73	67	75	81	100	109	505
+Porygon2 ImagePorygon2	85	80	90	105	85	60	505
+Nidoking ImageNidoking	81	102	77	85	75	85	505
+Nidoqueen ImageNidoqueen	90	92	87	75	85	76	505
+Shuckle ImageShuckle	20	10	230	10	230	5	505
+Beartic ImageBeartic	95	130	80	70	80	50	505
+Machamp ImageMachamp	90	130	80	65	85	55	505
+Ninetales ImageNinetales	73	76	75	81	100	100	505
+Arctovish ImageArctovish	90	90	100	80	90	55	505
+Dracovish ImageDracovish	90	90	100	70	80	75	505
+SirfetchSirfetch'd	62	135	95	68	82	65	507
+Polteageist ImagePolteageist	60	65	65	134	114	70	508
+Excadrill ImageExcadrill	110	135	60	50	65	88	508
+Seismitoad ImageSeismitoad	105	95	75	85	75	74	509
+Sandaconda ImageSandaconda	72	107	125	65	70	71	510
+Hatterene ImageHatterene	57	90	95	136	103	29	510
+Grimmsnarl ImageGrimmsnarl	95	120	65	95	75	60	510
+Coalossal ImageCoalossal	110	80	120	80	90	30	510
+Braviary ImageBraviary	100	123	75	57	75	80	510
+Mandibuzz ImageMandibuzz	110	65	105	55	95	80	510
+Steelix ImageSteelix	75	85	200	55	65	30	510
+Mienshao ImageMienshao	65	125	60	95	60	105	510
+Tsareena ImageTsareena	72	120	98	50	98	72	510
+Zoroark ImageZoroark	60	105	60	120	60	105	510
+Poliwrath ImagePoliwrath	90	95	95	70	90	70	510
+Cursola ImageCursola	60	95	50	145	130	30	510
+Weavile ImageWeavile	70	120	65	45	85	125	510
+Avalugg ImageAvalugg	95	117	184	44	46	28	514
+Aerodactyl ImageAerodactyl	80	105	65	60	75	130	515
+Tentacruel ImageTentacruel	80	70	65	80	120	100	515
+Gigalith ImageGigalith	85	135	130	60	80	25	515
+Lickilicky ImageLickilicky	110	85	95	80	95	50	515
+Roserade ImageRoserade	60	70	65	125	105	90	515
+Cryogonal ImageCryogonal	80	50	50	95	135	105	515
+Dhelmise ImageDhelmise	70	131	100	86	90	40	517
+Gallade ImageGallade	68	125	65	65	115	80	518
+Gardevoir ImageGardevoir	68	65	65	125	115	80	518
+Krookodile ImageKrookodile	95	117	80	65	70	92	519
+Obstagoon ImageObstagoon	93	90	101	60	81	95	520
+Chandelure ImageChandelure	60	55	90	145	90	80	520
+Starmie ImageStarmie	60	75	85	100	85	115	520
+Mr. Rime ImageMr. Rime	80	85	75	110	100	70	520
+Flygon ImageFlygon	80	100	80	80	80	100	520
+Klinklang ImageKlinklang	60	100	115	70	85	90	520
+Heat Rotom ImageHeat Rotom	50	65	107	105	107	86	520
+Wash Rotom ImageWash Rotom	50	65	107	105	107	86	520
+Frost Rotom ImageFrost Rotom	50	65	107	105	107	86	520
+Fan Rotom ImageFan Rotom	50	65	107	105	107	86	520
+Mow Rotom ImageMow Rotom	50	65	107	105	107	86	520
+Aurorus ImageAurorus	123	77	72	99	92	58	521
+Tyrantrum ImageTyrantrum	82	121	119	69	59	71	521
+Luxray ImageLuxray	80	120	79	95	79	70	523
+Centiskorch ImageCentiskorch	100	115	65	90	90	65	525
+Dusknoir ImageDusknoir	45	100	135	65	135	45	525
+Sylveon ImageSylveon	95	65	65	110	130	60	525
+Glaceon ImageGlaceon	65	60	110	130	95	65	525
+Leafeon ImageLeafeon	65	110	130	60	65	95	525
+Hippowdon ImageHippowdon	108	112	118	68	72	47	525
+Lucario ImageLucario	70	110	70	115	70	90	525
+Cloyster ImageCloyster	50	95	180	85	45	70	525
+Umbreon ImageUmbreon	95	65	110	60	130	65	525
+Espeon ImageEspeon	65	65	60	130	95	110	525
+Flareon ImageFlareon	65	130	60	95	110	65	525
+Jolteon ImageJolteon	65	65	60	110	95	130	525
+Vaporeon ImageVaporeon	130	65	60	110	95	65	525
+Alolan Exeggutor ImageAlolan Exeggutor	95	105	85	125	75	45	530
+Golisopod ImageGolisopod	75	125	140	60	90	40	530
+Inteleon ImageInteleon	70	85	65	125	65	120	530
+Cinderace ImageCinderace	80	116	75	65	75	119	530
+Rillaboom ImageRillaboom	100	125	90	60	70	85	530
+Blaziken ImageBlaziken	80	120	70	110	70	80	530
+Sceptile ImageSceptile	70	85	65	105	85	120	530
+Exeggutor ImageExeggutor	95	95	85	125	75	55	530
+Aggron ImageAggron	70	110	180	60	60	50	530
+Decidueye ImageDecidueye	78	107	75	100	100	70	530
+Incineroar ImageIncineroar	95	115	90	80	90	60	530
+Primarina ImagePrimarina	80	74	74	126	116	60	530
+Blastoise ImageBlastoise	79	83	100	85	105	78	530
+Walrein ImageWalrein	110	80	90	95	90	65	530
+Mamoswine ImageMamoswine	110	130	80	70	60	80	530
+Crustle ImageCrustle	70	85	65	125	65	120	530
+Charizard ImageCharizard	78	84	78	109	85	100	534
+Type: Null ImageType: Null	95	95	95	95	95	59	534
+Duraludon ImageDuraludon	70	95	115	120	50	85	535
+Magnezone ImageMagnezone	70	70	115	130	90	60	535
+Swampert ImageSwampert	100	110	90	85	90	60	535
+Lapras ImageLapras	130	85	80	85	95	60	535
+Tangrowth ImageTangrowth	100	100	125	110	50	50	535
+Noivern ImageNoivern	85	70	80	97	80	123	535
+Vanilluxe ImageVanilluxe	71	95	85	110	95	79	535
+Rhyperior ImageRhyperior	115	140	130	55	55	40	535
+Porygon-Z ImagePorygon-Z	85	80	70	135	75	90	535
+Crobat ImageCrobat	85	90	80	70	80	130	535
+Kingdra ImageKingdra	75	95	95	95	95	85	540
+Snorlax ImageSnorlax	160	110	65	65	110	30	540
+Naganadel ImageNaganadel	73	73	73	127	73	121	540
+Darmanitan (Zen Mode) ImageDarmanitan (Zen Mode)	105	30	105	140	105	55	540
+Galarian Darmanitan (Zen Mode) ImageGalarian Darmanitan (Zen Mode)	105	160	55	30	55	135	540
+Blissey ImageBlissey	255	10	10	75	135	55	540
+Magmortar ImageMagmortar	75	95	67	125	95	83	540
+Haxorus ImageHaxorus	76	147	90	60	70	97	540
+Milotic ImageMilotic	95	60	79	100	125	81	540
+Electivire ImageElectivire	75	123	67	95	85	95	540
+Gyarados ImageGyarados	95	125	79	60	100	81	540
+Togekiss ImageTogekiss	85	50	95	120	115	80	545
+Virizion ImageVirizion	91	90	72	90	129	108	550
+Urshifu Single-Strike Style ImageUrshifu Single-Strike Style	100	130	100	63	60	97	550
+Urshifu Rapid-Strike Style ImageUrshifu Rapid-Strike Style	100	130	100	63	60	97	550
+Volcarona ImageVolcarona	85	60	65	135	105	100	550
+Arcanine ImageArcanine	90	110	80	100	80	95	555
+Archeops ImageArcheops	75	140	65	112	65	110	567
+Silvally ImageSilvally	95	95	95	95	95	95	570
+Nihilego ImageNihilego	109	53	47	127	131	103	570
+Buzzwole ImageBuzzwole	107	139	139	53	53	79	570
+Pheromosa ImagePheromosa	71	137	37	137	37	151	570
+Xurkitree ImageXurkitree	83	89	71	173	71	83	570
+Celesteela ImageCelesteela	97	101	103	107	101	61	570
+Kartana ImageKartana	59	181	131	59	31	109	570
+Guzzlord ImageGuzzlord	223	101	53	97	53	43	570
+Stakataka ImageStakataka	61	131	211	53	101	13	570
+Blacephalon ImageBlacephalon	53	127	53	151	79	107	570
+Tapu Fini ImageTapu Fini	70	75	115	95	130	85	570
+Tapu Bulu ImageTapu Bulu	70	130	115	85	95	75	570
+Tapu Lele ImageTapu Lele	70	85	75	130	115	95	570
+Tapu Koko ImageTapu Koko	70	115	85	95	75	130	570
+Glastrier ImageGlastrier	100	145	130	65	110	30	580
+Spectrier ImageSpectrier	100	65	60	145	80	130	580
+Keldeo (Resolute Form) ImageKeldeo (Resolute Form)	91	72	90	129	90	108	580
+Raikou ImageRaikou	90	85	75	115	100	115	580
+Suicune ImageSuicune	100	75	115	90	115	85	580
+Entei ImageEntei	115	115	85	90	75	100	580
+Mesprit ImageMesprit	80	105	105	105	105	80	580
+Keldeo ImageKeldeo	91	72	90	129	90	108	580
+Uxie ImageUxie	75	75	130	75	130	95	580
+Azelf ImageAzelf	75	125	70	125	70	115	580
+Tornadus ImageTornadus	79	115	70	125	80	111	580
+Thundurus ImageThundurus	79	115	70	125	80	111	580
+Regice ImageRegice	80	50	100	100	200	50	580
+Regirock ImageRegirock	80	100	200	50	100	50	580
+Registeel ImageRegisteel	80	75	150	75	150	50	580
+Moltres ImageMoltres	90	100	90	125	85	90	580
+Zapdos ImageZapdos	90	90	85	125	90	100	580
+Articuno ImageArticuno	90	85	100	95	125	85	580
+Regieleki ImageRegieleki	80	100	50	100	50	200	580
+Regidrago ImageRegidrago	200	100	50	100	50	80	580
+Cobalion ImageCobalion	91	90	129	90	72	108	580
+Terrakion ImageTerrakion	91	129	90	72	90	108	580
+Galarian Zapdos ImageGalarian Zapdos	90	125	90	85	90	100	580
+Galarian Articuno ImageGalarian Articuno	90	85	85	125	100	95	580
+Galarian Moltres ImageGalarian Moltres	90	85	90	100	125	90	580
