@@ -45,7 +45,7 @@ GO
 --------------------------------------------------
 CREATE TABLE Posts
 (
- PostId          int NOT NULL ,
+ PostId          int NOT NULL IDENTITY(1, 1),
  PokemonId       int NULL ,
  PostTime        datetime NOT NULL ,
  PostDescription varchar(200) NULL ,
@@ -69,7 +69,7 @@ GO
 
 CREATE TABLE Users
 (
- UserId           int NOT NULL ,
+ UserId           int NOT NULL IDENTITY(1, 1),
  FirstName        varchar(50) NOT NULL ,
  LastName         varchar(50) NOT NULL ,
  UserName         varchar(50) NOT NULL ,
