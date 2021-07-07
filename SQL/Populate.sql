@@ -1,13 +1,13 @@
 
 --Populate users--
+ insert into Users(FirstName, LastName, UserName, Password, Email, CoinBalance, AccountLevel, TotalCoinsEarned)
+ Values('Alain', 'Duplan', 'alain.duplan' ,'Revature',  'alain.duplan@revature.net', 100, 20, 200);
+ insert into Users(FirstName, LastName, UserName, Password, Email, CoinBalance, AccountLevel, TotalCoinsEarned)
+ Values('Mason', 'Sanborn', 'mason.sanborn', 'Revature', 'mason.sanborn@revature.net', 200, 40, 400);
+ insert into Users(FirstName, LastName, UserName, Password, Email, CoinBalance, AccountLevel, TotalCoinsEarned)
+ Values('Adrian', 'Gonzalez', 'adrian.gozalez', 'Revature', 'adrian.gonzalez@revature.net', 300, 60, 600);
  insert into Users(UserID, FirstName, LastName, UserName, Password, Email, CoinBalance, AccountLevel, TotalCoinsEarned)
- Values(1000, 'Alain', 'Duplan', 'alain.duplan' ,'Revature',  'alain.duplan@revature.net', 100, 20, 200);
- insert into Users(UserID, FirstName, LastName, UserName, Password, Email, CoinBalance, AccountLevel, TotalCoinsEarned)
- Values(1001, 'Mason', 'Sanborn', 'mason.sanborn', 'Revature', 'mason.sanborn@revature.net', 200, 40, 400);
- insert into Users(UserID, FirstName, LastName, UserName, Password, Email, CoinBalance, AccountLevel, TotalCoinsEarned)
- Values(1002, 'Adrian', 'Gonzalez', 'adrian.gozalez', 'Revature', 'adrian.gonzalez@revature.net', 300, 60, 600);
- insert into Users(UserID, FirstName, LastName, UserName, Password, Email, CoinBalance, AccountLevel, TotalCoinsEarned)
- Values(1003, 'Christian', 'Romero', 'christian.romero', 'Revature', 'christian.romero@revature.net', 400, 80, 800);
+ Values('Christian', 'Romero', 'christian.romero', 'Revature', 'christian.romero@revature.net', 400, 80, 800);
 
 
 --Populate Rarity Types
@@ -47,55 +47,55 @@ SET ANSI_WARNINGS ON;
 
 --populate pokemon cards
  insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1000, 25, 1, 0); 
+values(1, 25, 1, 0); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1001, 68, 1, 0); 
+values(2, 68, 1, 0); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1001, 132, 0, 1); 
+values(2, 132, 0, 1); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1002, 150, 1, 0); 
+values(3, 150, 1, 0); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1002, 94, 0, 1); 
+values(3, 94, 0, 1); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1002, 448, 1, 0); 
+values(3, 448, 1, 0); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1003, 150, 1, 0); 
+values(4, 150, 1, 0); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1003, 448, 0, 2); 
+values(4, 448, 0, 2); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1003, 68, 1, 0); 
+values(4, 68, 1, 0); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1003, 25, 3, 0); 
+values(4, 25, 3, 0); 
 insert into CardCollection(userid, PokemonId, QuantityNormal, QuantityShiny)
-values(1003, 137, 1, 1); 
+values(4, 137, 1, 1); 
 
 
 
 --Populate Posts
- insert into Posts(PostId, PokemonID, PostTime, PostDescription, price, StillAvailable)
- values(1000, 25, GETDATE(),'Who wants to buy my Pikachu for cheap?', 5, 1);
- insert into Posts(PostId, PokemonID, PostTime, PostDescription, price, StillAvailable)
- values(1001, 68, GETDATE(),'Machamp?', 100, 1);
- insert into Posts(PostId, PokemonID, PostTime, PostDescription, price, StillAvailable)
- values(1002, 94, GETDATE(),'Fun Fact: this is Alain''s favorite pokemon', 170, 0);
- insert into Posts(PostId, PokemonID, PostTime, PostDescription, price, StillAvailable)
- values(1003, 132, GETDATE(),'My prize little Ditto', 200, 1);
- insert into Posts(PostId, PokemonID, PostTime, PostDescription, price, StillAvailable)
- values(1004, 150, GETDATE(),'MEWTWO MEWTWO MEWTWO', 500, 1);
- insert into Posts(PostId, PokemonID, PostTime, PostDescription, price, StillAvailable)
- values(1005, 68, GETDATE(),'If your reading this your to late', 200, 0);
- insert into Posts(PostId, PokemonID, PostTime, PostDescription, price, StillAvailable)
- values(1006, 25, GETDATE(),'Pika?', 50000, 1);
-insert into Posts(PostId, PokemonID, PostTime, price, StillAvailable)
- values(1007, 448, GETDATE(), 500, 1);
-insert into Posts(PostId, PokemonID, PostTime, PostDescription, StillAvailable)
- values(1008, 150, GETDATE(),'OMG SHINY MEWTWO', 1);
- insert into Posts(PostId, PostTime, PostDescription, StillAvailable)
- values(1009, GETDATE(),'I''m not selling anything just making a casual post', 1);
- insert into Posts(PostId, PostTime, PostDescription, StillAvailable)
- values(1010, GETDATE(),'When are we getting Galar Pokemon?', 1);
- insert into Posts(PostId, PokemonID, PostTime, PostDescription, StillAvailable)
- values(1011, 68, GETDATE(),'Look at my Machamp!', 1);
+ insert into Posts(PokemonID, PostTime, PostDescription, price, StillAvailable)
+ values(25, GETDATE(),'Who wants to buy my Pikachu for cheap?', 5, 1);
+ insert into Posts(PokemonID, PostTime, PostDescription, price, StillAvailable)
+ values(68, GETDATE(),'Machamp?', 100, 1);
+ insert into Posts(PokemonID, PostTime, PostDescription, price, StillAvailable)
+ values(94, GETDATE(),'Fun Fact: this is Alain''s favorite pokemon', 170, 0);
+ insert into Posts(PokemonID, PostTime, PostDescription, price, StillAvailable)
+ values(132, GETDATE(),'My prize little Ditto', 200, 1);
+ insert into Posts(PokemonID, PostTime, PostDescription, price, StillAvailable)
+ values(150, GETDATE(),'MEWTWO MEWTWO MEWTWO', 500, 1);
+ insert into Posts(PokemonID, PostTime, PostDescription, price, StillAvailable)
+ values(68, GETDATE(),'If your reading this your to late', 200, 0);
+ insert into Posts(PokemonID, PostTime, PostDescription, price, StillAvailable)
+ values(25, GETDATE(),'Pika?', 50000, 1);
+insert into Posts(PokemonID, PostTime, price, StillAvailable)
+ values(448, GETDATE(), 500, 1);
+insert into Posts(PokemonID, PostTime, PostDescription, StillAvailable)
+ values(150, GETDATE(),'OMG SHINY MEWTWO', 1);
+ insert into Posts(PostTime, PostDescription, StillAvailable)
+ values(GETDATE(),'I''m not selling anything just making a casual post', 1);
+ insert into Posts(PostTime, PostDescription, StillAvailable)
+ values(GETDATE(),'When are we getting Galar Pokemon?', 1);
+ insert into Posts(PokemonID, PostTime, PostDescription, StillAvailable)
+ values(68, GETDATE(),'Look at my Machamp!', 1);
  
 
 
@@ -111,29 +111,29 @@ values(3, 'Display');
 
 --Populate display Board
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1000, 1001, 2);
+Values(1, 2, 2);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1001, 1002, 2);
+Values(2, 3, 2);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1002, 1000, 2);
+Values(3, 1, 2);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1003, 1003, 2);
+Values(4, 4, 2);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1004, 1000, 2);
+Values(5, 1, 2);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1005, 1001, 2);
+Values(6, 2, 2);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1006, 1002, 2);
+Values(7, 3, 2);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1007, 1003, 2);
+Values(8, 4, 2);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1008, 1000, 3);
+Values(9, 1, 3);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1009, 1001, 1);
+Values(10, 2, 1);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1010, 1002, 1);
+Values(11, 3, 1);
 insert into DisplayBoard(PostId, UserId, PostType)
-Values(1011, 1003, 3);
+Values(12, 4, 3);
 
 
 
