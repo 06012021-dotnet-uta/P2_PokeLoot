@@ -10,44 +10,60 @@ namespace BusinessLayer
         {
 
         P2DbClass context = new P2DbClass();
-        
-        public Dictionary<PokemonCard, bool> rollLootbox(P2DbContext.Models.User user){
+        /// <summary>
+        /// Generate a lootbox for the player will add a randomly generated card into the users collection and will update the datebase based on if the card generated is shiny or not.
+        /// </summary>
+        /// <param name="currentUser">Current user who is recieving a lootbox</param>
+        /// <returns>Dictionary object where key is the generated card and the value is a boolean stating whether or not the card is shiny</returns>
+        public Dictionary<PokemonCard, bool> rollLootbox(P2DbContext.Models.User currentUser){
             Random random = new Random();
             bool isShiny = false;
-            Dictionary<PokemonCard, bool> dict = new Dictionary<PokemonCard, bool>();
-            P2DbContext.Models.PokemonCard card = lootbox(random);
+            Dictionary<PokemonCard, bool> result = new Dictionary<PokemonCard, bool>();
+            P2DbContext.Models.PokemonCard card = getRandomCard(random); //generates the random card
             int shiny = random.Next(101);
-            CardCollection coll = context.CardCollections.Where(x => x.UserId == user.UserId && x.PokemonId == card.PokemonId).FirstOrDefault();
-            if(coll == null){
-                coll.UserId = user.UserId;
-                coll.PokemonId = card.PokemonId;
-                coll.QuantityNormal = 0;
-                coll.QuantityShiny = 0;
-                //context.CardCollections.Add(coll);
-                
+            CardCollection collection = context.CardCollections.Where(x => x.UserId == currentUser.UserId && x.PokemonId == card.PokemonId).FirstOrDefault();
+            if(collection == null){ //if collection is null(doesn't exist), populate the empty collection with new data and add it to the database
+                collection.UserId = currentUser.UserId;
+                collection.PokemonId = card.PokemonId;
+                collection.QuantityNormal = 0;
+                collection.QuantityShiny = 0;
+                //context.CardCollections.Add(coll);                
             }
-            if(shiny < 99){
-                coll.QuantityNormal++;
+            if(shiny < 99){ //Updates collection to reflect a new normal card
+                collection.QuantityNormal++;
+                context.CardCollections.Attach(collection);
+                context.Entry(collection).Property(x => x.QuantityNormal).IsModified = true;
             }
-            else{
-                coll.QuantityShiny++;
+            else{ //Updates collection to reflect a new shiny card
+                context.CardCollections.Attach(collection);
+                context.Entry(collection).Property(x => x.QuantityShiny).IsModified = true;
+                collection.QuantityShiny++;
                 isShiny = true;     
             }
             //context.SaveChanges();
-            dict.Add(card, isShiny);
-            return dict;            
+            result.Add(card, isShiny);
+            return result;            
         }
 
-        private P2DbContext.Models.PokemonCard lootbox(Random random){            
-            int rare = genRarity(random);
-            var pokeList = context.PokemonCards.Where(x => x.RarityId == rare).ToList();
+        /// <summary>
+        /// Randomly generate a pokemonCard object by first randomly selection the rarity pool and then randomly selecting a pokemon in said said rarity category
+        /// </summary>
+        /// <param name="random">a random object</param>
+        /// <returns>Randomly generated pokemonCard object</returns>
+        private P2DbContext.Models.PokemonCard getRandomCard(Random random){            
+            int rareId = genRarity(random); //generate random rarity based on preset distribution
+            var pokeList = context.PokemonCards.Where(x => x.RarityId == rareId).ToList();
             int rand = random.Next(pokeList.Count);
             return pokeList[rand];
         }
 
+        /// <summary>
+        /// Randomly generats a number to represent the rarity pool to pull a pokemon card from.
+        /// </summary>
+        /// <param name="random">A random object</param>
+        /// <returns>Integer representation of the rarity ID.</returns>
         private int genRarity(Random random){
-            int rand = random.Next(101);
-            
+            int rand = random.Next(101);            
             if(rand <= 40){
                 return 1;
             }
