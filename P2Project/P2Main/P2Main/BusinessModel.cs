@@ -21,16 +21,16 @@ namespace BusinessLayer
         private int genRarity(){
             int rand = random.Next(101);
             
-            if(rand < 40){
+            if(rand <= 40){
                 return 1;
             }
             else if(rand > 40 && rand < 70){
                 return 2;
             }
-            else if(rand > 70 && rand < 90){
+            else if(rand >= 70 && rand < 90){
                 return 3;
             }
-            else if(rand > 90 && rand < 98){
+            else if(rand >= 90 && rand < 98){
                 return 4;
             }
             else {

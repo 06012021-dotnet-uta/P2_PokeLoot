@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\P2DbContext\P2DbContext.csproj" />
+  </ItemGroup>
+
 </Project>
