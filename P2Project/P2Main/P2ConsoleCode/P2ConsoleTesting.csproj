@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\P2DbContext\P2DbContext.csproj" />
+    <ProjectReference Include="..\P2Main\BusinessLayer.csproj" />
   </ItemGroup>
 
 </Project>
