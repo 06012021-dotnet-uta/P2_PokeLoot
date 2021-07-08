@@ -8,17 +8,17 @@ namespace BusinessLayer
         {
 
         P2DbClass context = new P2DbClass();
-        private readonly Random random = new Random();
+        
 
         public P2DbContext.Models.PokemonCard lootbox(){
-            //return 0;
-            int rare = genRarity();
+            Random random = new Random();
+            int rare = genRarity(random);
             var pokeList = context.PokemonCards.Where(x => x.RarityId == rare).ToList();
             int rand = random.Next(pokeList.Count);
             return pokeList[rand];
         }
 
-        private int genRarity(){
+        private int genRarity(Random random){
             int rand = random.Next(101);
             
             if(rand <= 40){

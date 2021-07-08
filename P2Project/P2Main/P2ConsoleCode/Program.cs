@@ -6,6 +6,7 @@ using System.Linq;
 using P2DbContext.Models;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+using BusinessLayer;
 
 namespace P2ConsoleTesting
 {
@@ -16,7 +17,7 @@ namespace P2ConsoleTesting
 
         static void Main(string[] args)
         {
-            Console.WriteLine("Program Start!");
+            /* Console.WriteLine("Program Start!");
 
             ApiClient.BaseAddress = new Uri("https://pokeapi.co/api/v2/pokemon?limit=20");
 
@@ -124,6 +125,27 @@ namespace P2ConsoleTesting
                 context.SaveChanges();
 
             }
+            */
+
+            void testRNG(){
+                BusinessModel busy = new BusinessModel();
+                P2DbContext.Models.PokemonCard poke = new PokemonCard();
+                for(int i = 0; i < 5; i++){
+                poke = busy.lootbox();
+
+                Console.WriteLine();
+                Console.WriteLine("Name:   " + poke.PokemonName);
+                Console.WriteLine("Id:     " + poke.PokemonId);
+                Console.WriteLine("Img:    " + poke.SpriteLink);
+                Console.WriteLine("S-Img:  " + poke.SpriteLinkShiny);
+                Console.WriteLine("Rarity: " + poke.RarityId);
+                Console.WriteLine();
+                }
+
+
+            }
+
+            testRNG();
 
         }
 
