@@ -19,7 +19,7 @@ namespace P2DbContext.Models
         public string SpriteLinkShiny { get; set; }
         public string PokemonName { get; set; }
 
-        public bool isShiny {get; set;} = false;
+        
 
         public virtual RarityType Rarity { get; set; }
         public virtual ICollection<CardCollection> CardCollections { get; set; }
