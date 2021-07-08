@@ -3,9 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31402.337
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2Main", "P2Main\P2Main.csproj", "{68A2471C-CEF7-4BC2-8C68-78E089A3DFFE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessLayer", "P2Main\BusinessLayer.csproj", "{68A2471C-CEF7-4BC2-8C68-78E089A3DFFE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2DbContext", "P2DbContext\P2DbContext.csproj", "{DB94B83A-9420-4AD8-9472-77D74165525D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P2ConsoleTesting", "P2ConsoleCode\P2ConsoleTesting.csproj", "{7632348A-FDAC-468D-9728-2CCE76CAA39C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{DB94B83A-9420-4AD8-9472-77D74165525D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB94B83A-9420-4AD8-9472-77D74165525D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB94B83A-9420-4AD8-9472-77D74165525D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7632348A-FDAC-468D-9728-2CCE76CAA39C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7632348A-FDAC-468D-9728-2CCE76CAA39C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7632348A-FDAC-468D-9728-2CCE76CAA39C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7632348A-FDAC-468D-9728-2CCE76CAA39C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
