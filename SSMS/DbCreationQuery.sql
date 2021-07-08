@@ -25,8 +25,8 @@ CREATE TABLE PokemonCards
 (
  PokemonId       int NOT NULL ,
  RarityId        int NOT NULL ,
- SpriteLink      varchar(50) NOT NULL ,
- SpriteLinkShiny varchar(50) NOT NULL ,
+ SpriteLink      varchar(125) NOT NULL ,
+ SpriteLinkShiny varchar(125) NOT NULL ,
  PokemonName     varchar(20) NOT NULL ,
 
 
