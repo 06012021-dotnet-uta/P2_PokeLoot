@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using P2DbContext.Models;
 using System.Linq;
 
@@ -9,8 +11,10 @@ namespace BusinessLayer
 
         P2DbClass context = new P2DbClass();
         
-        public P2DbContext.Models.PokemonCard rollLootbox(P2DbContext.Models.User user){
+        public Dictionary<PokemonCard, bool> rollLootbox(P2DbContext.Models.User user){
             Random random = new Random();
+            bool isShiny = false;
+            Dictionary<PokemonCard, bool> dict = new Dictionary<PokemonCard, bool>();
             P2DbContext.Models.PokemonCard card = lootbox(random);
             int shiny = random.Next(101);
             CardCollection coll = context.CardCollections.Where(x => x.UserId == user.UserId && x.PokemonId == card.PokemonId).FirstOrDefault();
@@ -27,10 +31,11 @@ namespace BusinessLayer
             }
             else{
                 coll.QuantityShiny++;
-                card.isShiny = true;    
+                isShiny = true;     
             }
             //context.SaveChanges();
-            return card;            
+            dict.Add(card, isShiny);
+            return dict;            
         }
 
         private P2DbContext.Models.PokemonCard lootbox(Random random){            
