@@ -9,5 +9,6 @@ namespace BusinessLayer
 {
     interface IBusinessModel
     {
+        public Dictionary<PokemonCard, bool> rollLootbox(P2DbContext.Models.User currentUser);
     }
 }
