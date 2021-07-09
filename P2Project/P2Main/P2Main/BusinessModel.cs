@@ -19,7 +19,30 @@ namespace BusinessLayer
             Random random = new Random();
             bool isShiny = false;
             Dictionary<PokemonCard, bool> result = new Dictionary<PokemonCard, bool>();
-            P2DbContext.Models.PokemonCard card = getRandomCard(random); //generates the random card
+            
+            P2DbContext.Models.PokemonCard card;
+            int rareId; //generate random rarity based on preset distribution
+            int rand = random.Next(101);            
+            if(rand <= 40){
+                rareId = 1;
+            }
+            else if(rand > 40 && rand < 70){
+                rareId = 2;
+            }
+            else if(rand >= 70 && rand < 90){
+                rareId = 3;
+            }
+            else if(rand >= 90 && rand < 98){
+                rareId = 4;
+            }
+            else {
+                rareId = 5;
+            }
+
+            var pokeList = context.PokemonCards.Where(x => x.RarityId == rareId).ToList();  //generates the random card
+            rand = random.Next(pokeList.Count);
+            card = pokeList[rand];
+
             int shiny = random.Next(101);
             CardCollection collection = context.CardCollections.Where(x => x.UserId == currentUser.UserId && x.PokemonId == card.PokemonId).FirstOrDefault();
             if(collection == null){ //if collection is null(doesn't exist), populate the empty collection with new data and add it to the database
@@ -27,7 +50,7 @@ namespace BusinessLayer
                 collection.PokemonId = card.PokemonId;
                 collection.QuantityNormal = 0;
                 collection.QuantityShiny = 0;
-                //context.CardCollections.Add(coll);                
+                context.CardCollections.Add(collection);                
             }
             if(shiny < 99){ //Updates collection to reflect a new normal card
                 collection.QuantityNormal++;
@@ -40,47 +63,120 @@ namespace BusinessLayer
                 collection.QuantityShiny++;
                 isShiny = true;     
             }
-            //context.SaveChanges();
+            //context.SaveChanges(); <-- update when code is ready
             result.Add(card, isShiny);
             return result;            
         }
 
         /// <summary>
-        /// Randomly generate a pokemonCard object by first randomly selection the rarity pool and then randomly selecting a pokemon in said said rarity category
+        /// Allows user to buy a card from a post, updates database accordingly
         /// </summary>
-        /// <param name="random">a random object</param>
-        /// <returns>Randomly generated pokemonCard object</returns>
-        private P2DbContext.Models.PokemonCard getRandomCard(Random random){            
-            int rareId = genRarity(random); //generate random rarity based on preset distribution
-            var pokeList = context.PokemonCards.Where(x => x.RarityId == rareId).ToList();
-            int rand = random.Next(pokeList.Count);
-            return pokeList[rand];
+        /// <param name="post">Post object that holds the card</param>
+        /// <param name="currentUser">Current user buying</param>
+        /// <returns>Dictionary object where key is the output message and value is whether or not sale was successful</returns>
+        public Dictionary<string, bool> buyFromPost(Post post, User currentUser){   
+            String output = "";
+            Dictionary<string, bool> result = new Dictionary<string, bool>();         
+            if(currentUser.CoinBalance < post.Price){ // checks if user has a sufficent balance
+                output = "You don\'t have suffeiencent funds for this purchase";
+                result.Add(output, false);
+                return result;
+            }
+            if(!post.StillAvailable){ // checks if posts is available
+                output = "Post is no longer avaialable!";
+                result.Add(output, false);
+                return result;
+            }
+
+            int sellerID = (int)context.DisplayBoards.Where(x => x.PostId == post.PostId).Select(x => x.UserId).FirstOrDefault();
+            User seller = context.Users.Where(x => x.UserId == sellerID).FirstOrDefault();
+
+            currentUser.CoinBalance-= (int)post.Price; //decrement  current user coin balance
+            context.Users.Attach(currentUser);
+            context.Entry(currentUser).Property(x => x.CoinBalance).IsModified = true;
+
+            seller.CoinBalance+= (int)post.Price; //increment seller coin balance
+            context.Users.Attach(seller);
+            context.Entry(seller).Property(x => x.CoinBalance).IsModified = true;
+
+            post.StillAvailable = false; //makes post unavailable
+            context.Posts.Attach(post);
+            context.Entry(post).Property(x => x.StillAvailable).IsModified = true;
+
+            CardCollection userCollection = context.CardCollections.Where(x => x.UserId == currentUser.UserId && x.PokemonId == post.PokemonId).FirstOrDefault();
+            CardCollection sellerCollection = context.CardCollections.Where(x => x.UserId == seller.UserId && x.PokemonId == post.PokemonId).FirstOrDefault();
+
+            if((bool)post.IsShiny){ //updates user and seller collection if shiny
+                sellerCollection.QuantityShiny--;
+                context.CardCollections.Attach(sellerCollection);
+                context.Entry(sellerCollection).Property(x => x.QuantityShiny).IsModified = true;
+                if(userCollection == null){ //if collection is null(doesn't exist), populate the empty collection with new data and add it to the database
+                    userCollection.UserId = currentUser.UserId;
+                    userCollection.PokemonId = (int)post.PokemonId;
+                    userCollection.QuantityNormal = 0;
+                    userCollection.QuantityShiny = 0;
+                    context.CardCollections.Add(userCollection);  
+                }
+                userCollection.QuantityShiny++;
+                context.CardCollections.Attach(userCollection);
+                context.Entry(userCollection).Property(x => x.QuantityShiny).IsModified = true;
+                output = $"You brought a shiny ${context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from ${seller.UserName} for ${post.Price} coins!";
+            }
+            else{ //updates user and seller collection if normal card
+                sellerCollection.QuantityNormal--;
+                context.CardCollections.Attach(sellerCollection);
+                context.Entry(sellerCollection).Property(x => x.QuantityNormal).IsModified = true;
+                if(userCollection == null){ //if collection is null(doesn't exist), populate the empty collection with new data and add it to the database
+                    userCollection.UserId = currentUser.UserId;
+                    userCollection.PokemonId = (int)post.PokemonId;
+                    userCollection.QuantityNormal = 0;
+                    userCollection.QuantityShiny = 0;
+                    context.CardCollections.Add(userCollection);  
+                }
+                userCollection.QuantityNormal++;
+                context.CardCollections.Attach(userCollection);
+                context.Entry(userCollection).Property(x => x.QuantityNormal).IsModified = true;
+                output = $"You brought a ${context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from ${seller.UserName} for ${post.Price} coins!";
+
+            }
+            try{
+                //context.SaveChanges(); <--- update when code is ready
+            }
+            catch(Exception e){ 
+                output = $"An exception occured: ${e}";
+                result.Add(output, false);
+                return result;
+            }
+
+           result.Add(output, true);
+                return result;
+
         }
 
         /// <summary>
-        /// Randomly generats a number to represent the rarity pool to pull a pokemon card from.
+        /// List all available posts
         /// </summary>
-        /// <param name="random">A random object</param>
-        /// <returns>Integer representation of the rarity ID.</returns>
-        private int genRarity(Random random){
-            int rand = random.Next(101);            
-            if(rand <= 40){
-                return 1;
-            }
-            else if(rand > 40 && rand < 70){
-                return 2;
-            }
-            else if(rand >= 70 && rand < 90){
-                return 3;
-            }
-            else if(rand >= 90 && rand < 98){
-                return 4;
-            }
-            else {
-                return 5;
-            }                
-            
+        /// <returns>Enumable list of posts</returns>
+        public IEnumerable<Post> getDisplayBoard(){         
+            return context.Posts.Where(x => x.StillAvailable).ToList();
         }
+        
+        /// <summary>
+        /// Sends a collection of pokemons cards representive if the current user collection
+        /// </summary>
+        /// <param name="currentUser">Current User</param>
+        /// <returns>Dictionary where key is the collection object and value is pokemon card</returns>
+        public Dictionary<CardCollection, PokemonCard> getUserCollection(User currentUser){      
+            Dictionary<CardCollection, PokemonCard> result = new Dictionary<CardCollection, PokemonCard>();
+            var fullCollection = context.CardCollections.Where(x => x.UserId == currentUser.UserId).ToList();
+            foreach(var collection in fullCollection){
+                var card = context.PokemonCards.Where(x => x.PokemonId == collection.PokemonId).FirstOrDefault();
+                result.Add(collection, card);
+            }
+            return result;
+        }
+        
+       
 
-    }
-}
+    }//class BusinessModel
+}// namespace BusinessLayer
