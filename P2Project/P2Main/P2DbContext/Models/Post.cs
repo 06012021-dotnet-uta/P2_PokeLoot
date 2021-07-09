@@ -13,6 +13,7 @@ namespace P2DbContext.Models
         public string PostDescription { get; set; }
         public int? Price { get; set; }
         public bool StillAvailable { get; set; }
+        public bool? IsShiny { get; set; }
 
         public virtual PokemonCard Pokemon { get; set; }
         public virtual DisplayBoard DisplayBoard { get; set; }
