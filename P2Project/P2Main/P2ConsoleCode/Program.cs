@@ -17,31 +17,24 @@ namespace P2ConsoleTesting
 
         static void Main(string[] args)
         {
-            /* Console.WriteLine("Program Start!");
-
-            ApiClient.BaseAddress = new Uri("https://pokeapi.co/api/v2/pokemon?limit=20");
-
-            ApiClient.DefaultRequestHeaders.Accept.Clear();
-            ApiClient.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
-
             
 
             P2DbClass context = new P2DbClass();
 
 
-            for(int i = 1; i <= 700; i++)
-            {
-                var testExists = context.PokemonCards.Where(x => x.PokemonId == i).FirstOrDefault();
+            //for(int i = 700; i <= 809; i++)
+            //{
+            //    var testExists = context.PokemonCards.Where(x => x.PokemonId == i).FirstOrDefault();
 
-                if(testExists == null)
-                {
-                    PopulateDbPokemon(i);
-                }
-                else
-                {
-                    Console.WriteLine($"Pokemon id {i} Already Exists in DB");
-                }
-            }
+            //    if(testExists == null)
+            //    {
+            //        PopulateDbPokemon(i);
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine($"Pokemon id {i} Already Exists in DB");
+            //    }
+            //}
 
 
             Console.WriteLine("End Program!");
@@ -125,7 +118,7 @@ namespace P2ConsoleTesting
                 context.SaveChanges();
 
             }
-            */
+            
 
             /*void testRNG(){
                 BusinessModel busy = new BusinessModel();
