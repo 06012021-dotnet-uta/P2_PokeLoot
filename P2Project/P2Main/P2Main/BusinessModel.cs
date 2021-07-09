@@ -134,7 +134,7 @@ namespace BusinessLayer
 
             }
             try{
-                context.SaveChanges();
+                //context.SaveChanges();
             }
             catch(Exception e){
                 output = $"An exception occured: ${e}";
