@@ -10,5 +10,7 @@ namespace BusinessLayer
     interface IBusinessModel
     {
         public Dictionary<PokemonCard, bool> rollLootbox(P2DbContext.Models.User currentUser);
+
+        public Dictionary<string, bool> buyFromPost(Post post, User currentUser);
     }
 }

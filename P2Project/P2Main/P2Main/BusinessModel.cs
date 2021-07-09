@@ -50,7 +50,7 @@ namespace BusinessLayer
                 collection.PokemonId = card.PokemonId;
                 collection.QuantityNormal = 0;
                 collection.QuantityShiny = 0;
-                //context.CardCollections.Add(coll);                
+                context.CardCollections.Add(collection);                
             }
             if(shiny < 99){ //Updates collection to reflect a new normal card
                 collection.QuantityNormal++;
@@ -63,11 +63,17 @@ namespace BusinessLayer
                 collection.QuantityShiny++;
                 isShiny = true;     
             }
-            //context.SaveChanges();
+            //context.SaveChanges(); <-- update when code is ready
             result.Add(card, isShiny);
             return result;            
         }
 
+        /// <summary>
+        /// Allows user to buy a card from a post, updates database accordingly
+        /// </summary>
+        /// <param name="post">Post object that holds the card</param>
+        /// <param name="currentUser">Current user buying</param>
+        /// <returns>Dictionary object where key is the output message and value is whether or not sale was successful</returns>
         public Dictionary<string, bool> buyFromPost(Post post, User currentUser){   
             String output = "";
             Dictionary<string, bool> result = new Dictionary<string, bool>();         
@@ -100,7 +106,7 @@ namespace BusinessLayer
             CardCollection userCollection = context.CardCollections.Where(x => x.UserId == currentUser.UserId && x.PokemonId == post.PokemonId).FirstOrDefault();
             CardCollection sellerCollection = context.CardCollections.Where(x => x.UserId == seller.UserId && x.PokemonId == post.PokemonId).FirstOrDefault();
 
-            if(false/*post.IsShiny*/){// <--- have to update scafolding to avoid errors
+            if((bool)post.IsShiny){ //updates user and seller collection if shiny
                 sellerCollection.QuantityShiny--;
                 context.CardCollections.Attach(sellerCollection);
                 context.Entry(sellerCollection).Property(x => x.QuantityShiny).IsModified = true;
@@ -109,14 +115,14 @@ namespace BusinessLayer
                     userCollection.PokemonId = (int)post.PokemonId;
                     userCollection.QuantityNormal = 0;
                     userCollection.QuantityShiny = 0;
-                    //context.CardCollections.Add(userCollection);  
+                    context.CardCollections.Add(userCollection);  
                 }
                 userCollection.QuantityShiny++;
                 context.CardCollections.Attach(userCollection);
                 context.Entry(userCollection).Property(x => x.QuantityShiny).IsModified = true;
                 output = $"You brought a shiny ${context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from ${seller.UserName} for ${post.Price} coins!";
             }
-            else{
+            else{ //updates user and seller collection if normal card
                 sellerCollection.QuantityNormal--;
                 context.CardCollections.Attach(sellerCollection);
                 context.Entry(sellerCollection).Property(x => x.QuantityNormal).IsModified = true;
@@ -125,7 +131,7 @@ namespace BusinessLayer
                     userCollection.PokemonId = (int)post.PokemonId;
                     userCollection.QuantityNormal = 0;
                     userCollection.QuantityShiny = 0;
-                    //context.CardCollections.Add(userCollection);  
+                    context.CardCollections.Add(userCollection);  
                 }
                 userCollection.QuantityNormal++;
                 context.CardCollections.Attach(userCollection);
@@ -134,9 +140,9 @@ namespace BusinessLayer
 
             }
             try{
-                //context.SaveChanges();
+                //context.SaveChanges(); <--- update when code is ready
             }
-            catch(Exception e){
+            catch(Exception e){ 
                 output = $"An exception occured: ${e}";
                 result.Add(output, false);
                 return result;
