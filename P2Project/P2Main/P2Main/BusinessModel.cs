@@ -152,6 +152,29 @@ namespace BusinessLayer
                 return result;
 
         }
+
+        /// <summary>
+        /// List all available posts
+        /// </summary>
+        /// <returns>Enumable list of posts</returns>
+        public IEnumerable<Post> getDisplayBoard(){         
+            return context.Posts.Where(x => x.StillAvailable).ToList();
+        }
+        
+        /// <summary>
+        /// Sends a collection of pokemons cards representive if the current user collection
+        /// </summary>
+        /// <param name="currentUser">Current User</param>
+        /// <returns>Dictionary where key is the collection object and value is pokemon card</returns>
+        public Dictionary<CardCollection, PokemonCard> getUserCollection(User currentUser){      
+            Dictionary<CardCollection, PokemonCard> result = new Dictionary<CardCollection, PokemonCard>();
+            var fullCollection = context.CardCollections.Where(x => x.UserId == currentUser.UserId).ToList();
+            foreach(var collection in fullCollection){
+                var card = context.PokemonCards.Where(x => x.PokemonId == collection.PokemonId).FirstOrDefault();
+                result.Add(collection, card);
+            }
+            return result;
+        }
         
        
 
