@@ -34,3 +34,4 @@ import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
