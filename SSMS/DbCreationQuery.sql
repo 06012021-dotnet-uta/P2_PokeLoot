@@ -51,6 +51,7 @@ CREATE TABLE Posts
  PostDescription varchar(200) NULL ,
  Price           int NULL ,
  StillAvailable  bit NOT NULL ,
+ IsShiny  	 bit NULL ,
 
 
  CONSTRAINT PK_posts PRIMARY KEY CLUSTERED (PostId ASC),

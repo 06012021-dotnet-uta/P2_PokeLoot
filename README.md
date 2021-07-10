@@ -1,4 +1,4 @@
-# PROJECT NAME
+# PokeLoot
 
 ## Project Description
 
@@ -6,16 +6,16 @@ Here goes your awesome project description!
 
 ## Technologies Used
 
-* Tech 1 - version 1.0
-* Tech 2 - version 2.0
-* Tech 3 - version 3.0
+* Angular CLI, ASP.NET CORE MVC, Microsoft Entity Framework Core, Azure DevOps Services - version 1.0
+
 
 ## Features
 
 List of features ready and TODOs for future development
-* Awesome feature 1
-* Awesome feature 2
-* Awesome feature 3
+* Allow users to create new accounts and log in with previous creditials.
+* Users are able to accumalate coins into a saved account balance through various tasks and activties.
+* Users are able to use coins to open lootboxes that would randomly generate pokemon cards or buy cards from the message boards.
+* Users are able to store their collected cards and sell them on the message boards.
 
 To-do list:
 * Wow improvement to be done 1

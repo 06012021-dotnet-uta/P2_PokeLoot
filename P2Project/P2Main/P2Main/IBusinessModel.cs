@@ -7,7 +7,14 @@ using P2DbContext.Models;
 
 namespace BusinessLayer
 {
-    interface IBusinessModel
+    public interface IBusinessModel
     {
+        public Dictionary<PokemonCard, bool> rollLootbox(P2DbContext.Models.User currentUser);
+
+        public Dictionary<string, bool> buyFromPost(Post post, User currentUser);
+        
+        public IEnumerable<Post> getDisplayBoard();
+
+        public Dictionary<CardCollection, PokemonCard> getUserCollection(User currentUser);
     }
 }
