@@ -13,9 +13,11 @@ namespace P2Api.Controllers
     {
         private readonly ILogger<P2Controller> _logger;
 
-        public P2Controller(IBusinessModel businessModel , ILogger<RpsGameController> logger)
+        private readonly IBusinessModel _businessModel;
+
+        public P2Controller(IBusinessModel businessModel , ILogger<P2Controller> logger)
         {
-            this._rpsGame = rpsGame;
+            this._businessModel = businessModel;
             this._logger = logger;
         }
 
