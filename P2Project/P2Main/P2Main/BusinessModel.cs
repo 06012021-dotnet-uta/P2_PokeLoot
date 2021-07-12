@@ -10,6 +10,8 @@ namespace BusinessLayer
         {
 
         P2DbClass context = new P2DbClass();
+
+
         /// <summary>
         /// Generate a lootbox for the player will add a randomly generated card into the users collection and will update the datebase based on if the card generated is shiny or not.
         /// </summary>
