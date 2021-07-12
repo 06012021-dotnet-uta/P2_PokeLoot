@@ -16,14 +16,14 @@ import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.
 const routes: Routes = [
   { path: '', redirectTo: 'app-root', pathMatch: 'full' },
   { path: 'Signup', component: SignupPageComponent },
-  { path: 'Home/:id', component: HomePageComponent },
-  { path: 'Profile/:id', component: ProfilePageComponent },
-  { path: 'Game/:id', component: GamePageComponent },
-  { path: 'Post/:id', component: CreatePostComponent },
-  { path: 'TradeCard/:id', component: TradeCardPageComponent },
-  { path: 'UnlockCard/:id', component: UnlockCardPageComponent },
-  { path: 'ViewInformation/:id', component: ViewInformationPageComponent },
-  { path: 'ViewBalance/:id', component: ViewBalancePageComponent },
+  { path: 'Home', component: HomePageComponent },
+  { path: 'Profile', component: ProfilePageComponent },
+  { path: 'Game', component: GamePageComponent },
+  { path: 'Post', component: CreatePostComponent },
+  { path: 'TradeCard', component: TradeCardPageComponent },
+  { path: 'UnlockCard', component: UnlockCardPageComponent },
+  { path: 'ViewInformation', component: ViewInformationPageComponent },
+  { path: 'ViewBalance', component: ViewBalancePageComponent },
   { path: '**', component: HomePageComponent },
 
 ];
