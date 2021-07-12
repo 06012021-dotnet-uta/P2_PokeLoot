@@ -1,6 +1,7 @@
+// 
+
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -13,15 +14,9 @@ import { TradeCardPageComponent } from './trade-card-page/trade-card-page.compon
 import { UnlockCardPageComponent } from './unlock-card-page/unlock-card-page.component';
 import { ViewInformationPageComponent } from './view-information-page/view-information-page.component';
 import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.component';
-
-//services
-//import { CollectCardsService } from './collect-cards.service';      // Christians
-//import { AddCardComponent } from './add-card/add-card.component';   // Christians
-
 import { AppRoutingModule } from './app-routing.module';
 import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
 import { PostsComponent } from './posts/posts.component';
-
 
 @NgModule({
   declarations: [
@@ -36,11 +31,6 @@ import { PostsComponent } from './posts/posts.component';
     UnlockCardPageComponent,
     ViewInformationPageComponent,
     ViewBalancePageComponent,
-    AddCardComponent
-  ],
-  imports: [
-    //BrowserModule,    // Christians
-    //HttpClientModule  // Christians
     TopNavBarComponent,
     PostsComponent
   ],
@@ -48,8 +38,7 @@ import { PostsComponent } from './posts/posts.component';
     BrowserModule,
     AppRoutingModule
   ],
-  providers: [CollectCardsService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
