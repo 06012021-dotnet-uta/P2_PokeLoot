@@ -13,9 +13,15 @@ import { TradeCardPageComponent } from './trade-card-page/trade-card-page.compon
 import { UnlockCardPageComponent } from './unlock-card-page/unlock-card-page.component';
 import { ViewInformationPageComponent } from './view-information-page/view-information-page.component';
 import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.component';
+
 //services
-import { CollectCardsService } from './collect-cards.service';
-import { AddCardComponent } from './add-card/add-card.component';
+//import { CollectCardsService } from './collect-cards.service';      // Christians
+//import { AddCardComponent } from './add-card/add-card.component';   // Christians
+
+import { AppRoutingModule } from './app-routing.module';
+import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
+import { PostsComponent } from './posts/posts.component';
+
 
 @NgModule({
   declarations: [
@@ -33,10 +39,17 @@ import { AddCardComponent } from './add-card/add-card.component';
     AddCardComponent
   ],
   imports: [
+    //BrowserModule,    // Christians
+    //HttpClientModule  // Christians
+    TopNavBarComponent,
+    PostsComponent
+  ],
+  imports: [
     BrowserModule,
-    HttpClientModule
+    AppRoutingModule
   ],
   providers: [CollectCardsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
