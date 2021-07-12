@@ -1,0 +1,31 @@
+<nav *ngIf="isHomeNav" class="navbar navbar-expand-lg navbar-light bg-light">
+    <!-- Will Populate when user is Logged in -->
+    <a class="navbar-brand" href="#">
+        <img src="assets/img/Pokeloot_Logo.png" width="200" height="200" class="img-fluid"
+            style="max-width: 300; max-height: 100;">
+    </a>
+    <!-- Will Display if User is LoggedIn -->
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Features</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Pricing</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#">Disabled</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<nav *ngIf="isLoginNav" id="LoginPage">
+    <a class="navbar-brand" href="#">
+        <img src="assets/img/Pokeloot_Logo.png" width="200" height="200" class="img-fluid"
+            style="max-width: 300; max-height: 100;">
+    </a>
+</nav>
