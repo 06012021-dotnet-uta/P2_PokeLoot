@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
@@ -12,6 +13,9 @@ import { TradeCardPageComponent } from './trade-card-page/trade-card-page.compon
 import { UnlockCardPageComponent } from './unlock-card-page/unlock-card-page.component';
 import { ViewInformationPageComponent } from './view-information-page/view-information-page.component';
 import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.component';
+//services
+import { CollectCardsService } from './collect-cards.service';
+import { AddCardComponent } from './add-card/add-card.component';
 
 @NgModule({
   declarations: [
@@ -25,12 +29,14 @@ import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.
     TradeCardPageComponent,
     UnlockCardPageComponent,
     ViewInformationPageComponent,
-    ViewBalancePageComponent
+    ViewBalancePageComponent,
+    AddCardComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [CollectCardsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
