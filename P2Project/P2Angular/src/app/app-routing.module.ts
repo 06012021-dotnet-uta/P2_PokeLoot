@@ -14,8 +14,7 @@ import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'Login', pathMatch: 'full' },
-  { path: 'Login', component: LoginPageComponent },
+  { path: '', redirectTo: 'app-root', pathMatch: 'full' },
   { path: 'Signup', component: SignupPageComponent },
   { path: 'Home/:id', component: HomePageComponent },
   { path: 'Profile/:id', component: ProfilePageComponent },
@@ -25,6 +24,8 @@ const routes: Routes = [
   { path: 'UnlockCard/:id', component: UnlockCardPageComponent },
   { path: 'ViewInformation/:id', component: ViewInformationPageComponent },
   { path: 'ViewBalance/:id', component: ViewBalancePageComponent },
+  { path: '**', component: HomePageComponent },
+
 ];
 
 @NgModule({

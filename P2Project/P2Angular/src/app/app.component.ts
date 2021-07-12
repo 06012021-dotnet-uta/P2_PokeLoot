@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'P2Angular';
+  isLogin: boolean = false;
+  isHome: boolean = true;
+
+  LoginEmitter(event: any): void {
+    this.isLogin = !event;
+    this.isHome = event;
+  }
+
 }

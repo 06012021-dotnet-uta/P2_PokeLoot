@@ -13,6 +13,8 @@ import { UnlockCardPageComponent } from './unlock-card-page/unlock-card-page.com
 import { ViewInformationPageComponent } from './view-information-page/view-information-page.component';
 import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.component';
 import { AppRoutingModule } from './app-routing.module';
+import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
+import { PostsComponent } from './posts/posts.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { AppRoutingModule } from './app-routing.module';
     TradeCardPageComponent,
     UnlockCardPageComponent,
     ViewInformationPageComponent,
-    ViewBalancePageComponent
+    ViewBalancePageComponent,
+    TopNavBarComponent,
+    PostsComponent
   ],
   imports: [
     BrowserModule,
