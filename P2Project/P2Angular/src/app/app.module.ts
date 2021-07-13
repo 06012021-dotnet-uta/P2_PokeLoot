@@ -17,6 +17,7 @@ import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.
 import { AppRoutingModule } from './app-routing.module';
 import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
 import { PostsComponent } from './posts/posts.component';
+import { CardCollectComponent } from './cardcollect/cardcollect.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { PostsComponent } from './posts/posts.component';
     ViewInformationPageComponent,
     ViewBalancePageComponent,
     TopNavBarComponent,
-    PostsComponent
+    PostsComponent,
+    CardCollectComponent
   ],
   imports: [
     BrowserModule,

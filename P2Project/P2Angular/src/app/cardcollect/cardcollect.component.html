@@ -1,3 +1,11 @@
-<p>cardcollect works!</p>
+<h2>{{user}} collection</h2>
 
-<p>{{userCollection}}</p>
+<!--Changeing the card & container class distorts the webpage. Refactor w/ bootstrap-->
+<div class="card">
+    <div class="container" *ngFor= "let c of userCollection">
+        <p class = "Id"><b>PokeID: {{c.pokeid}}</b></p>
+        <p class = "name">Name: {{c.pokename}}</p>
+        <p class = "rarity">Rarity: {{c.rarity}}</p>
+        <img class="sprite" src='{{c.spriteNorm}}'/> 
+    </div>
+</div>

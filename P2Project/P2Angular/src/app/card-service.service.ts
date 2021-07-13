@@ -7,14 +7,46 @@ import { Card } from './cardcollect/card';
 @Injectable({
   providedIn: 'root'
 })
-export class CollectCardsService {
+
+export class CardServiceService {
 
   constructor(private http: HttpClient) { }
 
-  //Method to retrieve data from WepAPI
   GetCardsList(): Observable<Card[]>{
     return this.http.get<Card[]>('path')
   }
+
+  GetCardTest(){
+    return [{
+            pokeid:1,
+            pokename:'bulbasaur',
+            rarity:5,
+            quanNorm:3,
+            spriteNorm:"spritenorm",
+            quanShiny:0,
+            spriteShiny:"spriteshiny",
+            },
+            {
+              pokeid:4,
+              pokename:'squirtle',
+              rarity:5,
+              quanNorm:3,
+              spriteNorm:"spritenorm",
+              quanShiny:0,
+              spriteShiny:"spriteshiny",
+            },
+            {
+            pokeid:7,
+            pokename:'charmander',
+            rarity:5,
+            quanNorm:3,
+            spriteNorm:"spritenorm",
+            quanShiny:0,
+            spriteShiny:"spriteshiny"
+            }
+            ];
+  }
+
 
   /* Get methods look like: return this.http.get<Card[]>('path', 
   options: {
@@ -35,35 +67,7 @@ export class CollectCardsService {
   }*/
 
   //"testing the service" w/in angular
-  GetCardTest(){
-    return [{
-      pokeid:1,
-      pokename:'bulbasaur',
-      rarity:5,
-      quanNorm:3,
-      spriteNorm:"spritenorm",
-      quanShiny:0,
-      spriteShiny:"spriteshiny",
-  },
-  {
-    pokeid:4,
-    pokename:'squirtle',
-    rarity:5,
-    quanNorm:3,
-    spriteNorm:"spritenorm",
-    quanShiny:0,
-    spriteShiny:"spriteshiny",
-},
-{
-  pokeid:7,
-  pokename:'charmander',
-  rarity:5,
-  quanNorm:3,
-  spriteNorm:"spritenorm",
-  quanShiny:0,
-  spriteShiny:"spriteshiny",
-}];
-  }
+
 
   AddsCardsTest()
   {
