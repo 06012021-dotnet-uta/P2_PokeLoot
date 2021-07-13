@@ -21,7 +21,7 @@ const routes: Routes = [
   { path: 'Profile', component: ProfilePageComponent },
   { path: 'Game', component: GamePageComponent },
   { path: 'Post', component: CreatePostComponent },
-  { path: 'Collection', component: CardCollectComponent },
+  { path: 'collection', component: CardCollectComponent },
   { path: 'TradeCard', component: TradeCardPageComponent },
   { path: 'UnlockCard', component: UnlockCardPageComponent },
   { path: 'ViewInformation', component: ViewInformationPageComponent },
