@@ -22,5 +22,9 @@ namespace BusinessLayer
         public User login(string username, string password);
 
         public bool signUp(User newUser);
+
+        public bool incrementUserBalance(User currentUser, int coinsToAdd);
+
+        public PokemonCard getPokemonById(int id);
     }
 }

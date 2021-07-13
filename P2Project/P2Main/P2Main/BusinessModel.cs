@@ -256,7 +256,51 @@ namespace BusinessLayer
             }
             return true;
         }
+
+        /// <summary>
+        /// Updates user account balances to reflect a new purchase or deposit
+        /// </summary>
+        /// <param name="currentUser">Current user we are working on</param>
+        /// <param name="coinsToAdd">Amount of coins to add to balance, value would be negetive if we are removing coins.</param>
+        /// <returns>True if account succefully updated</returns>
+        public bool incrementUserBalance(User currentUser, int coinsToAdd){ //not sure how to implement quizzes, but call this method when ever user completes a quiz or buy a lootbox
+            if(coinsToAdd >= 0){ //use when completing challenges(increments balance)
+                currentUser.AccountLevel++; //gain levels buy completing challanges
+                currentUser.CoinBalance+= coinsToAdd;
+                currentUser.TotalCoinsEarned+= coinsToAdd;
+            }
+            if(coinsToAdd < 0){ //use when buying lootboxes(decrements balance)
+                if((coinsToAdd * -1) > currentUser.CoinBalance){//do you have correct amount of coins to buy?
+                    return false;
+                }
+                currentUser.CoinBalance+= coinsToAdd;
+            }
+            context.Users.Attach(currentUser);
+            context.Entry(currentUser).Property(x => x.CoinBalance).IsModified = true;
+            if(coinsToAdd >= 0){
+                context.Entry(currentUser).Property(x => x.TotalCoinsEarned).IsModified = true;
+                context.Entry(currentUser).Property(x => x.AccountLevel).IsModified = true;
+                
+            }
+            try{
+                //context.SaveChanges();
+            }
+            catch(Exception e){
+                Console.WriteLine(e);
+                return false;
+            }
+
+            return true;
+        }
         
+        /// <summary>
+        /// Retrieves pokemon using id for display purposes
+        /// </summary>
+        /// <param name="id">Pokemon Id</param>
+        /// <returns>Pokemon card with giving id, retuns null if invalid</returns>
+        public PokemonCard getPokemonById(int id){
+            return context.PokemonCards.Where(x => x.PokemonId == id).FirstOrDefault();
+        }
        
 
     }//class BusinessModel
