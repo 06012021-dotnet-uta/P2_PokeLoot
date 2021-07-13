@@ -8,7 +8,36 @@ import { Card } from './card';
 })
 export class CardCollectComponent implements OnInit {
   title:string ="CardCollectComponent";
-  userCollection:Card[]=[];//Card Collections are aesthetically styled arrays of Card data structure
+  user:string="this.user";
+  userCollection:Card[]=[{
+    pokeid:1,
+    pokename:'Bulbasaur',
+    rarity:5,
+    quanNorm:3,
+    spriteNorm:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+    quanShiny:0,
+    spriteShiny:"spriteshiny",
+    },
+    {
+      pokeid:4,
+      pokename:'Squirtle',
+      rarity:5,
+      quanNorm:3,
+      spriteNorm:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+      quanShiny:0,
+      spriteShiny:"spriteshiny",
+    },
+    {
+    pokeid:7,
+    pokename:'Charmander',
+    rarity:5,
+    quanNorm:3,
+    spriteNorm:"https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+    quanShiny:0,
+    spriteShiny:"spriteshiny"
+    }
+    ];
+    //Card Collections are aesthetically styled arrays of Card data structure
 
   //@Input() public newcard:Card;
 
@@ -17,10 +46,13 @@ export class CardCollectComponent implements OnInit {
   //private service:CollectCardsService
   // }
 
-  constructor() { }
+  
+
+  constructor(/*private _cardcollectionService: CardService*/ ) { }
 
   ngOnInit(): void {
-    //this.userCollection = this.service.GetCardTest();
+    //this._cardcollectionService.GetCardTest();
+    
     
   }
 
