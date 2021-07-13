@@ -1,21 +1,11 @@
-<div>{{title}}</div>
-<p>{{userCollection}}</p>
+<h2>{{user}} collection</h2>
 
-<h2>Card collection</h2>
-<div class="card-container" *ngFor= "let c of userCollection">
-    <p>{{c.pokeid}}</p>
-    <p>{{c.pokename}}</p>
-    <p>{{c.rarity}}</p>
-</div>
-
-
-<div >
-    <div class="card">
-        <img id="picture0"  />
-        <div class="container">
-            <p class = "Id"><b>ID</b></p>
-            <p class = "name">NAME</p>
-            <p></p>
-          </div>
+<!--Changeing the card & container class distorts the webpage. Refactor w/ bootstrap-->
+<div class="card">
+    <div class="container" *ngFor= "let c of userCollection">
+        <p class = "Id"><b>PokeID: {{c.pokeid}}</b></p>
+        <p class = "name">Name: {{c.pokename}}</p>
+        <p class = "rarity">Rarity: {{c.rarity}}</p>
+        <img class="sprite" src='{{c.spriteNorm}}'/> 
     </div>
 </div>
