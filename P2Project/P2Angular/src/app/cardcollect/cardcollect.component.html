@@ -1,3 +1,22 @@
 <p>cardcollect works!</p>
-
+<div>{{title}}</div>
 <p>{{userCollection}}</p>
+
+<h2>Card collection</h2>
+<div class="card-container" *ngFor= "let c of userCollection">
+    <p>{{c.pokeid}}</p>
+    <p>{{c.pokename}}</p>
+    <p>{{c.rarity}}</p>
+</div>
+
+
+<div >
+    <div class="card">
+        <img id="picture0"  />
+        <div class="container">
+            <p class = "Id"><b>ID</b></p>
+            <p class = "name">NAME</p>
+            <p></p>
+          </div>
+    </div>
+</div>

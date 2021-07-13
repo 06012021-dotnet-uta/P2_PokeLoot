@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CollectCardsService } from '../collect-cards.service';
 import { Card } from './card'; 
 
 @Component({
@@ -7,20 +6,21 @@ import { Card } from './card';
   templateUrl: './cardcollect.component.html',
   styleUrls: ['./cardcollect.component.css']
 })
-export class CardcollectComponent implements OnInit {
-
+export class CardCollectComponent implements OnInit {
+  title:string ="CardCollectComponent";
   userCollection:Card[]=[];//Card Collections are aesthetically styled arrays of Card data structure
 
   //@Input() public newcard:Card;
 
   // AddCardTest(event:Card):void{
   //   this.service.AddsCardsTest().subscribe(x => console.log("card added"));
+  //private service:CollectCardsService
   // }
 
-  constructor(private service:CollectCardsService) { }
+  constructor() { }
 
   ngOnInit(): void {
-    this.userCollection = this.service.GetCardTest();
+    //this.userCollection = this.service.GetCardTest();
     
   }
 
