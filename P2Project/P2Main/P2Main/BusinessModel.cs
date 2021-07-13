@@ -60,11 +60,14 @@ namespace BusinessLayer
                 context.Entry(collection).Property(x => x.QuantityNormal).IsModified = true;
             }
             else{ //Updates collection to reflect a new shiny card
+                collection.QuantityShiny++;
                 context.CardCollections.Attach(collection);
                 context.Entry(collection).Property(x => x.QuantityShiny).IsModified = true;
-                collection.QuantityShiny++;
                 isShiny = true;     
             }
+            currentUser.AccountLevel++;//increments account level with each lootbox opened(we dont have an xp system implemented yet.)
+            context.Users.Attach(currentUser);
+            context.Entry(currentUser).Property(x => x.AccountLevel).IsModified = true;
             //context.SaveChanges(); <-- update when code is ready
             result.Add(card, isShiny);
             return result;            
@@ -98,8 +101,10 @@ namespace BusinessLayer
             context.Entry(currentUser).Property(x => x.CoinBalance).IsModified = true;
 
             seller.CoinBalance+= (int)post.Price; //increment seller coin balance
+            seller.TotalCoinsEarned+= (int)post.Price;
             context.Users.Attach(seller);
             context.Entry(seller).Property(x => x.CoinBalance).IsModified = true;
+            context.Entry(seller).Property(x => x.TotalCoinsEarned).IsModified = true;
 
             post.StillAvailable = false; //makes post unavailable
             context.Posts.Attach(post);
@@ -160,7 +165,7 @@ namespace BusinessLayer
         /// </summary>
         /// <returns>Enumable list of posts</returns>
         public IEnumerable<Post> getDisplayBoard(){         
-            return context.Posts.Where(x => x.StillAvailable).ToList();
+            return context.Posts.Where(x => x.StillAvailable == true).ToList();
         }
         
         /// <summary>
@@ -176,6 +181,80 @@ namespace BusinessLayer
                 result.Add(collection, card);
             }
             return result;
+        }
+
+        /// <summary>
+        /// Inserts a new post into database
+        /// </summary>
+        /// <param name="newPost">post to be inserted</param>
+        /// <param name="currentUser">Current user posting</param>
+        /// <returns>Returns whether post has been inserted succefully</returns>
+        public bool newPost(Post newPost, User currentUser){
+
+            //add new post to database after filling possible blank data            DateTime now = DateTime.Now;
+            DateTime now = DateTime.Now;
+            newPost.PostTime = now;
+            newPost.StillAvailable = true;
+            context.Posts.Add(newPost);
+
+            //check post details to determine post type.
+            int postType = 0;
+            if(newPost.PokemonId == null && newPost.Price == null){
+                postType = 1; //discussion
+            }
+            else if(newPost.PokemonId == null){
+                postType = 3; //display
+            }
+            else{
+                postType = 2; //sale
+            }
+
+            //reflect the new post on display board
+            DisplayBoard displayBoard = new DisplayBoard();
+            displayBoard.UserId = currentUser.UserId;
+            displayBoard.PostType = postType;
+            displayBoard.PostId = context.Posts.Where(x => x.PostTime == now).Select(x => x.PostId).Max();//returns the newest instance of a post(the one we just added) and grabs their id.
+            context.DisplayBoards.Add(displayBoard);
+
+            try{
+                //context.SaveChanges();
+            }
+            catch(Exception e){
+                Console.WriteLine(e);
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Allows user to log in
+        /// </summary>
+        /// <param name="username">Username for logging in</param>
+        /// <param name="password">Password for logging in</param>
+        /// <returns>User object after logging in, null if invalid creditials</returns>
+        public User login(string username, string password){
+            return context.Users.Where(x => x.UserName == username && x.Password == password).FirstOrDefault();
+            //If return is null, log in is invalid and should prompt user to relogin.
+        }
+
+        /// <summary>
+        /// Adds new user to database
+        /// </summary>
+        /// <param name="newUser">User to be added</param>
+        /// <returns>true if user was successfully added to database, false otherwise</returns>
+        public bool signUp(User newUser){
+            newUser.AccountLevel = 0;
+            newUser.CoinBalance = 10;
+            newUser.TotalCoinsEarned = 10;
+            context.Add(newUser);
+            try{
+                //context.SaveChanges();
+            }
+            catch(Exception e){
+                Console.WriteLine(e);
+                return false;
+            }
+            return true;
         }
         
        

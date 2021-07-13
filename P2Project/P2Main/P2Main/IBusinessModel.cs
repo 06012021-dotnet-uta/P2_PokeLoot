@@ -16,5 +16,11 @@ namespace BusinessLayer
         public IEnumerable<Post> getDisplayBoard();
 
         public Dictionary<CardCollection, PokemonCard> getUserCollection(User currentUser);
+
+        public bool newPost(Post newPost, User currentUser);
+
+        public User login(string username, string password);
+
+        public bool signUp(User newUser);
     }
 }
