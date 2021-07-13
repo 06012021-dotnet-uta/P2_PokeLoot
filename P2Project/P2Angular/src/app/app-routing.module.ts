@@ -10,6 +10,7 @@ import { TradeCardPageComponent } from './trade-card-page/trade-card-page.compon
 import { UnlockCardPageComponent } from './unlock-card-page/unlock-card-page.component';
 import { ViewInformationPageComponent } from './view-information-page/view-information-page.component';
 import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.component';
+import { CardCollectComponent } from './cardcollect/cardcollect.component';
 
 
 
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: 'Profile', component: ProfilePageComponent },
   { path: 'Game', component: GamePageComponent },
   { path: 'Post', component: CreatePostComponent },
+  { path: 'Collection', component: CardCollectComponent },
   { path: 'TradeCard', component: TradeCardPageComponent },
   { path: 'UnlockCard', component: UnlockCardPageComponent },
   { path: 'ViewInformation', component: ViewInformationPageComponent },
