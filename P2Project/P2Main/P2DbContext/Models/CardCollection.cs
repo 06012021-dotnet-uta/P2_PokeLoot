@@ -12,7 +12,10 @@ namespace P2DbContext.Models
         public int QuantityNormal { get; set; }
         public int QuantityShiny { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
         public virtual PokemonCard Pokemon { get; set; }
+
+        [Newtonsoft.Json.JsonIgnore]
         public virtual User User { get; set; }
     }
 }

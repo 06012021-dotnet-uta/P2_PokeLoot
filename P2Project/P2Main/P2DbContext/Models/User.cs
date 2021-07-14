@@ -23,7 +23,10 @@ namespace P2DbContext.Models
         public int AccountLevel { get; set; }
         public int TotalCoinsEarned { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<CardCollection> CardCollections { get; set; }
+
+        [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<DisplayBoard> DisplayBoards { get; set; }
     }
 }

@@ -9,7 +9,7 @@ namespace BusinessLayer
 {
     public interface IBusinessModel
     {
-        public Dictionary<PokemonCard, bool> rollLootbox(P2DbContext.Models.User currentUser);
+        public Dictionary<PokemonCard, bool> rollLootbox(User currentUser);
 
         public Dictionary<string, bool> buyFromPost(Post post, User currentUser);
         
@@ -26,5 +26,7 @@ namespace BusinessLayer
         public bool incrementUserBalance(User currentUser, int coinsToAdd);
 
         public PokemonCard getPokemonById(int id);
+
+        public User GetUserById(int id);
     }
 }
