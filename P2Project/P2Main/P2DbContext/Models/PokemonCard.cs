@@ -19,10 +19,14 @@ namespace P2DbContext.Models
         public string SpriteLinkShiny { get; set; }
         public string PokemonName { get; set; }
 
-        
 
+        [Newtonsoft.Json.JsonIgnore]
         public virtual RarityType Rarity { get; set; }
+
+        [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<CardCollection> CardCollections { get; set; }
+
+        [Newtonsoft.Json.JsonIgnore]
         public virtual ICollection<Post> Posts { get; set; }
     }
 }

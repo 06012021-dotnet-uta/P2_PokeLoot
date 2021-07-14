@@ -1,0 +1,51 @@
+# Node.js with Angular
+# Build a Node.js project that uses Angular.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+trigger:
+  branches:
+    include:
+    - main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: 'P2Project/P2Angular'
+  buildPlatform: 'Any CPU'
+  buildConfiguration: 'Release'
+
+steps:
+# - task: SonarCloudPrepare@1
+#   displayName: sonarclour prepare
+#   inputs:
+#     SonarCloud: 'sonarclourangular'
+#     organization: '03012021batch'
+#     scannerMode: 'CLI'
+#     configMode: 'manual'
+#     cliProjectKey: '03012021Batch_memesaverangular'
+#     cliProjectName: 'memesaverangular'
+#     cliSources: '$(solution)/src'
+#     extraProperties: 'sonar.javascript.lcov.reportPaths=$(solution)/coverage/memesaver/lcov.info'
+- task: NodeTool@0
+  inputs:
+    versionSpec: '10.x'
+  displayName: 'Install Node.js'
+
+- task: Npm@1
+  inputs:
+    command: 'install'
+    workingDir: $(solution)
+
+- task: Npm@1
+  displayName: 'NPM Build Angular'
+  inputs:
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'build --prod'
+
+- script: |
+    npm install
+    ng build --prod
+  displayName: 'npm install and build'

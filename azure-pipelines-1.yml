@@ -4,14 +4,50 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- main
+  branches:
+    include:
+    - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
 
 variables:
+  solution: '**/*.sln'
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+
+#SonarCloud task here
+
+
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+- task: DotNetCoreCLI@2
+  displayName: building project
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
+    arguments: '--configuration $(buildConfiguration)'
+    
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '$(solution)'
+    testRunTitle: 'dotnet tests running'
+    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+
+- task: PublishCodeCoverageResults@1
+  inputs:
+    codeCoverageTool: 'Cobertura'
+    summaryFileLocation: '**/coburtura/coverage.xml'
+    
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '$(solution)'
+    zipAfterPublish: true
+
+
+
+# - script: dotnet build --configuration $(buildConfiguration)
+#   displayName: 'dotnet build $(buildConfiguration)'
