@@ -4,14 +4,40 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- main
+  branches:
+    include:
+    - main
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: 'windows-latest'
 
 variables:
+  solution: '**/*P2Main.sln'
+  buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
+
+#SonarCloud task here
+
+
+
 steps:
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    arguments: $(solution)'
+
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'test'
+    projects: '$(solution)'
+    testRunTitle: 'DotNet tests running'
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '$(solution)'
+    modifyOutputPath: false
+
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
