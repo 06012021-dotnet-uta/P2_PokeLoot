@@ -1,11 +1,20 @@
 <h2>{{user}} collection</h2>
 
+<button>Sort by Name</button>
+<button>Sort by Id</button>
+<button>Sort by Rarity</button>
+<button>Sort by Type</button>
+
+
+<p>{{userCollection}}</p>
+
 <!--Changeing the card & container class distorts the webpage. Refactor w/ bootstrap-->
 <div class="card">
     <div class="container" *ngFor= "let c of userCollection">
-        <p class = "Id"><b>PokeID: {{c.pokeid}}</b></p>
-        <p class = "name">Name: {{c.pokename}}</p>
-        <p class = "rarity">Rarity: {{c.rarity}}</p>
-        <img class="sprite" src='{{c.spriteNorm}}'/> 
+         <p class = "Id"><b>PokeID: {{c.PokemonId}</b></p>
+         <p class = "name">Name: {{c.PokemonName}}</p>
+         <p class = "rarity">Rarity: {{c.RarityId}}</p>
+         <img class="sprite" src='{{c.SpriteLink}}'/> 
     </div>
 </div>
+
