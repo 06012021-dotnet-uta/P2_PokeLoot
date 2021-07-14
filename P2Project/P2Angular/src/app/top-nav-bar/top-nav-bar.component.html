@@ -1,12 +1,10 @@
-<nav *ngIf="isHomeNav" class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
     <div class="container-fluid">
         <!-- Will Populate when user is Logged in -->
-        <a class="navbar-brand" href="#">
-            <img src="assets/img/Pokeloot_Logo.png" width="200" height="200" class="img-fluid"
-                style="max-width: 300; max-height: 100;">
-        </a>
+        <img class="navbar-brand" src="assets/img/Pokeloot_Logo.png" width="200" height="200" class="img-fluid"
+            style="max-width: 300; max-height: 100;">
         <!-- Will Display if User is LoggedIn -->
-        <div class="collapse navbar-collapse" id="navbarNav">
+        <div *ngIf="authenticatationService.isAuthenticated" class="collapse navbar-collapse" id="navbarNav">
             <ul class="nav navbar-nav">
                 <li class="nav-item active">
                     <a routerLink="/Home" class="nav-link">Home</a>
@@ -23,7 +21,7 @@
             </ul>
             <ul class="nav navbar-nav ms-auto">
                 <li class="nav-item">
-                    <a routerLink="/Login" class="nav-link"> Login</a>
+                    <a (click)="Logout()" routerLink="" class="nav-link">Signout</a>
                 </li>
             </ul>
         </div>

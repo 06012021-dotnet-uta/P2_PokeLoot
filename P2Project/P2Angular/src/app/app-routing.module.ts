@@ -11,21 +11,24 @@ import { UnlockCardPageComponent } from './unlock-card-page/unlock-card-page.com
 import { ViewInformationPageComponent } from './view-information-page/view-information-page.component';
 import { ViewBalancePageComponent } from './view-balance-page/view-balance-page.component';
 import { CardCollectComponent } from './cardcollect/cardcollect.component';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'app-root', pathMatch: 'full' },
+  { path: '', redirectTo: 'Login', pathMatch: 'full' },
+  { path: 'Login', component: LoginPageComponent },
   { path: 'Signup', component: SignupPageComponent },
-  { path: 'Home', component: HomePageComponent },
-  { path: 'Profile', component: ProfilePageComponent },
-  { path: 'Game', component: GamePageComponent },
-  { path: 'Post', component: CreatePostComponent },
-  { path: 'collection', component: CardCollectComponent },
-  { path: 'TradeCard', component: TradeCardPageComponent },
-  { path: 'UnlockCard', component: UnlockCardPageComponent },
-  { path: 'ViewInformation', component: ViewInformationPageComponent },
-  { path: 'ViewBalance', component: ViewBalancePageComponent },
+  // { path: 'Home/:id', component: HomePageComponent, canActivate: [AuthGuard] },
+  { path: 'Home', component: HomePageComponent, canActivate: [AuthGuard] },
+  { path: 'Profile', component: ProfilePageComponent, canActivate: [AuthGuard] },
+  { path: 'Game', component: GamePageComponent, canActivate: [AuthGuard] },
+  { path: 'Post', component: CreatePostComponent, canActivate: [AuthGuard] },
+  { path: 'collection', component: CardCollectComponent, canActivate: [AuthGuard] },
+  { path: 'TradeCard', component: TradeCardPageComponent, canActivate: [AuthGuard] },
+  { path: 'UnlockCard', component: UnlockCardPageComponent, canActivate: [AuthGuard] },
+  { path: 'ViewInformation', component: ViewInformationPageComponent, canActivate: [AuthGuard] },
+  { path: 'ViewBalance', component: ViewBalancePageComponent, canActivate: [AuthGuard] },
   { path: '**', component: HomePageComponent },
 
 ];
