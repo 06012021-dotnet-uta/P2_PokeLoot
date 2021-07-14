@@ -10,7 +10,6 @@ trigger:
 
 pool:
   vmImage: 'windows-latest'
-
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
@@ -19,33 +18,44 @@ variables:
 
 #SonarCloud task here
 
+stages:
+  - stage: Build Stage
+    jobs: 
+      - job: Build Web App
+        variables:
+          solution: '**/*.sln'
+          buildPlatform: 'Any CPU'
+          buildConfiguration: 'Release'
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: building project
-  inputs:
-    command: 'build'
-    projects: '$(solution)'
-    arguments: '--configuration $(buildConfiguration)'
-    
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: '$(solution)'
-    testRunTitle: 'dotnet tests running'
-    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+        pool:
+          vmImage: 'windows-latest'
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '**/coburtura/coverage.xml'
+          steps:
+          - task: DotNetCoreCLI@2
+            displayName: building project
+            inputs:
+              command: 'build'
+              projects: '$(solution)'
+              arguments: '--configuration $(buildConfiguration)'
     
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '$(solution)'
-    zipAfterPublish: true
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'test'
+              projects: '$(solution)'
+              testRunTitle: 'dotnet tests running'
+              arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: 'Cobertura'
+              summaryFileLocation: '**/coburtura/coverage.xml'
+              
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'publish'
+              publishWebProjects: false
+              projects: '$(solution)'
+              zipAfterPublish: true
 
 
 
