@@ -443,11 +443,105 @@ namespace UnitTests
                 Assert.True(post2);
                 Assert.True(post3);
                 Assert.True(!post4);
-                Assert.True(resultPost1.PostType == 2);
-                Assert.True(resultPost2.PostType == 3);
-                Assert.True(resultPost3.PostType == 1);
+                Assert.Equal(2, resultPost1.PostType);
+                Assert.Equal(3, resultPost2.PostType);
+                Assert.Equal(1, resultPost3.PostType);
 
 
+            }
+        }
+        [Fact]
+        public void getUserCollectionTest()
+        {
+            // Arange
+            User testUser = new User()
+            {
+                FirstName = "Test",
+                LastName = "User",
+                Email = "generic@email.com",
+                UserName = "genericUser",
+                Password = "Password",
+                AccountLevel = 0,
+                CoinBalance = 10,
+                TotalCoinsEarned = 10,
+
+            };
+            User testUser2 = new User()
+            {
+                FirstName = "Test",
+                LastName = "User",
+                Email = "generic@email.com",
+                UserName = "genericUser",
+                Password = "Password",
+                AccountLevel = 0,
+                CoinBalance = 10,
+                TotalCoinsEarned = 10,
+
+            };
+            PokemonCard testPokemon1 = new PokemonCard()
+            {
+                PokemonId = 150,
+                PokemonName = "mewtwo",
+                SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+                SpriteLinkShiny = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/150.png",
+            };
+            PokemonCard testPokemon2 = new PokemonCard()
+            {
+                PokemonId = 151,
+                PokemonName = "mew",
+                SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
+                SpriteLinkShiny = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/151.png",
+            };
+            CardCollection cardCollection1 = new CardCollection()
+            {
+                PokemonId = 150,
+                UserId = 1,
+                QuantityNormal = 1,
+                QuantityShiny = 0
+            };
+            CardCollection cardCollection2 = new CardCollection()
+            {
+                PokemonId = 151,
+                UserId = 1,
+                QuantityNormal = 0,
+                QuantityShiny = 1
+            };
+
+            Dictionary<CardCollection, PokemonCard> result;
+            Dictionary<CardCollection, PokemonCard> failResult;
+            
+
+            // Act
+            using (var context = new P2DbClass(options))    // creates in memory database
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                BusinessModel testBusinessModel = new BusinessModel(context);
+
+                context.Users.Add(testUser);
+                context.Users.Add(testUser2);
+                context.PokemonCards.Add(testPokemon1);
+                context.PokemonCards.Add(testPokemon2);
+                context.CardCollections.Add(cardCollection1);
+                context.CardCollections.Add(cardCollection2);
+                context.SaveChanges();
+                testUser.UserId = 1;
+                testUser2.UserId = 2;
+
+                result = testBusinessModel.getUserCollection(testUser);
+                failResult = testBusinessModel.getUserCollection(testUser);
+                
+
+                // Assert
+                Assert.True(result.Any());
+                Assert.True(failResult.Keys.Count != 0);
+                Assert.True(result.Keys.Count == 2);
+                Assert.True(result.Keys.ToArray()[0].UserId == 1);
+                Assert.True(result.Keys.ToArray()[0].PokemonId == 150);
+                Assert.True(result.Keys.ToArray()[1].QuantityNormal == 0);
+                Assert.True(result.Keys.ToArray()[1].QuantityShiny == 1);
+                Assert.True(result.Values.Any());
             }
         }
     }

@@ -213,14 +213,24 @@ namespace BusinessLayer
             DateTime now = DateTime.Now;
             newPost.PostTime = now;
             newPost.StillAvailable = true;
-            context.Posts.Add(newPost);
+            try
+            {
+                context.Posts.Add(newPost);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            int next = context.Posts.Select(x => x.PostId).Max();
 
             //check post details to determine post type.
             int postType = 0;
             if(newPost.PokemonId == null && newPost.Price == null){
                 postType = 1; //discussion
             }
-            else if(newPost.PokemonId == null){
+            else if(newPost.Price == null){
                 postType = 3; //display
             }
             else{
@@ -232,7 +242,6 @@ namespace BusinessLayer
             displayBoard.UserId = currentUser.UserId;
             displayBoard.PostType = postType;
             Console.WriteLine(context.Posts.ToList());
-            int next = context.Posts.Last().PostId;
             
             displayBoard.PostId = next;//returns the newest instance of a post(the one we just added) and grabs their id.
             context.DisplayBoards.Add(displayBoard);

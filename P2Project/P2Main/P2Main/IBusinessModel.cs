@@ -17,7 +17,7 @@ namespace BusinessLayer
 
         public Dictionary<CardCollection, PokemonCard> getUserCollection(User currentUser);
 
-        public bool newPost(Post newPost, User currentUser); //testing
+        public bool newPost(Post newPost, User currentUser); //test
 
         public User login(string username, string password); //tested
 
