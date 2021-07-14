@@ -3,49 +3,20 @@ import { HttpClient } from "@angular/common/http";
 import { Observable, throwError } from 'rxjs';
 import { catchError, retry } from 'rxjs/operators';
 import { Card } from './cardcollect/card';
+import { Dictionary } from './cardcollect/IDictionary';
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class CardServiceService {
-
+  
   constructor(private http: HttpClient) { }
 
-  GetCardsList(): Observable<Card[]>{
-    return this.http.get<Card[]>('path')
+  GetCardsList():Observable<Dictionary[]>{/*https://pokeloot.azurewebsites.net*/
+    return this.http.get<Dictionary[]>('https://localhost:44307/api/P2/UserCollection/2')
   }
 
-  GetCardTest(){
-    return [{
-            pokeid:1,
-            pokename:'bulbasaur',
-            rarity:5,
-            quanNorm:3,
-            spriteNorm:"spritenorm",
-            quanShiny:0,
-            spriteShiny:"spriteshiny",
-            },
-            {
-              pokeid:4,
-              pokename:'squirtle',
-              rarity:5,
-              quanNorm:3,
-              spriteNorm:"spritenorm",
-              quanShiny:0,
-              spriteShiny:"spriteshiny",
-            },
-            {
-            pokeid:7,
-            pokename:'charmander',
-            rarity:5,
-            quanNorm:3,
-            spriteNorm:"spritenorm",
-            quanShiny:0,
-            spriteShiny:"spriteshiny"
-            }
-            ];
-  }
 
 
   /* Get methods look like: return this.http.get<Card[]>('path', 

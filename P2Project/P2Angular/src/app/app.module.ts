@@ -21,6 +21,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { TopNavBarComponent } from './top-nav-bar/top-nav-bar.component';
 import { PostsComponent } from './posts/posts.component';
 import { CardCollectComponent } from './cardcollect/cardcollect.component';
+import { CardServiceService } from './card-service.service';
 
 @NgModule({
   declarations: [
@@ -45,9 +46,8 @@ import { CardCollectComponent } from './cardcollect/cardcollect.component';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule
-
   ],
-  providers: [],
+  providers: [CardServiceService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
