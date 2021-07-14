@@ -50,10 +50,11 @@ steps:
     ng build --prod
   displayName: 'npm install and build'
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '$(solution)'
-    zipAfterPublish: true
-    arguments:
+#- task: DotNetCoreCLI@2
+#  inputs:
+#    command: 'publish'
+#    publishWebProjects: false
+#    projects: '$(solution)'
+#    zipAfterPublish: true
+#    arguments:
+
