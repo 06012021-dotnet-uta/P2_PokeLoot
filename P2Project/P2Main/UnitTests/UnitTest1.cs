@@ -530,18 +530,151 @@ namespace UnitTests
                 testUser2.UserId = 2;
 
                 result = testBusinessModel.getUserCollection(testUser);
-                failResult = testBusinessModel.getUserCollection(testUser);
+                failResult = testBusinessModel.getUserCollection(testUser2);
                 
 
                 // Assert
                 Assert.True(result.Any());
-                Assert.True(failResult.Keys.Count != 0);
+                Assert.True(failResult.Keys.Count == 0);
                 Assert.True(result.Keys.Count == 2);
                 Assert.True(result.Keys.ToArray()[0].UserId == 1);
                 Assert.True(result.Keys.ToArray()[0].PokemonId == 150);
                 Assert.True(result.Keys.ToArray()[1].QuantityNormal == 0);
                 Assert.True(result.Keys.ToArray()[1].QuantityShiny == 1);
                 Assert.True(result.Values.Any());
+            }
+        }
+
+        [Fact]
+        public void rollLootboxTest()
+        {
+            // Arange
+            User testUser = new User()
+            {
+                FirstName = "Test",
+                LastName = "User",
+                Email = "generic@email.com",
+                UserName = "genericUser",
+                Password = "Password",
+                AccountLevel = 0,
+                CoinBalance = 10,
+                TotalCoinsEarned = 10,
+
+            };
+            
+            PokemonCard testPokemon1 = new PokemonCard()
+            {
+                PokemonId = 150,
+                PokemonName = "mewtwo",
+                SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
+                SpriteLinkShiny = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/150.png",
+            };
+            PokemonCard testPokemon2 = new PokemonCard()
+            {
+                PokemonId = 151,
+                PokemonName = "mew",
+                SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
+                SpriteLinkShiny = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/151.png",
+            };
+            PokemonCard testPokemon3 = new PokemonCard()
+            {
+                PokemonId = 152,
+                PokemonName = "chikorita",
+                SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png",
+                SpriteLinkShiny = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/152.png",
+            };
+            PokemonCard testPokemon4 = new PokemonCard()
+            {
+                PokemonId = 153,
+                PokemonName = "bayleef",
+                SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/153.png",
+                SpriteLinkShiny = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/153.png",
+            };
+            PokemonCard testPokemon5 = new PokemonCard()
+            {
+                PokemonId = 154,
+                PokemonName = "meganium",
+                SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/154.png",
+                SpriteLinkShiny = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/154.png",
+            };
+            CardCollection cardCollection1 = new CardCollection()
+            {
+                PokemonId = 150,
+                UserId = 1,
+                QuantityNormal = 1,
+                QuantityShiny = 0
+            };
+
+
+            Dictionary<PokemonCard, bool> result1;
+            Dictionary<PokemonCard, bool> result2;
+            Dictionary<PokemonCard, bool> result3;
+            Dictionary<PokemonCard, bool> result4;
+            Dictionary<PokemonCard, bool> result5;
+            Dictionary<PokemonCard, bool> result6;
+            Dictionary<PokemonCard, bool> result7;
+            Dictionary<PokemonCard, bool> result8;
+            Dictionary<PokemonCard, bool> result9;
+            Dictionary<PokemonCard, bool> result10;
+            Dictionary<PokemonCard, bool> result11;
+            List<CardCollection> cardCollection;
+            User resultUser;
+
+            // Act
+            using (var context = new P2DbClass(options))    // creates in memory database
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                BusinessModel testBusinessModel = new BusinessModel(context);
+
+                context.Users.Add(testUser);
+                context.PokemonCards.Add(testPokemon1);
+                context.PokemonCards.Add(testPokemon2);
+                context.PokemonCards.Add(testPokemon3);
+                context.PokemonCards.Add(testPokemon4);
+                context.PokemonCards.Add(testPokemon5);
+                context.CardCollections.Add(cardCollection1);
+                context.SaveChanges();
+                testUser.UserId = 1;
+
+                result1 = testBusinessModel.rollLootbox(testUser);
+                result2 = testBusinessModel.rollLootbox(testUser);
+                result3 = testBusinessModel.rollLootbox(testUser);
+                result4 = testBusinessModel.rollLootbox(testUser);
+                result5 = testBusinessModel.rollLootbox(testUser);
+                result6 = testBusinessModel.rollLootbox(testUser);
+                result7 = testBusinessModel.rollLootbox(testUser);
+                result8 = testBusinessModel.rollLootbox(testUser);
+                result9 = testBusinessModel.rollLootbox(testUser);
+                result10 = testBusinessModel.rollLootbox(testUser);
+                result11 = testBusinessModel.rollLootbox(testUser);
+                cardCollection = context.CardCollections.Where(x => x.UserId == testUser.UserId).ToList();
+                resultUser = context.Users.Where(x => x.UserId == testUser.UserId).FirstOrDefault();
+
+
+                // Assert
+                Assert.True(resultUser.AccountLevel == 11);
+                Assert.True(result1.Any());
+                Assert.True(result1.Keys.Count == 1);
+                Assert.True(result1.Values.Any());
+                Assert.True(result1.Values.Count == 1);
+                Assert.True(result2.Any());
+                Assert.True(result2.Keys.Count == 1);
+                Assert.True(result2.Values.Any());
+                Assert.True(result1.Values.Count == 1);
+                Assert.True(result3.Any());
+                Assert.True(result3.Keys.Count == 1);
+                Assert.True(result3.Values.Any());
+                Assert.True(result3.Values.Count == 1);
+                Assert.True(result4.Any());
+                Assert.True(result4.Keys.Count == 1);
+                Assert.True(result4.Values.Any());
+                Assert.True(result4.Values.Count == 1);
+                Assert.True(result5.Any());
+                Assert.True(result5.Keys.Count == 1);
+                Assert.True(result5.Values.Any());
+                
             }
         }
     }
