@@ -12,7 +12,7 @@ pool:
   vmImage: 'windows-latest'
 
 variables:
-  solution: '**/*P2Main.sln'
+  solution: 'P2Project/P2Main/P2Main.sln'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
@@ -20,24 +20,20 @@ variables:
 #SonarCloud task here
 
 
-
 steps:
 - task: DotNetCoreCLI@2
+  displayName: building project
   inputs:
     command: 'build'
-    arguments: $(solution)'
+    arguments: '--configuration $(buildConfiguration)'
+    
 
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: '$(solution)'
-    testRunTitle: 'DotNet tests running'
 - task: DotNetCoreCLI@2
   inputs:
     command: 'publish'
     publishWebProjects: false
     projects: '$(solution)'
-    modifyOutputPath: false
+    modifyOutputPath: true
 
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
