@@ -70,7 +70,8 @@ namespace BusinessLayer
                 collection.PokemonId = card.PokemonId;
                 collection.QuantityNormal = 0;
                 collection.QuantityShiny = 0;
-                context.CardCollections.Add(collection);                
+                context.CardCollections.Add(collection);
+                context.SaveChanges();
             }
             if(shiny < 99){ //Updates collection to reflect a new normal card
                 collection.QuantityNormal++;

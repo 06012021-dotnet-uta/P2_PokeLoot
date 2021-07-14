@@ -564,6 +564,7 @@ namespace UnitTests
             
             PokemonCard testPokemon1 = new PokemonCard()
             {
+                RarityId = 1,
                 PokemonId = 150,
                 PokemonName = "mewtwo",
                 SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/150.png",
@@ -571,6 +572,8 @@ namespace UnitTests
             };
             PokemonCard testPokemon2 = new PokemonCard()
             {
+
+                RarityId = 2,
                 PokemonId = 151,
                 PokemonName = "mew",
                 SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/151.png",
@@ -578,6 +581,7 @@ namespace UnitTests
             };
             PokemonCard testPokemon3 = new PokemonCard()
             {
+                RarityId = 3,
                 PokemonId = 152,
                 PokemonName = "chikorita",
                 SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/152.png",
@@ -585,6 +589,7 @@ namespace UnitTests
             };
             PokemonCard testPokemon4 = new PokemonCard()
             {
+                RarityId = 4,
                 PokemonId = 153,
                 PokemonName = "bayleef",
                 SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/153.png",
@@ -592,6 +597,7 @@ namespace UnitTests
             };
             PokemonCard testPokemon5 = new PokemonCard()
             {
+                RarityId = 5,
                 PokemonId = 154,
                 PokemonName = "meganium",
                 SpriteLink = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/154.png",
