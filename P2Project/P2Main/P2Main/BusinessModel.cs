@@ -9,7 +9,24 @@ namespace BusinessLayer
     public class BusinessModel : IBusinessModel
         {
 
-        P2DbClass context = new P2DbClass();
+        public P2DbClass context;
+
+        /// <summary>
+        /// Constructor for business class that takes a Db context
+        /// </summary>
+        /// <param name="context">Db context</param>
+        public BusinessModel(P2DbClass context)
+        {
+            this.context = context;
+        }
+
+        /// <summary>
+        /// Constructor for business class that takes no constructor
+        /// </summary>
+        public BusinessModel()
+        {
+            this.context = new P2DbClass();
+        }
 
 
         /// <summary>
@@ -69,7 +86,7 @@ namespace BusinessLayer
             currentUser.AccountLevel++;//increments account level with each lootbox opened(we dont have an xp system implemented yet.)
             context.Users.Attach(currentUser);
             context.Entry(currentUser).Property(x => x.AccountLevel).IsModified = true;
-            //context.SaveChanges(); <-- update when code is ready
+            context.SaveChanges();
             result.Add(card, isShiny);
             return result;            
         }
@@ -148,7 +165,7 @@ namespace BusinessLayer
 
             }
             try{
-                //context.SaveChanges(); <--- update when code is ready
+                context.SaveChanges();
             }
             catch(Exception e){ 
                 output = $"An exception occured: ${e}";
@@ -214,11 +231,14 @@ namespace BusinessLayer
             DisplayBoard displayBoard = new DisplayBoard();
             displayBoard.UserId = currentUser.UserId;
             displayBoard.PostType = postType;
-            displayBoard.PostId = context.Posts.Where(x => x.PostTime == now).Select(x => x.PostId).Max();//returns the newest instance of a post(the one we just added) and grabs their id.
+            Console.WriteLine(context.Posts.ToList());
+            int next = context.Posts.Last().PostId;
+            
+            displayBoard.PostId = next;//returns the newest instance of a post(the one we just added) and grabs their id.
             context.DisplayBoards.Add(displayBoard);
 
             try{
-                //context.SaveChanges();
+                context.SaveChanges();
             }
             catch(Exception e){
                 Console.WriteLine(e);
@@ -234,7 +254,7 @@ namespace BusinessLayer
         /// <param name="password">Password for logging in</param>
         /// <returns>User object after logging in, null if invalid creditials</returns>
         public User login(string username, string password){
-            return context.Users.Where(x => x.UserName == username && x.Password == password).FirstOrDefault();
+            return context.Users.Where(x => x.UserName.ToLower() == username.ToLower() && x.Password == password).FirstOrDefault();
             //If return is null, log in is invalid and should prompt user to relogin.
         }
 
@@ -249,7 +269,7 @@ namespace BusinessLayer
             newUser.TotalCoinsEarned = 10;
             context.Add(newUser);
             try{
-                //context.SaveChanges();
+                context.SaveChanges();
             }
             catch(Exception e){
                 Console.WriteLine(e);
@@ -284,7 +304,7 @@ namespace BusinessLayer
                 
             }
             try{
-                //context.SaveChanges();
+                context.SaveChanges();
             }
             catch(Exception e){
                 Console.WriteLine(e);

@@ -13,20 +13,20 @@ namespace BusinessLayer
 
         public Dictionary<string, bool> buyFromPost(Post post, User currentUser);
         
-        public List<Post> getDisplayBoard();
+        public List<Post> getDisplayBoard(); //test
 
         public Dictionary<CardCollection, PokemonCard> getUserCollection(User currentUser);
 
-        public bool newPost(Post newPost, User currentUser);
+        public bool newPost(Post newPost, User currentUser); //testing
 
-        public User login(string username, string password);
+        public User login(string username, string password); //tested
 
-        public bool signUp(User newUser);
+        public bool signUp(User newUser); //tested
 
-        public bool incrementUserBalance(User currentUser, int coinsToAdd);
+        public bool incrementUserBalance(User currentUser, int coinsToAdd); //tested
 
-        public PokemonCard getPokemonById(int id);
+        public PokemonCard getPokemonById(int id); //tested
 
-        public User GetUserById(int id);
+        public User GetUserById(int id); //tested
     }
 }
