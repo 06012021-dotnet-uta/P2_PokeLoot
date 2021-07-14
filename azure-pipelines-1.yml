@@ -19,9 +19,9 @@ variables:
 #SonarCloud task here
 
 stages:
-  - stage: Build Stage
+  - stage: BuildStage
     jobs: 
-      - job: Build Web App
+      - job: BuildWebApp
         variables:
           solution: '**/*.sln'
           buildPlatform: 'Any CPU'
