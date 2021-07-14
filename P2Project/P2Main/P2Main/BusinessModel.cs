@@ -48,6 +48,7 @@ namespace BusinessLayer
             int shiny = random.Next(101);
             CardCollection collection = context.CardCollections.Where(x => x.UserId == currentUser.UserId && x.PokemonId == card.PokemonId).FirstOrDefault();
             if(collection == null){ //if collection is null(doesn't exist), populate the empty collection with new data and add it to the database
+                collection = new CardCollection();
                 collection.UserId = currentUser.UserId;
                 collection.PokemonId = card.PokemonId;
                 collection.QuantityNormal = 0;
@@ -301,7 +302,16 @@ namespace BusinessLayer
         public PokemonCard getPokemonById(int id){
             return context.PokemonCards.Where(x => x.PokemonId == id).FirstOrDefault();
         }
-       
+
+        /// <summary>
+        /// Gets the user object by its Id
+        /// </summary>
+        /// <param name="id">User Id</param>
+        /// <returns>User object or null</returns>
+        public User GetUserById(int id)
+        {
+            return context.Users.Where(x => x.UserId == id).FirstOrDefault();
+        }
 
     }//class BusinessModel
 }// namespace BusinessLayer
