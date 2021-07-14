@@ -39,13 +39,13 @@ steps:
     workingDir: $(solution)
 
 - task: Npm@1
+  displayName: 'NPM Build Angular'
   inputs:
     command: 'custom'
     workingDir: $(solution)
-    customCommand: 'run build-prod'
+    customCommand: 'build --prod'
 
 - script: |
-    npm install -g @angular/cli
     npm install
     ng build --prod
   displayName: 'npm install and build'
