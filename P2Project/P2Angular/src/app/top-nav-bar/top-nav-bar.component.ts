@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { AuthenticationService } from '../service/authentication/authentication.service';
 
 @Component({
   selector: 'app-top-nav-bar',
@@ -6,12 +7,14 @@ import { Component, OnInit, Input } from '@angular/core';
   styleUrls: ['./top-nav-bar.component.css']
 })
 export class TopNavBarComponent implements OnInit {
-  @Input() isHomeNav: boolean = true;
-  @Input() isLoginNav: boolean = true;
 
-  constructor() { }
+  constructor(public authenticatationService: AuthenticationService) { }
 
   ngOnInit(): void {
+  }
+
+  Logout() {
+    this.authenticatationService.Logout();
   }
 
 }
