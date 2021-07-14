@@ -164,7 +164,7 @@ namespace BusinessLayer
         /// List all available posts
         /// </summary>
         /// <returns>Enumable list of posts</returns>
-        public IEnumerable<Post> getDisplayBoard(){         
+        public List<Post> getDisplayBoard(){         
             return context.Posts.Where(x => x.StillAvailable == true).ToList();
         }
         

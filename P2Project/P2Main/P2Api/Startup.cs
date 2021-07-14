@@ -11,6 +11,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BusinessLayer;
+using P2DbContext.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace P2Api
 {
@@ -27,11 +30,31 @@ namespace P2Api
         public void ConfigureServices(IServiceCollection services)
         {
 
+            services.AddCors((options) =>
+            {
+                options.AddPolicy(name: "dev", builder =>
+                {
+                    builder.WithOrigins("http://127.0.0.1:5500", "http://localhost:4200")   // update thisssssssssss to proper ip / pathing
+                    .AllowAnyHeader()
+                    .AllowAnyMethod();
+                });
+            });
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "P2Api", Version = "v1" });
             });
+
+            services.AddDbContext<P2DbClass>(options =>
+            {
+                if (!options.IsConfigured)
+                {
+                    options.UseSqlServer(Configuration.GetConnectionString("Server=tcp:p2pokelootserver.database.windows.net,1433;Initial Catalog=PokeLoot;Persist Security Info=False;User ID=christian.romero@revature.net@p2pokelootserver;Password=P2PokeLoot;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+                }
+            });
+            services.AddScoped<IBusinessModel, BusinessModel>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
