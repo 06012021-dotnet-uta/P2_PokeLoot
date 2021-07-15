@@ -71,6 +71,8 @@ namespace P2Api
 
             app.UseRouting();
 
+            app.UseCors("dev");
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

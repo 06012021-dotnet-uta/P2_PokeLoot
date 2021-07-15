@@ -1,9 +1,9 @@
 export interface Card{
-    pokeid:number,
-    pokename:string,
-    rarity:number,
-    quanNorm:number,
-    spriteNorm:string,
-    quanShiny:number,
-    spriteShiny:string,
+     pokeid:number,
+     rarity:number,
+     spriteNorm:string,
+     spriteShiny:string,
+     pokename:string,
 }
+
+//Put these back into the card cllect component

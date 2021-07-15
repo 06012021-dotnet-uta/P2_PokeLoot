@@ -10,7 +10,6 @@ trigger:
 
 pool:
   vmImage: 'windows-latest'
-
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
@@ -19,33 +18,67 @@ variables:
 
 #SonarCloud task here
 
+stages:
+  - stage: BuildStage
+    jobs: 
+      - job: BuildWebApp
+        variables:
+          solution: '**/*.sln'
+          buildPlatform: 'Any CPU'
+          buildConfiguration: 'Release'
 
-steps:
-- task: DotNetCoreCLI@2
-  displayName: building project
-  inputs:
-    command: 'build'
-    projects: '$(solution)'
-    arguments: '--configuration $(buildConfiguration)'
-    
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'test'
-    projects: '$(solution)'
-    testRunTitle: 'dotnet tests running'
-    arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+        pool:
+          vmImage: 'windows-latest'
 
-- task: PublishCodeCoverageResults@1
-  inputs:
-    codeCoverageTool: 'Cobertura'
-    summaryFileLocation: '**/coburtura/coverage.xml'
+          steps:
+          - task: DotNetCoreCLI@2
+            displayName: building project
+            inputs:
+              command: 'build'
+              projects: '$(solution)'
+              arguments: '--configuration $(buildConfiguration)'
     
-- task: DotNetCoreCLI@2
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '$(solution)'
-    zipAfterPublish: true
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'test'
+              projects: '$(solution)'
+              testRunTitle: 'dotnet tests running'
+              arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: 'Cobertura'
+              summaryFileLocation: '**/coburtura/coverage.xml'
+              
+          - task: DotNetCoreCLI@2
+            inputs:
+              command: 'publish'
+              publishWebProjects: false
+              projects: '$(solution)'
+              zipAfterPublish: true
+              
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+              appType: 'webApp'
+              WebAppName: 'PokeLoot'
+              deployToSlotOrASE: true
+              ResourceGroupName: 'PokeLoot'
+              SlotName: 'production'
+              packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+  # - stage: DeployDev
+  #   displayName: 'Deploy to Dev'
+  #   jobs: 
+  #     - deployment: 
+  #       pool:
+  #         vmImage: 'windows-latest'
+  #       environment: 'Dev'
+  #       strategy:
+  #         runOnce:
+  #           deploy:
+  #             steps:
+  #               - 
 
 
 

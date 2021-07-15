@@ -17,17 +17,6 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
-# - task: SonarCloudPrepare@1
-#   displayName: sonarclour prepare
-#   inputs:
-#     SonarCloud: 'sonarclourangular'
-#     organization: '03012021batch'
-#     scannerMode: 'CLI'
-#     configMode: 'manual'
-#     cliProjectKey: '03012021Batch_memesaverangular'
-#     cliProjectName: 'memesaverangular'
-#     cliSources: '$(solution)/src'
-#     extraProperties: 'sonar.javascript.lcov.reportPaths=$(solution)/coverage/memesaver/lcov.info'
 - task: NodeTool@0
   inputs:
     versionSpec: '10.x'
@@ -43,9 +32,43 @@ steps:
   inputs:
     command: 'custom'
     workingDir: $(solution)
-    customCommand: 'build --prod'
+    customCommand: 'run build-prod'
+
 
 - script: |
     npm install
     ng build --prod
   displayName: 'npm install and build'
+      
+
+
+
+
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+    appType: 'webApp'
+    WebAppName: 'PokeLoot'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+    appType: 'webApp'
+    WebAppName: 'PokeLoot'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'PokeLoot'
+    SlotName: 'production'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+  
+
+
