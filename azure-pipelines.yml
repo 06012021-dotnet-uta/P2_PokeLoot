@@ -43,12 +43,22 @@ steps:
   inputs:
     command: 'custom'
     workingDir: $(solution)
-    customCommand: 'build --prod'
 
-- script: |
-    npm install
-    ng build --prod
-  displayName: 'npm install and build'
+- task: AzureResourceManagerTemplateDeployment@3
+  inputs:
+    deploymentScope: 'Resource Group'
+    azureResourceManagerConnection: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+    subscriptionId: '6b99bb29-57fd-4673-b918-0d515335b837'
+    action: 'Create Or Update Resource Group'
+    resourceGroupName: 'PokeLoot'
+    location: 'Central US'
+
+
+
+# - script: |
+#     npm install
+#     ng build --prod
+#   displayName: 'npm install and build'
 
 #- task: DotNetCoreCLI@2
 #  inputs:
