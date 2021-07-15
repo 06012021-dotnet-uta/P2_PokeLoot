@@ -5,6 +5,7 @@
     /* width: 600px; */
     width: 70%;
     /* min-width: 600px; */
+    font-size: 10px;
     max-width: 100%;
     overflow: hidden;
     display: flex;
@@ -62,16 +63,16 @@
 
 .date 
 {
-  font-size: small;
+  /* font-size: small; */
   color: #707070;
   text-align: left;
   margin-right: 3px;
-  width: 30%;
+  width: 50%;
 }
 
 .dot {
   margin-right: 5px;
-  margin-top: 8px;
+  margin-top: 5px;
   height: 5px;
   width: 5px;
   background-color: #707070;
@@ -82,7 +83,7 @@
 .type 
 {
   color: #707070;
-  font-size: small;
+  /* font-size: small; */
   text-align: left;
   margin-left: 3px;
   width: 40%;

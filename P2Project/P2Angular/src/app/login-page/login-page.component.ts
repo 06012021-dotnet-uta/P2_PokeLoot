@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit {
     }
 
     const login: Login = {
-      email: loginInForm.value.email,
+      username: loginInForm.value.username,
       password: loginInForm.value.password
     }
 
@@ -37,6 +37,13 @@ export class LoginPageComponent implements OnInit {
       this.isFormValid = false;
       this.isCredentialsValid = true;
     }
+
+    console.log(`Username ${login.username} Password: ${login.password}`)
+
+    this.authenticateService.AuthenticateWithApi(login.username, login.password).subscribe(
+      x => { console.log(x) },
+      y => console.log(`there was an error ${y}`)
+    )
   }
 
 }
