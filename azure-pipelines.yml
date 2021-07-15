@@ -43,21 +43,17 @@ steps:
   inputs:
     command: 'custom'
     workingDir: $(solution)
-    customCommand: 'run build-prod'
+    customCommand: 'run build --prod'
 
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-    appType: 'webApp'
-    WebAppName: 'PokeLoot'
-    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+
      
-       
-# - script: 
-#      npm install
-#      ng build --prod
-#   displayName: 'npm install and build'
+- script: |
+    npm install
+    ng build --prod
+  displayName: 'npm install and build'
+      
+
+
 
 # - task: ArchiveFiles@2
 #   inputs:
@@ -73,6 +69,14 @@ steps:
 #     ArtifactName: 'drop'
 #     publishLocation: 'Container'
 
+
+# - task: AzureRmWebAppDeployment@4
+#   inputs:
+#     ConnectionType: 'AzureRM'
+#     azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+#     appType: 'webApp'
+#     WebAppName: 'PokeLoot'
+#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 # - task: AzureRmWebAppDeployment@4
 #    inputs:
