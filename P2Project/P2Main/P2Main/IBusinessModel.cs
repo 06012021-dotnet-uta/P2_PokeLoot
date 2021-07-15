@@ -9,9 +9,9 @@ namespace BusinessLayer
 {
     public interface IBusinessModel
     {
-        public Dictionary<PokemonCard, bool> rollLootbox(User currentUser); //testing
+        public Dictionary<PokemonCard, bool> rollLootbox(User currentUser); //tested
 
-        public Dictionary<string, bool> buyFromPost(Post post, User currentUser);
+        public Dictionary<string, bool> buyFromPost(Post post, User currentUser); //tested
         
         public List<Post> getDisplayBoard(); //test
 

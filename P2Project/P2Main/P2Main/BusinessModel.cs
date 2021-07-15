@@ -132,16 +132,28 @@ namespace BusinessLayer
             CardCollection userCollection = context.CardCollections.Where(x => x.UserId == currentUser.UserId && x.PokemonId == post.PokemonId).FirstOrDefault();
             CardCollection sellerCollection = context.CardCollections.Where(x => x.UserId == seller.UserId && x.PokemonId == post.PokemonId).FirstOrDefault();
 
-            if((bool)post.IsShiny){ //updates user and seller collection if shiny
+            if(post.IsShiny != null  && (bool)post.IsShiny == true)
+            { //updates user and seller collection if shiny
                 sellerCollection.QuantityShiny--;
                 context.CardCollections.Attach(sellerCollection);
                 context.Entry(sellerCollection).Property(x => x.QuantityShiny).IsModified = true;
                 if(userCollection == null){ //if collection is null(doesn't exist), populate the empty collection with new data and add it to the database
+                    userCollection = new CardCollection();
                     userCollection.UserId = currentUser.UserId;
                     userCollection.PokemonId = (int)post.PokemonId;
                     userCollection.QuantityNormal = 0;
                     userCollection.QuantityShiny = 0;
-                    context.CardCollections.Add(userCollection);  
+                    context.CardCollections.Add(userCollection);
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        output = $"An exception occured: ${e}";
+                        result.Add(output, false);
+                        return result;
+                    }
                 }
                 userCollection.QuantityShiny++;
                 context.CardCollections.Attach(userCollection);
@@ -153,11 +165,22 @@ namespace BusinessLayer
                 context.CardCollections.Attach(sellerCollection);
                 context.Entry(sellerCollection).Property(x => x.QuantityNormal).IsModified = true;
                 if(userCollection == null){ //if collection is null(doesn't exist), populate the empty collection with new data and add it to the database
+                    userCollection = new CardCollection();
                     userCollection.UserId = currentUser.UserId;
                     userCollection.PokemonId = (int)post.PokemonId;
                     userCollection.QuantityNormal = 0;
                     userCollection.QuantityShiny = 0;
-                    context.CardCollections.Add(userCollection);  
+                    context.CardCollections.Add(userCollection);
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        output = $"An exception occured: ${e}";
+                        result.Add(output, false);
+                        return result;
+                    }
                 }
                 userCollection.QuantityNormal++;
                 context.CardCollections.Attach(userCollection);
