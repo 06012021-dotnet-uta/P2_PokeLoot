@@ -43,6 +43,8 @@ steps:
   inputs:
     command: 'custom'
     workingDir: $(solution)
+    customCommand: 'run build-prod'
+
 
 - task: AzureResourceManagerTemplateDeployment@3
   inputs:
@@ -52,7 +54,8 @@ steps:
     action: 'Create Or Update Resource Group'
     resourceGroupName: 'PokeLoot'
     location: 'Central US'
-
+    templateLocation: 'Linked artifact'
+    deploymentMode: 'Incremental'
 
 
 # - script: |
