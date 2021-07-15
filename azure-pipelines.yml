@@ -45,6 +45,20 @@ steps:
     workingDir: $(solution)
     customCommand: 'run build-prod'
 
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+    appType: 'webApp'
+    WebAppName: 'PokeLoot'
+    packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+     
+       
+# - script: 
+#      npm install
+#      ng build --prod
+#   displayName: 'npm install and build'
+
 # - task: ArchiveFiles@2
 #   inputs:
 #     rootFolderOrFile: '$(solution)/dist'
@@ -61,20 +75,15 @@ steps:
 
 
 # - task: AzureRmWebAppDeployment@4
-#   inputs:
-#     ConnectionType: 'AzureRM'
-#     azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-#     appType: 'webApp'
-#     WebAppName: 'PokeLoot'
-#     deployToSlotOrASE: true
-#     ResourceGroupName: 'PokeLoot'
-#     SlotName: 'production'
-#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-    
-# - script: |
-#     npm install
-#     ng build --prod
-#   displayName: 'npm install and build'
-
+#    inputs:
+#      ConnectionType: 'AzureRM'
+#      azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+#      appType: 'webApp'
+#      WebAppName: 'PokeLoot'
+#      deployToSlotOrASE: true
+#      ResourceGroupName: 'PokeLoot'
+#      SlotName: 'production'
+#      packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+  
 
 
