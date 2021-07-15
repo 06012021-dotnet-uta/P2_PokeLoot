@@ -56,6 +56,29 @@ stages:
               publishWebProjects: false
               projects: '$(solution)'
               zipAfterPublish: true
+              
+          - task: AzureRmWebAppDeployment@4
+            inputs:
+              ConnectionType: 'AzureRM'
+              azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+              appType: 'webApp'
+              WebAppName: 'PokeLoot'
+              deployToSlotOrASE: true
+              ResourceGroupName: 'PokeLoot'
+              SlotName: 'production'
+              packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+  # - stage: DeployDev
+  #   displayName: 'Deploy to Dev'
+  #   jobs: 
+  #     - deployment: 
+  #       pool:
+  #         vmImage: 'windows-latest'
+  #       environment: 'Dev'
+  #       strategy:
+  #         runOnce:
+  #           deploy:
+  #             steps:
+  #               - 
 
 
 
