@@ -9,7 +9,24 @@ namespace BusinessLayer
     public class BusinessModel : IBusinessModel
         {
 
-        P2DbClass context = new P2DbClass();
+        public P2DbClass context;
+
+        /// <summary>
+        /// Constructor for business class that takes a Db context
+        /// </summary>
+        /// <param name="context">Db context</param>
+        public BusinessModel(P2DbClass context)
+        {
+            this.context = context;
+        }
+
+        /// <summary>
+        /// Constructor for business class that takes no constructor
+        /// </summary>
+        public BusinessModel()
+        {
+            this.context = new P2DbClass();
+        }
 
 
         /// <summary>
@@ -53,7 +70,8 @@ namespace BusinessLayer
                 collection.PokemonId = card.PokemonId;
                 collection.QuantityNormal = 0;
                 collection.QuantityShiny = 0;
-                context.CardCollections.Add(collection);                
+                context.CardCollections.Add(collection);
+                context.SaveChanges();
             }
             if(shiny < 99){ //Updates collection to reflect a new normal card
                 collection.QuantityNormal++;
@@ -69,7 +87,7 @@ namespace BusinessLayer
             currentUser.AccountLevel++;//increments account level with each lootbox opened(we dont have an xp system implemented yet.)
             context.Users.Attach(currentUser);
             context.Entry(currentUser).Property(x => x.AccountLevel).IsModified = true;
-            //context.SaveChanges(); <-- update when code is ready
+            context.SaveChanges();
             result.Add(card, isShiny);
             return result;            
         }
@@ -114,16 +132,28 @@ namespace BusinessLayer
             CardCollection userCollection = context.CardCollections.Where(x => x.UserId == currentUser.UserId && x.PokemonId == post.PokemonId).FirstOrDefault();
             CardCollection sellerCollection = context.CardCollections.Where(x => x.UserId == seller.UserId && x.PokemonId == post.PokemonId).FirstOrDefault();
 
-            if((bool)post.IsShiny){ //updates user and seller collection if shiny
+            if(post.IsShiny != null  && (bool)post.IsShiny == true)
+            { //updates user and seller collection if shiny
                 sellerCollection.QuantityShiny--;
                 context.CardCollections.Attach(sellerCollection);
                 context.Entry(sellerCollection).Property(x => x.QuantityShiny).IsModified = true;
                 if(userCollection == null){ //if collection is null(doesn't exist), populate the empty collection with new data and add it to the database
+                    userCollection = new CardCollection();
                     userCollection.UserId = currentUser.UserId;
                     userCollection.PokemonId = (int)post.PokemonId;
                     userCollection.QuantityNormal = 0;
                     userCollection.QuantityShiny = 0;
-                    context.CardCollections.Add(userCollection);  
+                    context.CardCollections.Add(userCollection);
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        output = $"An exception occured: ${e}";
+                        result.Add(output, false);
+                        return result;
+                    }
                 }
                 userCollection.QuantityShiny++;
                 context.CardCollections.Attach(userCollection);
@@ -135,11 +165,22 @@ namespace BusinessLayer
                 context.CardCollections.Attach(sellerCollection);
                 context.Entry(sellerCollection).Property(x => x.QuantityNormal).IsModified = true;
                 if(userCollection == null){ //if collection is null(doesn't exist), populate the empty collection with new data and add it to the database
+                    userCollection = new CardCollection();
                     userCollection.UserId = currentUser.UserId;
                     userCollection.PokemonId = (int)post.PokemonId;
                     userCollection.QuantityNormal = 0;
                     userCollection.QuantityShiny = 0;
-                    context.CardCollections.Add(userCollection);  
+                    context.CardCollections.Add(userCollection);
+                    try
+                    {
+                        context.SaveChanges();
+                    }
+                    catch (Exception e)
+                    {
+                        output = $"An exception occured: ${e}";
+                        result.Add(output, false);
+                        return result;
+                    }
                 }
                 userCollection.QuantityNormal++;
                 context.CardCollections.Attach(userCollection);
@@ -148,7 +189,7 @@ namespace BusinessLayer
 
             }
             try{
-                //context.SaveChanges(); <--- update when code is ready
+                context.SaveChanges();
             }
             catch(Exception e){ 
                 output = $"An exception occured: ${e}";
@@ -196,14 +237,24 @@ namespace BusinessLayer
             DateTime now = DateTime.Now;
             newPost.PostTime = now;
             newPost.StillAvailable = true;
-            context.Posts.Add(newPost);
+            try
+            {
+                context.Posts.Add(newPost);
+                context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return false;
+            }
+            int next = context.Posts.Select(x => x.PostId).Max();
 
             //check post details to determine post type.
             int postType = 0;
             if(newPost.PokemonId == null && newPost.Price == null){
                 postType = 1; //discussion
             }
-            else if(newPost.PokemonId == null){
+            else if(newPost.Price == null){
                 postType = 3; //display
             }
             else{
@@ -214,11 +265,13 @@ namespace BusinessLayer
             DisplayBoard displayBoard = new DisplayBoard();
             displayBoard.UserId = currentUser.UserId;
             displayBoard.PostType = postType;
-            displayBoard.PostId = context.Posts.Where(x => x.PostTime == now).Select(x => x.PostId).Max();//returns the newest instance of a post(the one we just added) and grabs their id.
+            Console.WriteLine(context.Posts.ToList());
+            
+            displayBoard.PostId = next;//returns the newest instance of a post(the one we just added) and grabs their id.
             context.DisplayBoards.Add(displayBoard);
 
             try{
-                //context.SaveChanges();
+                context.SaveChanges();
             }
             catch(Exception e){
                 Console.WriteLine(e);
@@ -234,7 +287,7 @@ namespace BusinessLayer
         /// <param name="password">Password for logging in</param>
         /// <returns>User object after logging in, null if invalid creditials</returns>
         public User login(string username, string password){
-            return context.Users.Where(x => x.UserName == username && x.Password == password).FirstOrDefault();
+            return context.Users.Where(x => x.UserName.ToLower() == username.ToLower() && x.Password == password).FirstOrDefault();
             //If return is null, log in is invalid and should prompt user to relogin.
         }
 
@@ -249,7 +302,7 @@ namespace BusinessLayer
             newUser.TotalCoinsEarned = 10;
             context.Add(newUser);
             try{
-                //context.SaveChanges();
+                context.SaveChanges();
             }
             catch(Exception e){
                 Console.WriteLine(e);
@@ -284,7 +337,7 @@ namespace BusinessLayer
                 
             }
             try{
-                //context.SaveChanges();
+                context.SaveChanges();
             }
             catch(Exception e){
                 Console.WriteLine(e);
