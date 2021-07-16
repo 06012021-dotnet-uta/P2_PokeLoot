@@ -1,21 +1,11 @@
-/* 
-.card{
-    float:initial; 
-    width:25%;
-    height:40px;
+.shinyclass {
+    color : pink;
 }
 
-.sprite{
-    height: 20px;
-    width: 20px;
-} 
-
-.container {
-    display: grid;
-    grid-template-areas: "header header" "side content";
-    grid-template-rows: auto auto;
-    grid-row-gap: 10px;
-    grid-column-gap: 10px;
-    grid-column: 5px;
+.card {
+    background-color: aqua;
 }
-*/
+
+.card-title{
+    word-break: keep-all;
+}
