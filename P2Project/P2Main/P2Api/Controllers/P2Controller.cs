@@ -110,19 +110,6 @@ namespace P2Api.Controllers
             return json;
         }
 
-        /// <summary>
-        /// https://localhost:44307/api/P2/buy/1/15
-        /// Decrements user balance to allow the ability to buy lootboxes
-        /// </summary>
-        /// <param name="userId">userId of one making the purchase</param>
-        /// <param name="amount">cose of the lootbox</param>
-        /// <returns>true if purchase was successful, false otherwise</returns>
-        [HttpGet("buy/{userId}/{amount}")]
-        public bool buy(int userId, int amount){
-            User currentUser = _businessModel.GetUserById(userId);
-            return _businessModel.incrementUserBalance(currentUser, amount * -1);
-        }
-
 
         /// <summary>
         /// https://localhost:44307/api/P2/UserCollection/2
@@ -137,6 +124,34 @@ namespace P2Api.Controllers
             Dictionary<CardCollection, PokemonCard> userCollection = _businessModel.getUserCollection(currentUser);
             string json = JsonConvert.SerializeObject(userCollection.ToList());
             return json;
+        }
+
+        /// <summary>
+        /// https://localhost:44307/api/P2/UserProfile/2
+        /// Gets an updated user object for achievment dsiplaying purposes
+        /// </summary>
+        /// <param name="userId">id of desired users object</param>
+        /// <returns>Serialized string of currentuser Profile</returns>
+        [HttpGet("Profile/{userId}")]
+        public string GetUserProfile(int userId)
+        {
+            User currentUser = _businessModel.GetUserById(userId);
+            string json = JsonConvert.SerializeObject(currentUser);
+            return json;
+            //return currentUser;
+        }
+
+        /// <summary>
+        /// Returns User object by Id
+        /// </summary>
+        /// <param name="userId">user id to get object for</param>
+        /// <returns>User object</returns>
+        [HttpGet("CoinBalance/{userId}")]
+        public int CoinBalance(int userId)
+        {
+            User currentUser = _businessModel.GetUserById(userId);
+            _businessModel.incrementUserBalance(currentUser, -100);
+            return currentUser.CoinBalance;
         }
 
 

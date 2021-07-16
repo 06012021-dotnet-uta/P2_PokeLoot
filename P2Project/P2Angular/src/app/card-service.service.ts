@@ -15,6 +15,7 @@ export class CardServiceService {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
   // allen added
 >>>>>>> ad8137128e5fea40bea59ff78df98179d6d134b0
@@ -31,6 +32,10 @@ export class CardServiceService {
   private baseUrlLogin: string = 'https://localhost:44307/api/P2/UserCollection/'
 
 >>>>>>> ad8137128e5fea40bea59ff78df98179d6d134b0
+=======
+  private rootUrl: string = 'https://localhost:44307/'
+  private baseUrlLogin: string = this.rootUrl + 'api/P2/UserCollection/'
+>>>>>>> main
 
 
   //constructor(private http: HttpClient) { }

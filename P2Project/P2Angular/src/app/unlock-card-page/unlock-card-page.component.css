@@ -1,0 +1,9 @@
+.card {
+    background-color: aqua;
+}
+
+.card {
+    margin: 0 auto; /* Added */
+    float: none; /* Added */
+    justify-content: center; /* Added */
+}
