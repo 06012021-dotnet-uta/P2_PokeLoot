@@ -13,7 +13,7 @@ namespace BusinessLayer
 
         public Dictionary<string, bool> buyFromPost(Post post, User currentUser); //tested
         
-        public List<Post> getDisplayBoard(); //test
+        public List<Post> getDisplayBoard(); //tested
 
         public Dictionary<CardCollection, PokemonCard> getUserCollection(User currentUser);//tested
 
