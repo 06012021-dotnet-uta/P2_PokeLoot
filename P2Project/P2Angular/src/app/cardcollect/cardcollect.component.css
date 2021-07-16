@@ -5,7 +5,3 @@
 .card {
     background-color: aqua;
 }
-
-.card-title{
-    word-break: keep-all;
-}
