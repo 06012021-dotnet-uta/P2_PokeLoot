@@ -44,10 +44,7 @@ stages:
             command: 'build'
             projects: '$(solution)'
             arguments: '--configuration $(buildConfiguration)'
-        - task: SonarCloudAnalyze@1
-        - task: SonarCloudPublish@1
-          inputs:
-            pollingTimeoutSec: '300'
+
         - task: DotNetCoreCLI@2
           inputs:
             command: 'test'
@@ -60,6 +57,10 @@ stages:
           inputs:
             codeCoverageTool: 'Cobertura'
             summaryFileLocation: '**/coburtura/coverage.xml'
+        - task: SonarCloudAnalyze@1
+        - task: SonarCloudPublish@1
+          inputs:
+            pollingTimeoutSec: '300'
 - stage: Deploy
   dependsOn: Build
   jobs:
