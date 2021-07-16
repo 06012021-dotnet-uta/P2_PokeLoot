@@ -39,62 +39,6 @@ stages:
         workingDir: $(solution)
         customCommand: 'run test-headless'
 
-    # - script: |
-    #     npm install
-    #     ng build --prod
-    #   displayName: 'npm install and build'
-# - stage: Deploy
-#   jobs:
-#   - job:
-#     steps:
-#     - task: AzureRmWebAppDeployment@4
-#       inputs:
-#         ConnectionType: 'AzureRM'
-#         azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-#         appType: 'webApp'
-#         WebAppName: 'PokeLoot'
-#         deployToSlotOrASE: true
-#         ResourceGroupName: 'PokeLoot'
-#         SlotName: 'production'
-#         packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip' 
-
-      
-
-# - task: SonarCloudAnalyze@1
-#   displayName: 'SonarCloud Analyze'
-
-# - task: SonarCloudPublish@1
-#   displayName: 'SonarCloud Publish'
-#   inputs:
-#     pollingTimeoutSec: '300'
-
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#     ArtifactName: 'drop'
-#     publishLocation: 'Container'
-
-
-# - task: AzureRmWebAppDeployment@4
-#   inputs:
-#     ConnectionType: 'AzureRM'
-#     azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-#     appType: 'webApp'
-#     WebAppName: 'PokeLoot'
-#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
-# - task: AzureRmWebAppDeployment@4
-#   inputs:
-#     ConnectionType: 'AzureRM'
-#     azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-#     appType: 'webApp'
-#     WebAppName: 'PokeLoot'
-#     deployToSlotOrASE: true
-#     ResourceGroupName: 'PokeLoot'
-#     SlotName: 'production'
-#     packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-  
-
 
 
 
