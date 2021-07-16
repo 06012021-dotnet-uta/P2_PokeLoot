@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { Login } from '../Models/login'
+import { FormBuilder, NgForm } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from '../service/authentication/authentication.service';
 
 @Component({
@@ -14,10 +14,15 @@ export class LoginPageComponent implements OnInit {
 
   isFormValid: boolean = false;
   isCredentialsValid: boolean = false;
+  returnUrl!: string;
 
-  constructor(private authenticateService: AuthenticationService) { }
+  constructor(private authenticateService: AuthenticationService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private fb: FormBuilder) { }
 
   ngOnInit(): void {
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || ''
   }
 
   OnSubmit(loginInForm: NgForm) {
@@ -28,21 +33,23 @@ export class LoginPageComponent implements OnInit {
       return;
     }
 
-    const login: Login = {
-      username: loginInForm.value.username,
-      password: loginInForm.value.password
-    }
 
-    if (!this.authenticateService.Authenticate(login)) {
-      this.isFormValid = false;
-      this.isCredentialsValid = true;
-    }
+    this.authenticateService.AuthenticateWithApi(loginInForm.value.username, loginInForm.value.password).subscribe(
+      result => {
 
-    console.log(`Username ${login.username} Password: ${login.password}`)
+        if (result == null) {
+          this.isFormValid = false;
+          this.isCredentialsValid = true;
+        } else {
+          this.isFormValid = false;
+          this.isCredentialsValid = false;
+          console.log(`Return URL: ${this.returnUrl}`)
+          this.router.navigateByUrl(this.returnUrl)
 
-    this.authenticateService.AuthenticateWithApi(login.username, login.password).subscribe(
-      x => { console.log(x) },
-      y => console.log(`there was an error ${y}`)
+        }
+
+      },
+      error => { `Error Occured ${console.log(error)}` }
     )
   }
 
