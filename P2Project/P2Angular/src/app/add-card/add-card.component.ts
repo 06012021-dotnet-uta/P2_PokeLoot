@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Card } from '../cardcollect/card';
 
 @Component({
   selector: 'app-add-card',
