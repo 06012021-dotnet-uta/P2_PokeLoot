@@ -141,6 +141,21 @@ namespace P2Api.Controllers
             //return currentUser;
         }
 
+        /// <summary>
+        /// Returns User object by Id
+        /// </summary>
+        /// <param name="userId">user id to get object for</param>
+        /// <returns>User object</returns>
+        [HttpGet("CoinBalance/{userId}")]
+        public int CoinBalance(int userId)
+        {
+            User currentUser = _businessModel.GetUserById(userId);
+            _businessModel.incrementUserBalance(currentUser, -100);
+            return currentUser.CoinBalance;
+        }
+
+
+
 
     } // end class
 } // end namespace

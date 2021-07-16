@@ -10,18 +10,23 @@ import { catchError, retry } from 'rxjs/operators';
   providedIn: 'root'
 })
 
-export class CardServiceService {
+export class UnlockCardService {
   
 
   private rootUrl: string = 'https://localhost:44307/'
-  private baseUrlLogin: string = this.rootUrl + 'api/P2/UserCollection/'
+  private lootBoxUrl: string = this.rootUrl + 'api/P2/Lootbox/'
+  private updateUserUrl: string = this.rootUrl + 'api/P2/CoinBalance/'
 
 
   //constructor(private http: HttpClient) { }
   constructor(private router: Router, private http: HttpClient) { }
 
-  GetCardsList(userId : string):Observable<any[]>{
-    return this.http.get<any>(this.baseUrlLogin + userId)
+  RollLootbox(userId : string):Observable<any[]>{
+    return this.http.get<any>(this.lootBoxUrl + userId)
+  }
+
+  GetBalance(userId : string):Observable<any[]>{
+    return this.http.get<any>(this.updateUserUrl + userId)
   }
 
 
