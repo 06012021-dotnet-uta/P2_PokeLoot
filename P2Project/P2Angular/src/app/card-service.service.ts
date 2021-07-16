@@ -13,14 +13,7 @@ import { catchError, retry } from 'rxjs/operators';
 export class CardServiceService {
   
 
-  // allen added
-  BuyLootbox(UserId:number, price:number):Observable<boolean>{
-    return this.http.get<boolean>('https://localhost:44307/api/P2/buy/' + UserId + '/' + price)
-  }
-  // end
-
   private baseUrlLogin: string = 'https://localhost:44307/api/P2/UserCollection/'
-
 
 
   //constructor(private http: HttpClient) { }
