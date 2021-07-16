@@ -7,3 +7,35 @@
     float: none; /* Added */
     justify-content: center; /* Added */
 }
+img{
+    width: 200px;
+    height: 200px;
+}
+
+.shinyclass {
+    color : pink;
+}
+
+.card1 {
+    background-color: #96e6c2;
+}
+.card2 {
+    background-color: #ADD8E6;
+}
+.card3 {
+    background-color: #CBC3E3;
+}
+.card4 {
+    background-color: #ffcccb;
+}
+.card5 {
+    background-color: #FFD580;
+}
+
+.card6{
+    background-color: rgb(202, 201, 201);
+}
+
+.card-title{
+    word-break: keep-all;
+}
