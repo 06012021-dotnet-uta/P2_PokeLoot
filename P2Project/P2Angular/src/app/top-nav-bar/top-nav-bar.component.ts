@@ -10,15 +10,19 @@ import { AuthenticationService } from '../service/authentication/authentication.
 export class TopNavBarComponent implements OnInit {
 
   LoginStatus$!: Observable<boolean>;
+  isLogin!: boolean;
 
   constructor(public authenticatationService: AuthenticationService) { }
 
   ngOnInit(): void {
 
     this.LoginStatus$ = this.authenticatationService.IsLoggedIn;
+    this.LoginStatus$.subscribe(x => { this.isLogin = x })
+
   }
 
   Logout() {
+    this.isLogin = false
     this.authenticatationService.Logout();
   }
 

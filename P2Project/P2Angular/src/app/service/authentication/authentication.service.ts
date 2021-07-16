@@ -38,13 +38,16 @@ export class AuthenticationService {
   Logout() {
     this.isAuthenticated = false;
     localStorage.setItem('loginStatus', "0");
+    // this.loginStatus.next(true);
     localStorage.removeItem('userId')
     this.router.navigate(['Login']);
   }
 
   CheckLoginStatus(): boolean {
-    if (localStorage.getItem('loginStatus') === '1')
+    if (localStorage.getItem('loginStatus') === '1') {
       return true;
+    }
+    console.log('We return false')
     return false;
   }
 
