@@ -31,13 +31,20 @@ stages:
         vmImage: 'windows-latest'
 
         steps:
+        - task: SonarCloudPrepare@1
+          inputs:
+            SonarCloud: 'P2_SonarCloudToken'
+            organization: 'p2project-1'
+            scannerMode: 'MSBuild'
+            projectKey: 'P2Project_P2'
+            projectName: 'P2'
         - task: DotNetCoreCLI@2
           displayName: building project
           inputs:
             command: 'build'
             projects: '$(solution)'
             arguments: '--configuration $(buildConfiguration)'
-  
+
         - task: DotNetCoreCLI@2
           inputs:
             command: 'test'
@@ -45,7 +52,10 @@ stages:
             testRunTitle: 'dotnet tests running'
             arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
             workingDirectory: 'P2Project/P2Main/P2Api/'
-
+        - task: SonarCloudAnalyze@1
+        - task: SonarCloudPublish@1
+          inputs:
+            pollingTimeoutSec: '300'
         - task: PublishCodeCoverageResults@1
           inputs:
             codeCoverageTool: 'Cobertura'
