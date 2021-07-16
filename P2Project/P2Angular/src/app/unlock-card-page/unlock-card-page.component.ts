@@ -46,9 +46,16 @@ export class UnlockCardPageComponent implements OnInit {
             let RarityId      = result[0].Key.RarityId;
             let SpriteLink    = result[0].Key.SpriteLink;
             let PokemonName   = result[0].Key.PokemonName;
-            let IsShiny       = result[0].Value
+            let SpriteLinkShiny = result[0].Key.SpriteLinkShiny;
+            let IsShiny       = result[0].Value;
+            let MainSprite = '';
+            if (IsShiny == true) {
+              MainSprite = SpriteLink;
+            } else {
+              MainSprite = SpriteLinkShiny;
+            }
 
-            this.newCard = {PokemonId, RarityId, SpriteLink, PokemonName, IsShiny};
+            this.newCard = {PokemonId, RarityId, SpriteLink, PokemonName, IsShiny, SpriteLinkShiny, MainSprite};
 
             console.log(this.newCard);
           }

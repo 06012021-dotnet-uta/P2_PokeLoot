@@ -1,31 +1,23 @@
-<br/>
-<br/>
-<br/>
+<br>
+<br>
+<br>
 <div class="row display: flex justify-content-center">Click the button below to open a new card for 10 coins!</div>
-
-<br/>
-<br/>
-<br/>
+<br>
+<br>
 <div class="row justify-content-center">
-    <div class="col text-center">
-        <button (click) = 'openLootbox()' style="justify-self: center; font-size: large;">Open Card Pack</button>
-        <br/>
-        <br/>
-        <h6>{{currentUserCoinBalance}} Coins Remaining</h6>
+<div class="col text-center">
+    <h6>{{currentUserCoinBalance}} Coins Remaining</h6><br>
+    <img *ngIf="newCard.PokemonName == null" src="https://static.wikia.nocookie.net/pokemon-fano/images/6/6f/Poke_Ball.png/revision/latest/scale-to-width-down/767?cb=20140520015336" href="lootbox img"><br>
+    <button (click) = 'openLootbox()' style="justify-self: center; font-size: large;">Open Card Pack</button>
+</div>>
 
-    <br/>
-    <br/>
-    <br/>
-    <div *ngIf="newCard.PokemonName != null" >
-        <h3>You Unlocked</h3>
-        <div class="card" style="width: 18rem; " >
-            <img class="card-img-top" src="{{newCard.SpriteLink}}" alt="{{newCard.PokemonName}} Image">
-            <div class="card-body">
-            <h5 *ngIf="newCard.IsShiny as true; else elseBlock" class="card-title text-center" style="font-size: 1.45em;">★ {{newCard.PokemonName}} ★</h5>
-            <ng-template #elseBlock><h5 class="card-title" style="font-size: 1.45em;">{{newCard.PokemonName}}</h5></ng-template>
-            </div>
-        </div>
-    </div>
+<br>
+<br>
+<br>
+<br> 
+<div *ngIf="newCard.PokemonName != null">
+
+ <app-add-card [newCard]="newCard"></app-add-card> 
 
 </div>
 </div>
