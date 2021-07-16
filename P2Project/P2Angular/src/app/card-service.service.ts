@@ -17,6 +17,10 @@ export class CardServiceService {
     return this.http.get<Dictionary[]>('https://localhost:44307/api/P2/UserCollection/2')
   }
 
+  BuyLootbox(UserId:number, price:number):Observable<boolean>{
+    return this.http.get<boolean>('https://localhost:44307/api/P2/buy/' + UserId + '/' + price)
+  }
+
 
 
   /* Get methods look like: return this.http.get<Card[]>('path', 
