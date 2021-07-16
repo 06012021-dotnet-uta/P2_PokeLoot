@@ -15,6 +15,7 @@ export class UnlockCardPageComponent implements OnInit {
   private userId = localStorage.getItem('userId')
   newCard : IUnlockCard;
   currentUserCoinBalance : any;
+  tooPoor: boolean = false;
 
   constructor(private _cardcollectionService: UnlockCardService) { 
     this.newCard = {} as IUnlockCard;
@@ -70,11 +71,10 @@ export class UnlockCardPageComponent implements OnInit {
       }
       else
       {
-        // handle too poor to afford boxes
-      }
+        this.tooPoor = true;
     }
   }
 
 }
 
-
+}

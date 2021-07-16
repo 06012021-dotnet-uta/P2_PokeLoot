@@ -24,12 +24,8 @@ export class CardServiceService {
 
   private baseUrlLogin: string = 'https://localhost:44307/api/P2/UserCollection/'
 
-
-  private baseUrlLogin: string = 'https://localhost:44307/api/P2/UserCollection/'
-
-
   private rootUrl: string = 'https://localhost:44307/'
-  private baseUrlLogin: string = this.rootUrl + 'api/P2/UserCollection/'
+  
 
 
 
