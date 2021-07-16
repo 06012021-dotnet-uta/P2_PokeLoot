@@ -34,7 +34,7 @@ namespace P2Api
             {
                 options.AddPolicy(name: "dev", builder =>
                 {
-                    builder.WithOrigins("http://127.0.0.1:5500", "http://localhost:4200")   // update thisssssssssss to proper ip / pathing
+                    builder.WithOrigins("http://127.0.0.1:5500", "http://localhost:4200", "https://localhost:44307")   // update thisssssssssss to proper ip / pathing
                     .AllowAnyHeader()
                     .AllowAnyMethod();
                 });
@@ -50,7 +50,7 @@ namespace P2Api
             {
                 if (!options.IsConfigured)
                 {
-                    options.UseSqlServer(Configuration.GetConnectionString("Server=tcp:p2pokelootserver.database.windows.net,1433;Initial Catalog=PokeLoot;Persist Security Info=False;User ID=christian.romero@revature.net@p2pokelootserver;Password=P2PokeLoot;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"));
+                    options.UseSqlServer("Server=tcp:p2pokelootserver.database.windows.net,1433;Initial Catalog=PokeLoot;Persist Security Info=False;User ID=christian.romero@revature.net@p2pokelootserver;Password=P2PokeLoot;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
                 }
             });
             services.AddScoped<IBusinessModel, BusinessModel>();

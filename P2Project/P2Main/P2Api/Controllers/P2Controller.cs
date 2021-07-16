@@ -126,7 +126,20 @@ namespace P2Api.Controllers
             return json;
         }
 
-
+        /// <summary>
+        /// https://localhost:44307/api/P2/UserProfile/2
+        /// Gets an updated user object for achievment dsiplaying purposes
+        /// </summary>
+        /// <param name="userId">id of desired users object</param>
+        /// <returns>Serialized string of currentuser Profile</returns>
+        [HttpGet("Profile/{userId}")]
+        public string GetUserProfile(int userId)
+        {
+            User currentUser = _businessModel.GetUserById(userId);
+            string json = JsonConvert.SerializeObject(currentUser);
+            return json;
+            //return currentUser;
+        }
 
 
     } // end class

@@ -1,1 +1,28 @@
-<p>profile-page works!</p>
+
+<h1>{{title}}</h1>
+
+<div class="card">
+     <div class="container" >
+     <p class = "Id"><b>User ID: {{currentProfile.UserId}}</b></p>
+     <p class = "Id"><b>Username: {{currentProfile.UserName}}</b></p>
+     <p class = "rarity">Level: {{currentProfile.AccountLevel}}</p>
+     <p class = "name">Coins: {{currentProfile.CoinBalance}}</p>
+     <p class = "rarity">Total Coins Earned: {{currentProfile.TotalCoinsEarned}}</p>
+     </div>
+</div>
+
+<button (click)="ViewBadges">View Badges</button>
+<!--Note - this can be improved with a loop - for time constraints we are using multiple ngIf-->
+<!-- <img ngIf="{{currentProfile.TotalCoinsEarned}} >= 100" src='/assets/img/hoenn-1.jpg'/> 
+<img ngIf="{{currentProfile.TotalCoinsEarned}} >= 1000" src='/assets/img/hoenn-2.jpg'/> 
+<img ngIf="{{currentProfile.TotalCoinsEarned}} >= 10000" src='/assets/img/hoenn-3.jpg'/> -->
+<div *ngIf="JohtoBadges">
+     <div *ngFor="let b of JohtoBadges; let i = index">
+          <img *ngIf= " b == true " src='/assets/img/hoenn-{{1+i}}.jpg'/> 
+          <p></p>
+     </div>
+</div>
+
+
+
+<!--UserCollection achievements here - ngIfs depend on the userCollection in the profile page component-->
