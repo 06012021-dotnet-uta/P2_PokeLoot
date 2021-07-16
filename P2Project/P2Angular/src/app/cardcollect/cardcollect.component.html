@@ -2,6 +2,7 @@
 
 <div class="row display: flex justify-content-center" >
     <div *ngFor="let card of userCollection" class="card text-center border-dark mb-3" style="width: 18rem; margin: 1rem;" >
+        <h5 class="card-title text-left" style="font-size: 1.45em; text-align: left;">x{{card.Quantity}}</h5>
         <img class="card-img-top" src="{{card.SpriteLink}}" alt="{{card.PokemonName}} Image">
         <div class="card-body">
         <h5 *ngIf="card.IsShiny as true; else elseBlock" class="card-title text-center" style="font-size: 1.45em;">★ {{card.PokemonName}} ★</h5>
