@@ -29,10 +29,10 @@ export class HomePageComponent implements OnInit {
           let Price = result[i].price;
           let StillAvailable = result[i].stillAvailable;
           let IsShiny = result[i].isShiny;
-          let UserId = result[i].UserId;
-          let type = result[i].PostType;
-          let UserName = result[i].UserName;
-          let SpriteLink = result[i].SpriteLink;
+          let UserId = result[i].userId;
+          let type = result[i].postType;
+          let UserName = result[i].userName;
+          let SpriteLink = result[i].spriteLink;
           let PostType = '';
           if(type == 1){
             PostType = 'Discussion';
