@@ -60,17 +60,9 @@ stages:
 
         #- task: SonarCloudAnalyze@1
         
-        - task: SonarCloudPublish@1
-          inputs:
-            pollingTimeoutSec: '300'
-        
         - task: PublishBuildArtifacts@1
             
-- stage: Deploy
-  dependsOn: API
-  jobs:
-    - job: DeployWebApp
-      steps:
+
         - task: DotNetCoreCLI@2
           inputs:
             command: 'publish'
@@ -99,7 +91,7 @@ stages:
       displayName: 'Install Node.js'
 
     - script: |
-        cd '$(System.DefaultWorkingDirectory)/P2Angular'
+        cd '$(System.DefaultWorkingDirectory)'
         npm install -g @angular/cli
         npm install
         ng build
