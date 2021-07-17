@@ -59,8 +59,6 @@ stages:
             summaryFileLocation: '**/coburtura/coverage.xml'
 
         #- task: SonarCloudAnalyze@1
-        
-        - task: PublishBuildArtifacts@1
             
 
         - task: DotNetCoreCLI@2
@@ -69,6 +67,8 @@ stages:
             publishWebProjects: false
             projects: '$(solution)'
             zipAfterPublish: true
+        
+        - task: PublishBuildArtifacts@1
         
         - task: AzureRmWebAppDeployment@4
           inputs:
