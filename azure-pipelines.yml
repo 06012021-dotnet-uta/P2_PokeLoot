@@ -10,42 +10,26 @@ variables:
   buildConfiguration: 'Release'
 
 stages:
-- stage: Build
+
+
+- stage: DeployAngular
   jobs:
   - job:
-    steps:
+    steps:    
     - task: NodeTool@0
       inputs:
         versionSpec: '14.x'
       displayName: 'Install Node.js'
 
-    - task: Npm@1
-      displayName: 'NPM Install'
+    - script: |
+        cd '$(System.DefaultWorkingDirectory)/P2Angular'
+        npm install -g @angular/cli
+        npm install
+        ng build
+    - task: AzureRmWebAppDeployment@4
       inputs:
-        command: 'install'
-        workingDir: $(solution)
-
-    - task: Npm@1
-      displayName: 'NPM Build Angular'
-      inputs:
-        command: 'custom'
-        workingDir: $(solution)
-        customCommand: 'run build --prod'
-
-    # - task: Npm@1
-    #   displayName: 'NPM Test'
-    #   inputs:
-    #     command: 'custom'
-    #     workingDir: $(solution)
-    #     customCommand: 'run test-headless'
-
-
-
-
-
-
-
-
-
-
-
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+        appType: 'webApp'
+        WebAppName: 'PokeLoot'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'

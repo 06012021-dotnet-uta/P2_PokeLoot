@@ -12,8 +12,38 @@
 
     <br>
 
-    <div class="container">
-        <app-posts></app-posts>
+ 
+    <div *ngFor="let post of displayBoard">
+        <div class="card">
+            <div class="outer-column">
+                <div class="car-header">
+                    <button type="button" class="btn btn-circle btn-lg" style="background-color: #EEEDED;">A</button>
+                    <div class="column">
+                        <div class="card-username">
+                            <p>{{post.UserName}}</p>
+                        </div>
+                        <div class="card-info">
+                            <div class="date">
+                                <p>{{post.PostTime}}</p>
+                            </div>
+                            <div class="dot"></div>
+                            <div class="type">
+                                <p>{{post.PostType}}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngIf="post.Price">
+                    <h6>{{post.Price}} coins</h6>
+                </div>
+                <div class="card-details">
+                    <p>{{post.PostDescription}}</p>
+                </div>
+            </div>
+            <div class="image">
+                <img src={{post.SpriteLink}} alt="Pokemon Sprite"> 
+            </div>
+        </div>
     </div>
 
 </div>
