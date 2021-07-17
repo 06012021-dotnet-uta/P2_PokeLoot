@@ -64,13 +64,6 @@ stages:
           inputs:
             pollingTimeoutSec: '300'
         
-        - task: DotNetCoreCLI@2
-          inputs:
-            command: 'publish'
-            publishWebProjects: false
-            projects: '$(solution)'
-            zipAfterPublish: true
-        
         - task: PublishBuildArtifacts@1
             
 - stage: Deploy
@@ -78,7 +71,13 @@ stages:
   jobs:
     - job: DeployWebApp
       steps:
-            
+        - task: DotNetCoreCLI@2
+          inputs:
+            command: 'publish'
+            publishWebProjects: false
+            projects: '$(solution)'
+            zipAfterPublish: true
+        
         - task: AzureRmWebAppDeployment@4
           inputs:
             ConnectionType: 'AzureRM'
