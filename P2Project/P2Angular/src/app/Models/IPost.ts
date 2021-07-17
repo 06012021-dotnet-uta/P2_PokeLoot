@@ -10,4 +10,6 @@ export interface IPost{
     UserName: string,
     SpriteLink: string,
     PostType: string,
+    PokemonName?: string,
+    RarityId?: number,
 }
