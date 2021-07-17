@@ -11,24 +11,29 @@ variables:
   buildConfiguration: 'Release'
 
 steps:
+- script: |
+    cd '$(System.DefaultWorkingDirectory)/P2Project/P2Angular'
+    npm install -g @angular/cli
+    npm install
+    ng build --prod
 
-- task: NodeTool@0
-  inputs:
-    versionSpec: '14.x'
-  displayName: 'Install Node.js'
-- task: Npm@1
-  displayName: 'NPM Install'
-  inputs:
-    command: 'install'
-    workingDir: $(solution)
+# - task: NodeTool@0
+#   inputs:
+#     versionSpec: '14.x'
+#   displayName: 'Install Node.js'
+# - task: Npm@1
+#   displayName: 'NPM Install'
+#   inputs:
+#     command: 'install'
+#     workingDir: $(solution)
 
 
 
-- task: Npm@1
-  displayName: 'NPM Build Angular'
-  inputs:
-    command: 'custom'
-    customCommand: 'run build'
+# - task: Npm@1
+#   displayName: 'NPM Build Angular'
+#   inputs:
+#     command: 'custom'
+#     customCommand: 'run build-prod'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -39,7 +44,7 @@ steps:
     deployToSlotOrASE: true
     ResourceGroupName: 'PokeLoot'
     SlotName: 'production'
-    packageForLinux: 'dist/'
+    packageForLinux: 'dist/P2Angular'
 
 # - task: Npm@1
 #   displayName: 'NPM Test'
@@ -76,8 +81,3 @@ steps:
 #     packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
 #packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-# - script: |
-#     cd '$(System.DefaultWorkingDirectory)/MovieTheaterUI'
-#     npm install -g @angular/cli
-#     npm install
-#     ng build --prod
