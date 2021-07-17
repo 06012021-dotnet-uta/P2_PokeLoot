@@ -13,20 +13,16 @@ import { catchError, retry } from 'rxjs/operators';
 export class UnlockCardService {
   
 
-  private rootUrl: string = 'https://pokeloot.azurewebsites.net'
-  private lootBoxUrl: string = this.rootUrl + 'api/P2/Lootbox/'
-  private updateUserUrl: string = this.rootUrl + 'api/P2/CoinBalance/'
-
 
   //constructor(private http: HttpClient) { }
-  constructor(private router: Router, private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  RollLootbox(userId : string):Observable<any[]>{
-    return this.http.get<any>(this.lootBoxUrl + userId)
+  RollLootbox():Observable<any[]>{
+    return this.http.get<any>('https://pokeloot.azurewebsites.net/api/P2/Lootbox/' + localStorage.getItem('userId'))
   }
 
-  GetBalance(userId : string):Observable<any[]>{
-    return this.http.get<any>(this.updateUserUrl + userId)
+  GetBalance():Observable<any[]>{
+    return this.http.get<any>('https://pokeloot.azurewebsites.net/api/P2/CoinBalance/' + localStorage.getItem('userId'))
   }
 
 
