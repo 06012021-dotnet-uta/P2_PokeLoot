@@ -1,5 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { Card } from '../cardcollect/card';
+
+import { Component, Input, OnInit } from '@angular/core';
+import { PokemonCards } from '../Models/pokemon-cards';
+import { IUnlockCard } from '../unlock-card-page/IUnlockCard';
+
 
 @Component({
   selector: 'app-add-card',
@@ -8,12 +11,18 @@ import { Card } from '../cardcollect/card';
 })
 export class AddCardComponent implements OnInit {
 
-  //newCard:Card =
+  @Input() newCard?: IUnlockCard;
+
+  
   constructor() { }
   
   //method to update array in usercollection
   
   ngOnInit(): void {
+    
+    
+    
   }
 
+  
 }

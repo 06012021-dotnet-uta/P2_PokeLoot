@@ -37,12 +37,71 @@ namespace P2ConsoleTesting
             //}
 
 
-            Console.WriteLine("End Program!");
+            
+
+            bool updaterq(){
+                Post newPost = new Post();
+
+                newPost.PokemonId = 801;
+                newPost.IsShiny = false;
+                newPost.Price = 20;
+                newPost.PostDescription = "I got for arms like ben";
+                DateTime now = DateTime.Now;
+                newPost.PostTime = now;
+                newPost.StillAvailable = true;
+                try
+                {
+                    context.Posts.Add(newPost);
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return false;
+                }
+                int next = context.Posts.Select(x => x.PostId).Max();
+
+                //check post details to determine post type.
+                int postType = 0;
+                if (newPost.PokemonId == null && newPost.Price == null)
+                {
+                    postType = 1; //discussion
+                }
+                else if (newPost.Price == null)
+                {
+                    postType = 3; //display
+                }
+                else
+                {
+                    postType = 2; //sale
+                }
+
+                //reflect the new post on display board
+                DisplayBoard displayBoard = new DisplayBoard();
+                displayBoard.UserId = 2;
+                displayBoard.PostType = postType;
+                Console.WriteLine(context.Posts.ToList());
+
+                displayBoard.PostId = next;//returns the newest instance of a post(the one we just added) and grabs their id.
+                context.DisplayBoards.Add(displayBoard);
+
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e);
+                    return false;
+                }
+                return true;
+            }
+            //updaterq();
+            //updaterq();
+            //updaterq();
 
 
-
-
-            void PopulateDbPokemon(int searchid)
+            /* void PopulateDbPokemon(int searchid)
             {
                 string url = "https://pokeapi.co/api/v2/pokemon/" + searchid;
                 var json = new WebClient().DownloadString(url);
@@ -117,8 +176,8 @@ namespace P2ConsoleTesting
                 context.PokemonCards.Add(newCard);
                 context.SaveChanges();
 
-            }
-            
+            } */
+
 
             /*void testRNG(){
                 BusinessModel busy = new BusinessModel();

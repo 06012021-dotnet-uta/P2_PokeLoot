@@ -1,21 +1,62 @@
-<h2>{{user}} collection</h2>
+<h2 class="row display: flex justify-content-center">Users Cards</h2>
 
-<button>Sort by Name</button>
-<button>Sort by Id</button>
-<button>Sort by Rarity</button>
-<button>Sort by Type</button>
+<div class="row display: flex justify-content-center" >
+    <div *ngFor="let card of userCollection" style="width: 18rem; margin: 1rem;" >
+        <div *ngIf="card.RarityId == 1" class="card1 text-center border-dark mb-3" >
+        <h5 class="card-title text-left" style="font-size: 1.45em; text-align: left;">x{{card.Quantity}}</h5>
+        <img class="card-img-top" src="{{card.SpriteLink}}" alt="{{card.PokemonName}} Image">
+        <div class="card-body">
+        <h6>Common</h6>
+        <h5 *ngIf="card.IsShiny as true; else elseBlock" class="card-title">★ {{card.PokemonName}} ★</h5>
+        <ng-template #elseBlock><h5 class="card-title">{{card.PokemonName}}</h5></ng-template>
+        <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+        </div>
+        </div>
 
+        <div *ngIf="card.RarityId == 2" class="card2 text-center border-dark mb-3" >
+        <h5 class="card-title text-left" style="font-size: 1.45em; text-align: left;">x{{card.Quantity}}</h5>
+        <img class="card-img-top" src="{{card.SpriteLink}}" alt="{{card.PokemonName}} Image">
+        <div class="card-body">
+        <h6>Uncommon</h6>
+        <h5 *ngIf="card.IsShiny as true; else elseBlock" class="card-title">★ {{card.PokemonName}} ★</h5>
+        <ng-template #elseBlock><h5 class="card-title">{{card.PokemonName}}</h5></ng-template>
+        <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+        </div>
+        </div>
 
-<p>{{userCollection}}</p>
+        <div *ngIf="card.RarityId == 3" class="card3 text-center border-dark mb-3" >
+        <h5 class="card-title text-left" style="font-size: 1.45em; text-align: left;">x{{card.Quantity}}</h5>
+        <img class="card-img-top" src="{{card.SpriteLink}}" alt="{{card.PokemonName}} Image">
+        <div class="card-body">
+        <h6>Rare</h6>
+        <h5 *ngIf="card.IsShiny as true; else elseBlock" class="card-title">★ {{card.PokemonName}} ★</h5>
+        <ng-template #elseBlock><h5 class="card-title">{{card.PokemonName}}</h5></ng-template>
+        <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+        </div>
+        </div>
 
-<!--Changeing the card & container class distorts the webpage. Refactor w/ bootstrap-->
+        <div *ngIf="card.RarityId == 4" class="card4 text-center border-dark mb-3" >
+        <h5 class="card-title text-left" style="font-size: 1.45em; text-align: left;">x{{card.Quantity}}</h5>
+        <img class="card-img-top" src="{{card.SpriteLink}}" alt="{{card.PokemonName}} Image">
+        <div class="card-body">
+        <h6>Super Rare</h6>
+        <h5 *ngIf="card.IsShiny as true; else elseBlock" class="card-title">★ {{card.PokemonName}} ★</h5>
+        <ng-template #elseBlock><h5 class="card-title">{{card.PokemonName}}</h5></ng-template>
+        <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+        </div>
+        </div>
 
-<!-- <div class="card">
-    <div class="container" *ngFor= "let c of userCollection">
-         <p class = "Id"><b>PokeID: {{c.PokemonId}</b></p>
-         <p class = "name">Name: {{c.PokemonName}}</p>
-         <p class = "rarity">Rarity: {{c.RarityId}}</p>
-         <img class="sprite" src='{{c.SpriteLink}}'/> 
+        <div *ngIf="card.RarityId == 5" class="card5 text-center border-dark mb-3" >
+        <h5 class="card-title text-left" style="font-size: 1.45em; text-align: left;">x{{card.Quantity}}</h5>
+        <img class="card-img-top" src="{{card.SpriteLink}}" alt="{{card.PokemonName}} Image">
+        <div class="card-body">
+        <h6>Specially Super Rare</h6>
+        <h5 *ngIf="card.IsShiny as true; else elseBlock" class="card-title">★ {{card.PokemonName}} ★</h5>
+        <ng-template #elseBlock><h5 class="card-title">{{card.PokemonName}}</h5></ng-template>
+        <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+        </div>
+        </div>
+
     </div>
-</div> -->
+</div>
 

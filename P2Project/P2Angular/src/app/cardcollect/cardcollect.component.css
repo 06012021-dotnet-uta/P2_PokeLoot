@@ -1,21 +1,40 @@
-/* 
-.card{
-    float:initial; 
-    width:25%;
-    height:40px;
+.shinyclass {
+    color : pink;
 }
 
-.sprite{
-    height: 20px;
-    width: 20px;
-} 
-
-.container {
-    display: grid;
-    grid-template-areas: "header header" "side content";
-    grid-template-rows: auto auto;
-    grid-row-gap: 10px;
-    grid-column-gap: 10px;
-    grid-column: 5px;
+.card {
+    background-color: aqua;
 }
-*/
+
+
+
+.card1 {
+    background-color: #96e6c2;
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+}
+.card2 {
+    background-color: #ADD8E6;
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+}
+.card3 {
+    background-color: #CBC3E3;
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+}
+.card4 {
+    background-color: #ffcccb;
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+}
+.card5 {
+    background-color: #FFD580;
+    border-style: solid;
+    border-width: thin;
+    border-color: black;
+}

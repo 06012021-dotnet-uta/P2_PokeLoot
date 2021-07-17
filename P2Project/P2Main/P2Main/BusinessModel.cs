@@ -9,6 +9,7 @@ namespace BusinessLayer
     public class BusinessModel : IBusinessModel
         {
 
+
         public P2DbClass context;
 
         /// <summary>
@@ -158,7 +159,7 @@ namespace BusinessLayer
                 userCollection.QuantityShiny++;
                 context.CardCollections.Attach(userCollection);
                 context.Entry(userCollection).Property(x => x.QuantityShiny).IsModified = true;
-                output = $"You brought a shiny ${context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from ${seller.UserName} for ${post.Price} coins!";
+                output = $"You brought a shiny {context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from {seller.UserName} for ${post.Price} coins!";
             }
             else{ //updates user and seller collection if normal card
                 sellerCollection.QuantityNormal--;
@@ -185,7 +186,7 @@ namespace BusinessLayer
                 userCollection.QuantityNormal++;
                 context.CardCollections.Attach(userCollection);
                 context.Entry(userCollection).Property(x => x.QuantityNormal).IsModified = true;
-                output = $"You brought a ${context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from ${seller.UserName} for ${post.Price} coins!";
+                output = $"You brought a {context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from {seller.UserName} for ${post.Price} coins!";
 
             }
             try{
@@ -384,6 +385,22 @@ namespace BusinessLayer
             }
 
             return false;
+        }
+        /// Gets additional information on the post
+        /// </summary>
+        /// <param name="id">Post id</param>
+        /// <returns>DisplayBoard object or null</returns>
+        public DisplayBoard getPostInfo(int id){
+            return context.DisplayBoards.Where(x => x.PostId == id).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Gets post object
+        /// </summary>
+        /// <param name="id">Post Id</param>
+        /// <returns>Post object or null</returns>
+        public Post getPostById(int id){
+            return context.Posts.Where(x => x.PostId == id).FirstOrDefault();
         }
 
     }//class BusinessModel

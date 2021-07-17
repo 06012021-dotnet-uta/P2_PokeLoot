@@ -45,10 +45,63 @@ namespace P2Api.Controllers
         /// </summary>
         /// <returns>List of Posts</returns>
         [HttpGet("DisplayBoard")]
-        public List<Post> PostList()
+        public List<FullPost> PostList()
         {
+            List<FullPost> result = new List<FullPost>();
             List<Post> playerList = _businessModel.getDisplayBoard();
-            return playerList;
+            foreach(Post post in playerList){
+                DisplayBoard displayBoard = _businessModel.getPostInfo(post.PostId);
+                string mainSprite = "https://wiki.p-insurgence.com/images/0/09/722.png";
+                string cardName ="";
+                int cardRare = 0;
+                if(post.PokemonId != null){
+                    if(post.IsShiny == true){
+                        mainSprite = _businessModel.getPokemonById((int)post.PokemonId).SpriteLinkShiny;
+                    }
+                    else{
+                        mainSprite = _businessModel.getPokemonById((int)post.PokemonId).SpriteLink;
+                    }
+                   cardName = _businessModel.getPokemonById((int)post.PokemonId).PokemonName;
+                   cardRare = _businessModel.getPokemonById((int)post.PokemonId).RarityId;
+                }
+                
+                FullPost instance = new FullPost()
+                {
+                    PostId = post.PostId,
+                    PokemonId = post.PokemonId,
+                    PostTime = post.PostTime,
+                    PostDescription = post.PostDescription,
+                    Price = post.Price,
+                    StillAvailable = post.StillAvailable,
+                    IsShiny = post.IsShiny,
+                    UserId = displayBoard.UserId,
+                    PostType = displayBoard.PostType,
+                    PokemonName = cardName,
+                    RarityId = cardRare,
+                    UserName = _businessModel.GetUserById(displayBoard.UserId).UserName,
+                    SpriteLink = mainSprite
+
+                };
+                result.Add(instance);
+            }
+            return result;
+        }
+
+        /// <summary>
+        /// https://localhost:44307/api/P2/buyCard/3/2
+        /// Returns the result from buying a card
+        /// </summary>
+        /// <param name="postId">Post ID of a sale</param>
+        /// <param name="userId">Current User</param>
+        /// <returns>Dictionary conation output and outcome</returns>
+        [HttpGet("buyCard/{postId}/{userId}")]
+        public string buyCard(int postId, int userId){
+            Dictionary<string, bool> result = new Dictionary<string, bool>();
+            Post post = _businessModel.getPostById(postId);
+            User currentUser = _businessModel.GetUserById(userId);
+            result = _businessModel.buyFromPost(post, currentUser);
+            string json = JsonConvert.SerializeObject(result.ToList());
+            return json;
         }
 
         /// <summary>
@@ -125,6 +178,34 @@ namespace P2Api.Controllers
             Dictionary<CardCollection, PokemonCard> userCollection = _businessModel.getUserCollection(currentUser);
             string json = JsonConvert.SerializeObject(userCollection.ToList());
             return json;
+        }
+
+        /// <summary>
+        /// https://localhost:44307/api/P2/UserProfile/2
+        /// Gets an updated user object for achievment dsiplaying purposes
+        /// </summary>
+        /// <param name="userId">id of desired users object</param>
+        /// <returns>Serialized string of currentuser Profile</returns>
+        [HttpGet("Profile/{userId}")]
+        public string GetUserProfile(int userId)
+        {
+            User currentUser = _businessModel.GetUserById(userId);
+            string json = JsonConvert.SerializeObject(currentUser);
+            return json;
+            //return currentUser;
+        }
+
+        /// <summary>
+        /// Returns User object by Id
+        /// </summary>
+        /// <param name="userId">user id to get object for</param>
+        /// <returns>User object</returns>
+        [HttpGet("CoinBalance/{userId}")]
+        public int CoinBalance(int userId)
+        {
+            User currentUser = _businessModel.GetUserById(userId);
+            _businessModel.incrementUserBalance(currentUser, -100);
+            return currentUser.CoinBalance;
         }
 
         /// <summary>
