@@ -73,6 +73,7 @@ stages:
         cd '$(System.DefaultWorkingDirectory)/P2Angular'
         npm install -g @angular/cli
         npm install
+        rmdir dist
         ng build
 
     - task: AzureRmWebAppDeployment@4
@@ -81,4 +82,4 @@ stages:
         azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
         appType: 'webApp'
         WebAppName: 'PokeLoot'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/P2Angular/dist/P2Angular'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/P2Angular/dist/P2Angular.zip'
