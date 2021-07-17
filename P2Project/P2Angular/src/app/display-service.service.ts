@@ -10,7 +10,7 @@ export class DisplayServiceService {
 
   
   
-  private url: string = 'https://localhost:44307/api/P2/DisplayBoard';
+  private url: string = 'https://pokeloot.azurewebsites.net/api/P2/DisplayBoard';
   //private url: string = '';
 
   constructor( private router:Router, private http:HttpClient) { }

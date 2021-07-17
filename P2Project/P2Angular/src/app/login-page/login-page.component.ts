@@ -45,7 +45,7 @@ export class LoginPageComponent implements OnInit {
           this.isCredentialsValid = false;
           console.log(`Return URL: ${this.returnUrl}`)
           this.router.navigateByUrl(this.returnUrl)
-
+          
         }
 
       },
