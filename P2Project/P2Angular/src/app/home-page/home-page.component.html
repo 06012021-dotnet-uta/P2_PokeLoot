@@ -1,19 +1,51 @@
-<div class="container">
-    <p>home-page works!</p>
+<!-- <div class="container">
+    <div class="post-wrapper">
+        <div class="card mt-5">
+            <div class="card-body">
+                <div class="text-center">
 
-    <form class="d-inline-flex p-2">
-        <input class="form-control me-2 input-sm" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-    </form>
 
-    <br>
+                <form class="d-inline-flex p-2">
+                    <input class="form-control me-2 input-sm" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
 
-    <div class="border"></div>
+                <br>
 
-    <br>
+                <div class="border my-3"></div>
 
-    <div class="container">
-        <app-posts></app-posts>
+                <br>
+
+                <div class="me-2">
+                    <app-posts></app-posts>
+                </div>
+
+                </div>
+            </div>
+        </div>
     </div>
+</div> -->
 
+<div class="container">
+
+    <div class="row justify-content-center my-5">
+        <div class="col text-center">
+            <form class="d-inline-flex p-2">
+                <input class="form-control me-2 input-sm" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+
+            <br>
+
+            <div class="border my-5 d-flex justify-content-center"></div>
+
+            <br>
+        </div>
+        <div class="row d-flex justify-content-center">
+            <div class="col col-lg-8">
+                <app-posts class="" style="background-color: #eee;"></app-posts>
+            </div>
+        </div>
+
+    </div>
 </div>

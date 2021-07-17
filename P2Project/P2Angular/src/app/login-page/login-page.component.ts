@@ -16,10 +16,10 @@ export class LoginPageComponent implements OnInit {
   isCredentialsValid: boolean = false;
   returnUrl!: string;
 
-  constructor(private authenticateService: AuthenticationService,
+  constructor(
+    private authenticateService: AuthenticationService,
     private router: Router,
-    private route: ActivatedRoute,
-    private fb: FormBuilder) { }
+    private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
     this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || ''
@@ -43,7 +43,6 @@ export class LoginPageComponent implements OnInit {
         } else {
           this.isFormValid = false;
           this.isCredentialsValid = false;
-          console.log(`Return URL: ${this.returnUrl}`)
           this.router.navigateByUrl(this.returnUrl)
 
         }

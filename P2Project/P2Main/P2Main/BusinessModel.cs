@@ -334,7 +334,6 @@ namespace BusinessLayer
             if(coinsToAdd >= 0){
                 context.Entry(currentUser).Property(x => x.TotalCoinsEarned).IsModified = true;
                 context.Entry(currentUser).Property(x => x.AccountLevel).IsModified = true;
-                
             }
             try{
                 context.SaveChanges();
@@ -364,6 +363,27 @@ namespace BusinessLayer
         public User GetUserById(int id)
         {
             return context.Users.Where(x => x.UserId == id).FirstOrDefault();
+        }
+
+        /// <summary>
+        /// Removes user object by its Id
+        /// </summary>
+        /// <param name="id">User Id</param>
+        /// <returns>True if user was deleted successfully or false otherwise</returns>
+        public bool RemoveUser(int id)
+        {
+            // Grab the Object by id
+            User user = context.Users.Single(x => x.UserId == id);
+
+            // Remove the user.
+            if (user != null)
+            {
+                context.Users.Remove(user);
+                context.SaveChanges();
+                return true;
+            }
+
+            return false;
         }
 
     }//class BusinessModel
