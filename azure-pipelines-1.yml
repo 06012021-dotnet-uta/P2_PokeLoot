@@ -67,7 +67,7 @@ stages:
         - task: PublishBuildArtifacts@1
             
 - stage: Deploy
-  dependsOn: Build
+  dependsOn: API
   jobs:
     - job: DeployWebApp
       steps:
