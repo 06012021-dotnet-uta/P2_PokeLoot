@@ -6,7 +6,6 @@ export interface IPost{
     Price?: number,
     StillAvailable: boolean,
     IsShiny?: boolean,
-    Link?: string,
     UserId : number,
     UserName: string,
     SpriteLink: string,
