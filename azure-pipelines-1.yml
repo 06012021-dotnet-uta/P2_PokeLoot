@@ -53,7 +53,7 @@ stages:
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-        appType: 'webApp'
+        appType: 'apiApp'
         WebAppName: 'PokeLoot'
         deployToSlotOrASE: true
         ResourceGroupName: 'PokeLoot'
