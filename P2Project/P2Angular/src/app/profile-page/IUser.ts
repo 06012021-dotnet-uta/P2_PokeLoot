@@ -5,7 +5,7 @@ export interface User{
       UserName:string,
       Password:string,
       Email:string,
-      CoinBalance:number
-      AccountLevel:number
-      TotalCoinsEarned:number
+      CoinBalance:number,
+      AccountLevel:number,
+      TotalCoinsEarned:number,
 }

@@ -14,13 +14,14 @@ import { Observable, of, BehaviorSubject } from 'rxjs';
 export class CardCollectComponent implements OnInit {
 
   userCollection: ICard[];
-  private userId = localStorage.getItem('userId')
+  private userId = localStorage.getItem('userId');
+
 
 
   constructor(private _cardcollectionService: CardServiceService) { 
     this.userCollection = []
-
   }
+
 
   ngOnInit(): void {
     if(this.userId != null)
