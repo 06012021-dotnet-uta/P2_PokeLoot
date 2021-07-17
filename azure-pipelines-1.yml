@@ -17,7 +17,7 @@ variables:
 
 
 stages:
-- stage: Build
+- stage: API
   jobs: 
     - job: BuildWebApp
       variables:
@@ -58,7 +58,7 @@ stages:
             codeCoverageTool: 'Cobertura'
             summaryFileLocation: '**/coburtura/coverage.xml'
 
-        - task: SonarCloudAnalyze@1
+        #- task: SonarCloudAnalyze@1
         
         - task: SonarCloudPublish@1
           inputs:
@@ -89,7 +89,27 @@ stages:
             SlotName: 'production'
             packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
+- stage: DeployAngular
+  jobs:
+  - job:
+    steps:    
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '14.x'
+      displayName: 'Install Node.js'
 
+    - script: |
+        cd '$(System.DefaultWorkingDirectory)/P2Angular'
+        npm install -g @angular/cli
+        npm install
+        ng build
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+        appType: 'webApp'
+        WebAppName: 'PokeLoot'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 
 
 
