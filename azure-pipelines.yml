@@ -1,5 +1,6 @@
 trigger:
-- main
+  - main
+pr: none
 
 pool:
   vmImage: 'windows-latest'
@@ -9,27 +10,55 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-stages:
+steps:
+
+- task: NodeTool@0
+  inputs:
+    versionSpec: '14.x'
+  displayName: 'Install Node.js'
+
+- task: Npm@1
+  displayName: 'NPM Install'
+  inputs:
+    command: 'install'
+    workingDir: $(solution)
+
+- task: Npm@1
+  displayName: 'NPM Build Angular'
+  inputs:
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'run build-prod'
+
+- task: Npm@1
+  displayName: 'NPM Test'
+  inputs:
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'run test-headless'
 
 
-- stage: DeployAngular
-  jobs:
-  - job:
-    steps:    
-    - task: NodeTool@0
-      inputs:
-        versionSpec: '14.x'
-      displayName: 'Install Node.js'
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(solution)/dist'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
 
-    - script: |
-        cd '$(System.DefaultWorkingDirectory)/P2Angular'
-        npm install -g @angular/cli
-        npm install
-        ng build
-    - task: AzureRmWebAppDeployment@4
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-        appType: 'webApp'
-        WebAppName: 'PokeLoot'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    artifactName: 'dist'
+    publishLocation: 'Container'
+- task: AzureRmWebAppDeployment@4
+  inputs:
+    ConnectionType: 'AzureRM'
+    azureSubscription: 'Azure subscription 1(d6c8a8b1-d080-451c-a2a1-87677bde0d9f)'
+    appType: 'webApp'
+    WebAppName: 'Game-Book'
+    deployToSlotOrASE: true
+    ResourceGroupName: 'GameBookResourceGroup'
+    SlotName: 'production'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    #packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
