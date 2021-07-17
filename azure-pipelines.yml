@@ -61,5 +61,5 @@ steps:
     deployToSlotOrASE: true
     ResourceGroupName: 'PokeLoot'
     SlotName: 'production'
-packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     #packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
