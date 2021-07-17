@@ -16,12 +16,28 @@ steps:
   inputs:
     versionSpec: '14.x'
   displayName: 'Install Node.js'
+- task: Npm@1
+  displayName: 'NPM Install'
+  inputs:
+    command: 'install'
+    workingDir: $(solution)
 
-- script: |
-    cd '$(System.DefaultWorkingDirectory)/MovieTheaterUI'
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
+
+
+- task: Npm@1
+  displayName: 'NPM Build Angular'
+  inputs:
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'run build --prod'
+
+- task: Npm@1
+  displayName: 'NPM Test'
+  inputs:
+    command: 'custom'
+    workingDir: $(solution)
+    customCommand: 'run test-headless'
+
 
 
 - task: ArchiveFiles@2
@@ -49,24 +65,8 @@ steps:
     SlotName: 'production'
     packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
     #packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-# - task: Npm@1
-#   displayName: 'NPM Install'
-#   inputs:
-#     command: 'install'
-#     workingDir: $(solution)
-
-
-  
-# - task: Npm@1
-#   displayName: 'NPM Build Angular'
-#   inputs:
-#     command: 'custom'
-#     workingDir: $(solution)
-#     customCommand: 'run build --prod'
-
-# - task: Npm@1
-#   displayName: 'NPM Test'
-#   inputs:
-#     command: 'custom'
-#     workingDir: $(solution)
-#     customCommand: 'run test-headless'
+# - script: |
+#     cd '$(System.DefaultWorkingDirectory)/MovieTheaterUI'
+#     npm install -g @angular/cli
+#     npm install
+#     ng build --prod
