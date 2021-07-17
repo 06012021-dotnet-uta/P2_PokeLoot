@@ -28,7 +28,7 @@ steps:
   displayName: 'NPM Build Angular'
   inputs:
     command: 'custom'
-    customCommand: 'run build--prod'
+    customCommand: 'run build --prod'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
