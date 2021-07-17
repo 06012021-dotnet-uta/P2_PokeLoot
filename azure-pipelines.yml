@@ -32,8 +32,23 @@ stages:
         command: 'custom'
         workingDir: $(solution)
         customCommand: 'run build --prod'
+        
+    - task: PublishBuildArtifacts@1
 
-
+- stage: DeployAngular
+  jobs:
+  - job:
+    steps:
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+        appType: 'webApp'
+        WebAppName: 'PokeLoot'
+        deployToSlotOrASE: true
+        ResourceGroupName: 'PokeLoot'
+        SlotName: 'production'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
 # - stage: Deploy
 #   jobs:
 #   - job: angulardeploy
