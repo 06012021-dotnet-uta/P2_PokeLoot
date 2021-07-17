@@ -28,7 +28,7 @@ steps:
   displayName: 'NPM Build Angular'
   inputs:
     command: 'custom'
-    customCommand: 'run build'
+    customCommand: 'ng build'
 
 - task: AzureRmWebAppDeployment@4
   inputs:
@@ -39,7 +39,7 @@ steps:
     deployToSlotOrASE: true
     ResourceGroupName: 'PokeLoot'
     SlotName: 'production'
-    packageForLinux: 'dist/'
+    packageForLinux: 'dist/P2Angular'
 
 # - task: Npm@1
 #   displayName: 'NPM Test'
