@@ -30,5 +30,7 @@ namespace BusinessLayer
         public User GetUserById(int id); //tested
 
         public DisplayBoard getPostInfo(int id);
+
+        public Post getPostById(int id);
     }
 }

@@ -15,6 +15,8 @@ namespace P2DbContext.Models
         public string UserName { get; set; }
         public int UserId { get; set; }
         public int PostType { get; set; }
+        public string PokemonName {get; set;}
+        public int RarityId {get; set;}
 
         public string SpriteLink {get; set;}
 

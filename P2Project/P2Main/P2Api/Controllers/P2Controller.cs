@@ -51,6 +51,8 @@ namespace P2Api.Controllers
             foreach(Post post in playerList){
                 DisplayBoard displayBoard = _businessModel.getPostInfo(post.PostId);
                 string mainSprite = "https://wiki.p-insurgence.com/images/0/09/722.png";
+                string cardName ="";
+                int cardRare = 0;
                 if(post.PokemonId != null){
                     if(post.IsShiny == true){
                         mainSprite = _businessModel.getPokemonById((int)post.PokemonId).SpriteLinkShiny;
@@ -58,7 +60,10 @@ namespace P2Api.Controllers
                     else{
                         mainSprite = _businessModel.getPokemonById((int)post.PokemonId).SpriteLink;
                     }
+                   cardName = _businessModel.getPokemonById((int)post.PokemonId).PokemonName;
+                   cardRare = _businessModel.getPokemonById((int)post.PokemonId).RarityId;
                 }
+                
                 FullPost instance = new FullPost()
                 {
                     PostId = post.PostId,
@@ -70,6 +75,8 @@ namespace P2Api.Controllers
                     IsShiny = post.IsShiny,
                     UserId = displayBoard.UserId,
                     PostType = displayBoard.PostType,
+                    PokemonName = cardName,
+                    RarityId = cardRare,
                     UserName = _businessModel.GetUserById(displayBoard.UserId).UserName,
                     SpriteLink = mainSprite
 
@@ -77,6 +84,23 @@ namespace P2Api.Controllers
                 result.Add(instance);
             }
             return result;
+        }
+
+        /// <summary>
+        /// https://localhost:44307/api/P2/buyCard/3/2
+        /// Returns the result from buying a card
+        /// </summary>
+        /// <param name="postId">Post ID of a sale</param>
+        /// <param name="userId">Current User</param>
+        /// <returns>Dictionary conation output and outcome</returns>
+        [HttpGet("buyCard/{postId}/{userId}")]
+        public string buyCard(int postId, int userId){
+            Dictionary<string, bool> result = new Dictionary<string, bool>();
+            Post post = _businessModel.getPostById(postId);
+            User currentUser = _businessModel.GetUserById(userId);
+            result = _businessModel.buyFromPost(post, currentUser);
+            string json = JsonConvert.SerializeObject(result.ToList());
+            return json;
         }
 
         /// <summary>
