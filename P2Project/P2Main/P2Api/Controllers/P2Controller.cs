@@ -44,10 +44,39 @@ namespace P2Api.Controllers
         /// </summary>
         /// <returns>List of Posts</returns>
         [HttpGet("DisplayBoard")]
-        public List<Post> PostList()
+        public List<FullPost> PostList()
         {
+            List<FullPost> result = new List<FullPost>();
             List<Post> playerList = _businessModel.getDisplayBoard();
-            return playerList;
+            foreach(Post post in playerList){
+                DisplayBoard displayBoard = _businessModel.getPostInfo(post.PostId);
+                string mainSprite = "https://wiki.p-insurgence.com/images/0/09/722.png";
+                if(post.PokemonId != null){
+                    if(post.IsShiny == true){
+                        mainSprite = _businessModel.getPokemonById((int)post.PokemonId).SpriteLinkShiny;
+                    }
+                    else{
+                        mainSprite = _businessModel.getPokemonById((int)post.PokemonId).SpriteLink;
+                    }
+                }
+                FullPost instance = new FullPost()
+                {
+                    PostId = post.PostId,
+                    PokemonId = post.PokemonId,
+                    PostTime = post.PostTime,
+                    PostDescription = post.PostDescription,
+                    Price = post.Price,
+                    StillAvailable = post.StillAvailable,
+                    IsShiny = post.IsShiny,
+                    UserId = displayBoard.UserId,
+                    PostType = displayBoard.PostType,
+                    UserName = _businessModel.GetUserById(displayBoard.UserId).UserName,
+                    SpriteLink = mainSprite
+
+                };
+                result.Add(instance);
+            }
+            return result;
         }
 
         /// <summary>

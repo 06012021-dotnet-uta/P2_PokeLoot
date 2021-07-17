@@ -28,5 +28,7 @@ namespace BusinessLayer
         public PokemonCard getPokemonById(int id); //tested
 
         public User GetUserById(int id); //tested
+
+        public DisplayBoard getPostInfo(int id);
     }
 }

@@ -367,5 +367,14 @@ namespace BusinessLayer
             return context.Users.Where(x => x.UserId == id).FirstOrDefault();
         }
 
+        /// <summary>
+        /// Gets additional information on the post
+        /// </summary>
+        /// <param name="id">Post id</param>
+        /// <returns>DisplayBoard object or null</returns>
+        public DisplayBoard getPostInfo(int id){
+            return context.DisplayBoards.Where(x => x.PostId == id).FirstOrDefault();
+        }
+
     }//class BusinessModel
 }// namespace BusinessLayer

@@ -1,3 +1,4 @@
+import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { DisplayServiceService } from '../display-service.service';
 import { IPost } from '../Models/IPost';
@@ -28,8 +29,22 @@ export class HomePageComponent implements OnInit {
           let Price = result[i].price;
           let StillAvailable = result[i].stillAvailable;
           let IsShiny = result[i].isShiny;
+          let UserId = result[i].UserId;
+          let type = result[i].PostType;
+          let UserName = result[i].UserName;
+          let SpriteLink = result[i].SpriteLink;
+          let PostType = '';
+          if(type == 1){
+            PostType = 'Discussion';
+          }
+          else if(type == 2){
+            PostType = 'Sale';
+          }
+          else{
+            PostType = 'Display';
+          }
 
-          let Post: IPost = {PostId, PokemonId, PostTime, PostDescription, Price, StillAvailable, IsShiny}
+          let Post: IPost = {PostId, PokemonId, PostTime, PostDescription, Price, StillAvailable, IsShiny, UserId, UserName, SpriteLink, PostType}
           this.displayBoard.push(Post);
         }
       }
