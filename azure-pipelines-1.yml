@@ -70,6 +70,8 @@ stages:
             publishWebProjects: false
             projects: '$(solution)'
             zipAfterPublish: true
+        
+        - task: PublishBuildArtifacts@1
             
 - stage: Deploy
   dependsOn: Build
@@ -87,7 +89,6 @@ stages:
             ResourceGroupName: 'PokeLoot'
             SlotName: 'production'
             packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
 
 
 
