@@ -14,6 +14,14 @@ stages:
   jobs:
   - job:
     steps:
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'P2_SonarCloudToken'
+        organization: 'p2project-1'
+        scannerMode: 'MSBuild'
+        projectKey: 'P2Project_P2'
+        projectName: 'P2'
+        
     - task: NodeTool@0
       inputs:
         versionSpec: '14.x'
@@ -31,13 +39,11 @@ stages:
         command: 'custom'
         workingDir: $(solution)
         customCommand: 'run build --prod'
+    - task: SonarCloudAnalyze@1
 
-    # - task: Npm@1
-    #   displayName: 'NPM Test'
-    #   inputs:
-    #     command: 'custom'
-    #     workingDir: $(solution)
-    #     customCommand: 'run test-headless'
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
 
 
 
