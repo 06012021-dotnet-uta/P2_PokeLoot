@@ -25,7 +25,7 @@ export class UnlockCardPageComponent implements OnInit {
   ngOnInit(): void {
     if(this.userId != null)
     {
-      this._cardcollectionService.GetBalance(this.userId).subscribe(
+      this._cardcollectionService.GetBalance().subscribe(
         result => {
           let coinBalance   = result;
 
@@ -41,7 +41,7 @@ export class UnlockCardPageComponent implements OnInit {
     {
       if(this.currentUserCoinBalance >= 100)
       {
-        this._cardcollectionService.RollLootbox(this.userId).subscribe(
+        this._cardcollectionService.RollLootbox().subscribe(
           result => {
             let PokemonId     = result[0].Key.PokemonId;
             let RarityId      = result[0].Key.RarityId;
@@ -61,7 +61,7 @@ export class UnlockCardPageComponent implements OnInit {
             console.log(this.newCard);
           }
         );
-        this._cardcollectionService.GetBalance(this.userId).subscribe(
+        this._cardcollectionService.GetBalance().subscribe(
           result => {
             let coinBalance   = result;
   
