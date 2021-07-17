@@ -1,5 +1,5 @@
 <div class="container">
-    <p>home-page works!</p>
+    
 
     <form class="d-inline-flex p-2">
         <input class="form-control me-2 input-sm" type="search" placeholder="Search" aria-label="Search">
@@ -12,21 +12,27 @@
 
     <br>
 
- 
+    <div class="newPost">
+    <button style="justify-self: center; font-size: large;">Make A Post</button> <!-- Add method to make a post-->
+    </div>
+    <br>
+    <br>
+
     <div *ngFor="let post of displayBoard">
+        
         <div class="card">
             <div class="outer-column">
                 <div class="car-header">
-                    <button type="button" class="btn btn-circle btn-lg" style="background-color: #EEEDED;">A</button>
+                    <img class="btn btn-circle btn-lg" src ='https://www.popsockets.com/dw/image/v2/BDFW_PRD/on/demandware.static/-/Sites-popsockets-master-catalog/default/dwc69e17a6/images/hi-res/Master-Ball-Gloss_01_Top-View.png?sw=200&sh=200' alt='profile pictures'>
                     <div class="column">
                         <div class="card-username">
-                            <p>{{post.UserName}}</p>
+                            <p>@{{post.UserName}}</p>
                         </div>
                         <div class="card-info">
                             <div class="date">
-                                <p>{{post.PostTime}}</p>
+                                <p>{{post.PostTime | date: 'short'}}</p>
                             </div>
-                            <div class="dot"></div>
+                            
                             <div class="type">
                                 <p>{{post.PostType}}</p>
                             </div>
@@ -34,11 +40,16 @@
                     </div>
                 </div>
                 <div *ngIf="post.Price">
-                    <h6>{{post.Price}} coins</h6>
+                    <h6> {{post.Price}} coins</h6>
                 </div>
                 <div class="card-details">
                     <p>{{post.PostDescription}}</p>
+                    <div *ngIf="post.PostType == 'Sale'">
+                        <button>Buy Card</button>
+
+                    </div>
                 </div>
+                
             </div>
             <div class="image">
                 <img src={{post.SpriteLink}} alt="Pokemon Sprite"> 
