@@ -1,6 +1,7 @@
 import { stringify } from '@angular/compiler/src/util';
 import { Component, OnInit } from '@angular/core';
 import { DisplayServiceService } from '../display-service.service';
+import { IBuy } from '../Models/IBuy';
 import { IPost } from '../Models/IPost';
 
 @Component({
@@ -11,6 +12,9 @@ import { IPost } from '../Models/IPost';
 export class HomePageComponent implements OnInit {
 
   displayBoard: IPost[];
+  attemptToBuy: boolean = false;
+  broughtCard?: IBuy;
+  private userId: any = localStorage.getItem('userId');
   
   constructor(private _displayService : DisplayServiceService) {
     this.displayBoard = [];
@@ -19,6 +23,7 @@ export class HomePageComponent implements OnInit {
   
    //we should edit the api to also recieve the original username of poster
   ngOnInit(): void {
+    this.attemptToBuy = false;
     this._displayService.DisplayBoard().subscribe(
       result => {
         for(let i = 0; i < result.length; i++){
@@ -43,12 +48,39 @@ export class HomePageComponent implements OnInit {
           else{
             PostType = 'Display';
           }
+          let PokemonName = result[i].pokemonName;
+          let RarityId = result[i].rarityId;
 
-          let Post: IPost = {PostId, PokemonId, PostTime, PostDescription, Price, StillAvailable, IsShiny, UserId, UserName, SpriteLink, PostType}
+          let Post: IPost = {PostId, PokemonId, PostTime, PostDescription, Price, StillAvailable, IsShiny, UserId, UserName, SpriteLink, PostType, PokemonName, RarityId}
           this.displayBoard.push(Post);
         }
       }
     )
+  }
+  buy(post :IPost):void{
+    this.attemptToBuy = true;
+    //Ouput: string,
+    //Result: boolean,
+    let Price = post.Price;
+    let UserName = post.UserName;
+    let SpriteLink = post.SpriteLink;
+    let PokemonName = post.PokemonName;
+    let RarityId = post.RarityId;
+    let IsShiny = post.IsShiny;
+
+    this._displayService.getBuyCard(post.PostId, this.userId).subscribe(
+      result => {
+        let Output = result[0].Key;
+        let Result = result[0].Value;
+        if(Result == false){
+          RarityId = 6;
+        }
+
+        this.broughtCard = {Output, Result, Price, UserName, SpriteLink, PokemonName, RarityId, IsShiny};
+      }
+    )
+  
+    
   }
 
 }

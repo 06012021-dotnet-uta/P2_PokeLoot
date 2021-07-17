@@ -10,8 +10,13 @@ export class DisplayServiceService {
 
   
   
+
   private url: string = 'https://pokeloot.azurewebsites.net/api/P2/DisplayBoard';
   //private url: string = '';
+
+  //private url: string = 'https://localhost:44307/api/P2/DisplayBoard';
+  private urltobuy: string = 'https://localhost:44307/api/P2/buyCard/';
+
 
   constructor( private router:Router, private http:HttpClient) { }
 
@@ -19,7 +24,8 @@ export class DisplayServiceService {
     return this.http.get<any>(this.url);
   }
 
-  /*getPokemon(id: number):Observable<any>{
-      return;
-  }*/
+  getBuyCard(postId: number, userId: string):Observable<any>{
+      let newUrl = this.urltobuy + postId + '/' + userId + '/';
+      return this.http.get<any>(newUrl);
+  }
 }
