@@ -15,6 +15,7 @@ export class UnlockCardPageComponent implements OnInit {
   private userId = localStorage.getItem('userId')
   newCard : IUnlockCard;
   currentUserCoinBalance : any;
+  tooPoor: boolean = false;
 
   constructor(private _cardcollectionService: UnlockCardService) { 
     this.newCard = {} as IUnlockCard;
@@ -46,9 +47,16 @@ export class UnlockCardPageComponent implements OnInit {
             let RarityId      = result[0].Key.RarityId;
             let SpriteLink    = result[0].Key.SpriteLink;
             let PokemonName   = result[0].Key.PokemonName;
-            let IsShiny       = result[0].Value
+            let SpriteLinkShiny = result[0].Key.SpriteLinkShiny;
+            let IsShiny       = result[0].Value;
+            let MainSprite = '';
+            if (IsShiny == true) {
+              MainSprite = SpriteLinkShiny;
+            } else {
+              MainSprite = SpriteLink;
+            }
 
-            this.newCard = {PokemonId, RarityId, SpriteLink, PokemonName, IsShiny};
+            this.newCard = {PokemonId, RarityId, SpriteLink, PokemonName, IsShiny, SpriteLinkShiny, MainSprite};
 
             console.log(this.newCard);
           }
@@ -63,11 +71,10 @@ export class UnlockCardPageComponent implements OnInit {
       }
       else
       {
-        // handle too poor to afford boxes
-      }
+        this.tooPoor = true;
     }
   }
 
 }
 
-
+}

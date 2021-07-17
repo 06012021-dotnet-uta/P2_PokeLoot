@@ -4,5 +4,7 @@ export interface IUnlockCard{
       SpriteLink  :     string;
       PokemonName :     string;
       IsShiny     :     boolean;
+      SpriteLinkShiny:   string;
+      MainSprite  :      string;
 }
 

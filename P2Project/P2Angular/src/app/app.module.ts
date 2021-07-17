@@ -23,6 +23,9 @@ import { PostsComponent } from './posts/posts.component';
 import { CardCollectComponent } from './cardcollect/cardcollect.component';
 import { CardServiceService } from './card-service.service';
 import { AccountService } from './account.service';
+import { AddCardComponent } from './add-card/add-card.component';
+import { CommonModule } from '@angular/common';
+
 
 @NgModule({
   declarations: [
@@ -39,14 +42,16 @@ import { AccountService } from './account.service';
     ViewBalancePageComponent,
     TopNavBarComponent,
     PostsComponent,
-    CardCollectComponent
+    CardCollectComponent, 
+    AddCardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    CommonModule
   ],
   providers: [CardServiceService,AccountService],
   bootstrap: [AppComponent]
