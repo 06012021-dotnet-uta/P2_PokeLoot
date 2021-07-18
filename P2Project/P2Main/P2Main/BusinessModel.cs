@@ -9,13 +9,10 @@ namespace BusinessLayer
     public class BusinessModel : IBusinessModel
         {
 
-        private P2DbClass _context;
 
-        public P2DbClass context
-        {
-            get { return context; }
-            set { context = _context; }
-        }
+
+        public P2DbClass context;
+
 
 
         //public P2DbClass context;
