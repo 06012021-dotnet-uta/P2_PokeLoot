@@ -20,10 +20,6 @@ export class UnlockCardService {
     return this.http.get<any>('https://pokeloot.azurewebsites.net/api/P2/Lootbox/' + localStorage.getItem('userId'))
   }
 
-  // GetBalance():Observable<any[]>{
-  //   return this.http.get<any>('https://pokeloot.azurewebsites.net/api/P2/CoinBalance/' + localStorage.getItem('userId'))
-  // }
-
   Balance():Observable<any[]>{
     return this.http.get<any>('https://pokeloot.azurewebsites.net/api/P2/Balance/' + localStorage.getItem('userId'))
   }
