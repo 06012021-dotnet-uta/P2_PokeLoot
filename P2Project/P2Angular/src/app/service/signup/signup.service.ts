@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 })
 export class SignupService {
 
-  private baseUrlSignup: string = "https://localhost:44307/api/P2/Signup"
+  private baseUrlSignup: string = "https://pokeloot.azurewebsites.net/api/P2/Signup"
 
 
   constructor(private route: Router, private http: HttpClient) { }
