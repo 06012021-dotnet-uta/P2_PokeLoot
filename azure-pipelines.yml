@@ -38,7 +38,7 @@ stages:
       inputs:
         command: 'custom'
         workingDir: $(solution)
-        customCommand: 'run build-proddafasdf'
+        customCommand: 'run build-prod'
     
     # - task: Npm@1
     #   displayName: 'NPM Test'
