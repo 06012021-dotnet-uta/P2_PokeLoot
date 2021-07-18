@@ -15,6 +15,14 @@ stages:
   jobs:
   - job:
     steps:
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'SonarCloudToken'
+        organization: 'p2project-1'
+        scannerMode: 'MSBuild'
+        projectKey: 'P2Project_P2'
+        projectName: 'P2Angular'
+        extraProperties: 'extra'
     - task: NodeTool@0
       inputs:
         versionSpec: '14.x'
@@ -29,6 +37,10 @@ stages:
         command: 'custom'
         workingDir: $(solution)
         customCommand: 'run build-prod'
+    - task: SonarCloudAnalyze@1
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
 
     - task: ArchiveFiles@2
       inputs:
