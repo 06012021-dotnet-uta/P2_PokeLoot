@@ -1,56 +1,47 @@
-<!-- <div class="card">
-    <div class="outer-column">
-        <div class="car-header">
-            <button type="button" class="btn btn-circle btn-lg" style="background-color: #EEEDED;">A</button>
-            <div class="column">
-                <div class="card-username">
-                    <p>Adrian Gonzalez</p>
-                </div>
-                <div class="card-info">
-                    <div class="date">
-                        <p>Jan 4</p>
+<div *ngFor="let post of displayBoard">
+    <div class="container mt-4 mb-3 shadow-sm p-3 bg-body rounded">
+        <div class="row">
+            <div class="col-md-7">
+                <div class="d-flex justify-content-between">
+                    <div class="d-flex flex-row align-items-center">
+                        <img height="50px" width="50px"
+                            style="box-shadow: 4px 4px 5px 0px #131313; border-radius: 25px;"
+                            src='https://www.popsockets.com/dw/image/v2/BDFW_PRD/on/demandware.static/-/Sites-popsockets-master-catalog/default/dwc69e17a6/images/hi-res/Master-Ball-Gloss_01_Top-View.png?sw=200&sh=200' />
+                        <div class="ms-3 c-details">
+                            <h6 class="mb-1">{{post.UserName}}</h6> <span>{{post.PostTime | date: 'short'}}</span>
+                            <span class="dot mx-2"></span>
+                            <span>{{post.PostType}}</span>
+                        </div>
                     </div>
-                    <div class="dot"></div>
-                    <div class="type">
-                        <p>Sale</p>
-                    </div>
                 </div>
-            </div>
-        </div>
-        <div class="card-details">
-            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam necessitatibus magni
-                similique quis esse veritatis voluptatibus! Sunt, perspiciatis minima ipsum vero voluptatibus
-                adipisci
-                eius
-                dolores. Molestiae sint molestias deleniti aperiam?</p>
-        </div>
-    </div>
-    <div class="image">image</div>
-</div> -->
 
-<div class="container mt-5 mb-3">
-    <div class="row">
-        <div class="col-md-6">
-            <div class="d-flex justify-content-between">
-                <div class="d-flex flex-row align-items-center">
-                    <button type="button" class="btn btn-circle btn-lg" style="background-color: #EEEDED;">A</button>
-                    <div class="ms-3 c-details">
-                        <h6 class="mb-1">Adrian Gonzalez</h6> <span>Jan 4</span>
-                        <span class="dot mx-2"></span>
-                        <span>Sale</span>
+                <div class="d-flex align-items-start flex-column bd-highlight" style="height: 280px;">
+                    <div class="mb-auto mt-4 p-2 bd-highlight">
+                        <p class="h5">{{post.PostDescription}}</p>
+                    </div>
+                    <div *ngIf="post.PostType == 'Sale'">
+
+                        <button type="button" class="btn btn-success btn-sm" aria-disabled="true">Price
+                            {{post.Price}}
+                            coins</button>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-3">
+                <div [ngClass]="GetCardColor(post.RarityId)" class="card text-center" style="width: 18rem;">
+                    <img class="card-img-top" height="200" src={{post.SpriteLink}} alt="{{post.PokemonName}} Image">
+                    <div class="card-body">
+                        <h6>{{GetRarityDisplay(post.RarityId)}}</h6>
+                        <h5 *ngIf="post.IsShiny as true; else elseBlock" class="card-title">★
+                            {{post.PokemonName}} ★</h5>
+                        <ng-template #elseBlock>
+                            <h5 class="card-title">{{post.PokemonName}}</h5>
+                        </ng-template>
+                        <a href="#" class="btn btn-danger">View Detials</a>
                     </div>
                 </div>
             </div>
-            <div class="mt-4 mx-2">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quibusdam necessitatibus magni
-                    similique quis esse veritatis voluptatibus! Sunt, perspiciatis minima ipsum vero voluptatibus
-                    adipisci
-                    eius
-                    dolores. Molestiae sint molestias deleniti aperiam?</p>
-            </div>
-        </div>
-        <div class="col-md-2">
-            <img src="https://via.placeholder.com/150" class="rounded float-end">
         </div>
     </div>
 </div>
