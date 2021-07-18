@@ -10,48 +10,50 @@ variables:
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-steps:
-- script: |
-    cd '$(System.DefaultWorkingDirectory)/P2Project/P2Angular'
-    npm install -g @angular/cli
-    npm install
-    ng build --prod
+stages:
+- stage: Angular
+  jobs:
+  - job:
+    steps:
+    - task: NodeTool@0
+      inputs:
+        versionSpec: '14.x'
 
-# - task: NodeTool@0
-#   inputs:
-#     versionSpec: '14.x'
-#   displayName: 'Install Node.js'
-# - task: Npm@1
-#   displayName: 'NPM Install'
-#   inputs:
-#     command: 'install'
-#     workingDir: $(solution)
+    - task: Npm@1
+      inputs:
+        command: 'install'
+        workingDir: $(solution)
 
+    - task: Npm@1
+      inputs:
+        command: 'custom'
+        workingDir: $(solution)
+        customCommand: 'run build-prod'
 
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(solution)/dist'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
 
-# - task: Npm@1
-#   displayName: 'NPM Build Angular'
-#   inputs:
-#     command: 'custom'
-#     customCommand: 'run build-prod'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'dist'
+        publishLocation: 'Container'
 
-- task: AzureRmWebAppDeployment@4
-  inputs:
-    ConnectionType: 'AzureRM'
-    azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-    appType: 'webApp'
-    WebAppName: 'PokeLoot'
-    deployToSlotOrASE: true
-    ResourceGroupName: 'PokeLoot'
-    SlotName: 'production'
-    packageForLinux: 'dist/P2Angular'
-
-# - task: Npm@1
-#   displayName: 'NPM Test'
-#   inputs:
-#     command: 'custom'
-#     workingDir: $(solution)
-#     customCommand: 'run test-headless'
+    - task: AzureRmWebAppDeployment@4
+      inputs:
+        ConnectionType: 'AzureRM'
+        azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
+        appType: 'webApp'
+        WebAppName: 'PokeLoot'
+        deployToSlotOrASE: true
+        ResourceGroupName: 'PokeLoot'
+        SlotName: 'production'
+        packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
 
 
 
