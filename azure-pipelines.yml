@@ -28,7 +28,7 @@ stages:
       inputs:
         command: 'custom'
         workingDir: $(solution)
-        customCommand: 'run build-prod'
+        customCommand: 'run build-prodf'
     
     # - task: Npm@1
     #   displayName: 'NPM Test'
