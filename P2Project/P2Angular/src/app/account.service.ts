@@ -11,7 +11,8 @@ export class AccountService {
 
   constructor(private http:HttpClient) { }
 
-    GetUserProfile():Observable<User>{
-      return this.http.get<User>('https://pokeloot.azurewebsites.net/api/P2/Profile/'+localStorage.getItem('userId'))
-    }
+  GetUserProfile():Observable<User>{
+    return this.http.get<User>('https://pokeloot.azurewebsites.net/api/P2/Profile/'+localStorage.getItem('userId'))
+  }
+
 }

@@ -23,17 +23,18 @@ export class UnlockCardPageComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if(this.userId != null)
-    {
-      this._cardcollectionService.GetBalance().subscribe(
-        result => {
-          let coinBalance   = result;
+     if(this.userId != null)
+     {
+       this._cardcollectionService.Balance().subscribe(
+         result => {
+           let coinBalance   = result;
 
-          this.currentUserCoinBalance = coinBalance;
-        }
-      );
-      
-    }
+           this.currentUserCoinBalance = coinBalance;
+         }
+         
+       );
+    
+     }
   }
 
   openLootbox(): void {
