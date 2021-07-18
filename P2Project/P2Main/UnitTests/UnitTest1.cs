@@ -362,7 +362,7 @@ namespace UnitTests
 
                 // Assert
                 Assert.True(testPosts.Any());
-                Assert.True(testPosts.Count() == 4);
+                Assert.True(testPosts.Count == 4);
 
 
             }
