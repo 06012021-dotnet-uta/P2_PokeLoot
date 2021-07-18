@@ -41,6 +41,7 @@ stages:
         command: 'test'
         projects: '$(solution)'
         arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
+        workingDirectory: 'P2Pokeloot/P2Project/P2Main'
 
     - task: PublishCodeCoverageResults@1
       inputs:
