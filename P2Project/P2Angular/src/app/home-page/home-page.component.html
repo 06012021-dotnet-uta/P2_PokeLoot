@@ -26,36 +26,11 @@
 
     <div *ngFor="let post of displayBoard">
         
-        <div class="card">
-            <div class="outer-column">
-                <div class="car-header">
-                    <img class="btn btn-circle btn-lg" src ='https://www.popsockets.com/dw/image/v2/BDFW_PRD/on/demandware.static/-/Sites-popsockets-master-catalog/default/dwc69e17a6/images/hi-res/Master-Ball-Gloss_01_Top-View.png?sw=200&sh=200' alt='profile pictures'>
-                    <div class="column" style="font-size:medium;">
-                        <div class="card-username">
-                            <p>@{{post.UserName}}</p>
-                        </div>
-                        <div class="card-info">
-                            <div class="date">
-                                <p>{{post.PostTime | date: 'short'}}</p>
-                            </div>
-                            
-                            <div class="type">
-                                <p>{{post.PostType}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="post.Price">
-                    <h6> {{post.Price}} coins</h6>
-                </div>
-                <div class="card-details" style="font-size:medium;">
-                    <p>{{post.PostDescription}}
-                    </p>
-                    <div *ngIf="post.PostType == 'Sale'">
+   
 
 
 
-    <div *ngIf='attemptToBuy == true' class="container">
+    <div  class="container">
         <div *ngIf='broughtCard'>
             <h2 class="row display: flex justify-content-center">{{broughtCard.Output}}</h2>
             <div class="row display: flex justify-content-center">
@@ -138,7 +113,11 @@
                     <h6>Not a Sale</h6>
                     <h5 class="card-title">missigno</h5>
                     <a href="https://bulbapedia.bulbagarden.net/wiki/MissingNo." target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a>
-
                     </div>
                 </div>
             </div>
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
