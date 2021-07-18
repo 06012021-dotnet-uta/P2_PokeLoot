@@ -19,46 +19,41 @@ export class CardCollectComponent implements OnInit {
 
 
 
-  constructor(private _cardcollectionService: CardServiceService) { 
+  constructor(private _cardcollectionService: CardServiceService) {
     this.userCollection = []
   }
 
 
   ngOnInit(): void {
-    if(this.userId != null)
-    {
+    if (this.userId != null) {
       this._cardcollectionService.GetCardsList(this.userId).subscribe(
         result => {
-          for(let i = 0; i < result.length; i++)
-          {
-            
-            let PokemonId     = result[i].Key.PokemonId;
-            let Amount        = result[i].Key.QuantityNormal;
-            let AmountShiny   = result[i].Key.QuantityShiny;
-            let RarityId      = result[i].Value.RarityId;
-            let Link          = result[i].Value.SpriteLink;
-            let LinkShiny     = result[i].Value.SpriteLinkShiny;
-            let PokemonName   = result[i].Value.PokemonName;
+          for (let i = 0; i < result.length; i++) {
 
-            if(Amount > 0)
-            {
+            let PokemonId = result[i].Key.PokemonId;
+            let Amount = result[i].Key.QuantityNormal;
+            let AmountShiny = result[i].Key.QuantityShiny;
+            let RarityId = result[i].Value.RarityId;
+            let Link = result[i].Value.SpriteLink;
+            let LinkShiny = result[i].Value.SpriteLinkShiny;
+            let PokemonName = result[i].Value.PokemonName;
+
+            if (Amount > 0) {
               let Quantity = Amount;
               let SpriteLink = Link;
               let IsShiny = false;
-              let card : ICard = {PokemonId, Quantity, RarityId, SpriteLink, PokemonName, IsShiny};
+              let card: ICard = { PokemonId, Quantity, RarityId, SpriteLink, PokemonName, IsShiny };
               this.userCollection.push(card);
             }
-            if(AmountShiny > 0)
-            {
+            if (AmountShiny > 0) {
               let Quantity = AmountShiny;
               let SpriteLink = LinkShiny;
               let IsShiny = true;
-              let card : ICard = {PokemonId, Quantity, RarityId, SpriteLink, PokemonName, IsShiny};
+              let card: ICard = { PokemonId, Quantity, RarityId, SpriteLink, PokemonName, IsShiny };
               this.userCollection.push(card);
             }
-            
-          }
 
+          }
         }
 
       );

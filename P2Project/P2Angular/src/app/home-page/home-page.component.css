@@ -1,207 +1,23 @@
-
-.border 
-{
-    /* color: black; */
-    border-style: solid;
-    width: 70%;
-    /* font-size: 10px; */
-}
-.newPost{
-  margin-left: 20%;
-}
-.card 
-{
-    /* background-color:darkgoldenrod; */
-    height: 50%;
-    /* width: 600px; */
-    width: 70%;
-    /* min-width: 600px; */
-    font-size: 10px;
-    max-width: 100%;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-    border: none;
-}
-.outer-column
-{
-  width: 100%;
-  /* background-color: crimson; */
-  display: flex;
-  flex-direction: column;
-  background-color: #f7f5e0;
-  border-style: solid;
-  border-width: thin;
-}
-.car-header
-{
-    /* background-color: cadetblue; */
-    padding: 3%;
-    width: 75%;
-    display: flex;
-    width: auto;
-    min-width: 50%;
-    flex-direction: row;
-    background-color: #fdf8ba;
-    
+.checkbox-lg .custom-control-label::before, 
+.checkbox-lg .custom-control-label::after {
+  top: .8rem;
+  width: 1.55rem;
+  height: 1.55rem;
 }
 
-.column 
-{
-  display: flex;
-  width: 300px;
-  min-width: 300px;
-  height: 0%;
-  flex-direction: column;
+.checkbox-lg .custom-control-label {
+  padding-top: 13px;
+  padding-left: 6px;
 }
 
-.card-username 
-{
-    /* background-color: aqua; */
-    width: 100%;
-    height: 25px;
-    margin-left: 3%;
-    display: flex;
-    flex-direction: column;
+.checkbox-xl .custom-control-label::before, 
+.checkbox-xl .custom-control-label::after {
+  top: 1.2rem;
+  width: 1.85rem;
+  height: 1.85rem;
 }
 
-.card-info
-{
-    width: 65%;
-    /* background-color: aquamarine; */
-    height: 30px;
-    display: flex;
-    margin-left: 3%;
-    flex-direction: row;
-    justify-content:flex-start;
-
+.checkbox-xl .custom-control-label {
+  padding-top: 23px;
+  padding-left: 10px;
 }
-
-.date 
-{
-  /* font-size: small; */
-  color: #707070;
-  text-align: left;
-  margin-right: 3px;
-  width: 70%;
-}
-
-.dot {
-  margin-right: 5px;
-  margin-top: 5px;
-  height: 5px;
-  width: 5px;
-  background-color: #707070;
-  border-radius: 50%;
-  display: inline-block;
-}
-
-.type 
-{
-  color: #707070;
-  /* font-size: small; */
-  text-align: left;
-  margin-left: 3px;
-  width: 95%;
-}
-
-
-.card-details
-{
-  width: auto;
-  height: 100px;
-  overflow: hidden;
-  /* background-color: chartreuse; */
-  color: #707070;
-  padding-left: 4%;
-  display: flex;
-  flex-direction: column;
-}
-
-.image 
-{
-  height: auto;
-  width: 300px;
-  background-color: rgb(219, 215, 215);
-  border-style: solid;
-  border-width: thin;
-  /* background-color: deeppink; */
-  
-}
-img{
-  height: auto;
-  width: 200px;
-  
-}
-
-/* Btn Styles */
-.btn-circle {
-  width: 30px;
-  height: 30px;
-  text-align: center;
-  padding: 6px 0;
-  font-size: 12px;
-  line-height: 1.428571429;
-  border-radius: 15px;
-}
-
-.btn-circle.btn-lg {
-  width: 50px;
-  height: 50px;
-  
-  
-  line-height: 1.33;
-  
-  box-shadow: 4px 4px 5px 0px #131313;
-}
-.btn-circle.btn-xl {
-  width: 70px;
-  height: 70px;
-  padding: 10px 16px;
-  font-size: 24px;
-  line-height: 1.33;
-  border-radius: 35px;
-}
-
-.card1 {
-  background-color: #96e6c2;
-  border-style: solid;
-  border-width: thin;
-  border-color: black;
-}
-.card2 {
-  background-color: #ADD8E6;
-  border-style: solid;
-  border-width: thin;
-  border-color: black;
-}
-.card3 {
-  background-color: #CBC3E3;
-  border-style: solid;
-  border-width: thin;
-  border-color: black;
-}
-.card4 {
-  background-color: #ffcccb;
-  border-style: solid;
-  border-width: thin;
-  border-color: black;
-}
-.card5 {
-  background-color: #FFD580;
-  border-style: solid;
-  border-width: thin;
-  border-color: black;
-}
-
-.card6{
-  background-color: rgb(202, 201, 201);
-  border-style: solid;
-  border-width: thin;
-  border-color: black;
-}
-
-.card-title{
-  word-break: keep-all;
-}
-

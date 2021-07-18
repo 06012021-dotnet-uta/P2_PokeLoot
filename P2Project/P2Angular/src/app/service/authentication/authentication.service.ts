@@ -10,7 +10,7 @@ import { map } from 'rxjs/operators';
 
 export class AuthenticationService {
 
-  private baseUrlLogin: string = "https://localhost:44307/api/P2/Login/"
+  private baseUrlLogin: string = "https://pokeloot.azurewebsites.net/api/P2/Login/"
   private loginStatus = new BehaviorSubject<boolean>(this.CheckLoginStatus());
   private userId = new BehaviorSubject<string>(localStorage.getItem('userId') as string);
 

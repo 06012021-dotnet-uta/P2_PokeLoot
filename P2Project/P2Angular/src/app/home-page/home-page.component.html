@@ -7,138 +7,24 @@
                 <input type="text" id="search" name="search" class="form-control me-2 input-sm" placeholder="Search"
                     aria-label="Search" ngModel>
                 <button class="btn btn-outline-success" type="submit">Search</button>
+
             </form>
 
             <br>
 
-            <div class="border my-5 d-flex justify-content-center"></div>
+            <div class="border my-4 d-flex justify-content-center"></div>
 
             <br>
         </div>
 
         <div class="row d-flex justify-content-center">
+            <div class="col col-lg-8 text-center mb-3">
+                <a routerLink="/PostForm"><button class="btn btn-lg btn-warning">Create Post</button></a>
+            </div>
             <div class="col col-lg-8">
-                <app-posts [search]="searchString"></app-posts>
+                <app-posts [search]="filterString"></app-posts>
             </div>
         </div>
 
     </div>
-
-    <div *ngFor="let post of displayBoard">
-        
-        <div class="card">
-            <div class="outer-column">
-                <div class="car-header">
-                    <img class="btn btn-circle btn-lg" src ='https://www.popsockets.com/dw/image/v2/BDFW_PRD/on/demandware.static/-/Sites-popsockets-master-catalog/default/dwc69e17a6/images/hi-res/Master-Ball-Gloss_01_Top-View.png?sw=200&sh=200' alt='profile pictures'>
-                    <div class="column" style="font-size:medium;">
-                        <div class="card-username">
-                            <p>@{{post.UserName}}</p>
-                        </div>
-                        <div class="card-info">
-                            <div class="date">
-                                <p>{{post.PostTime | date: 'short'}}</p>
-                            </div>
-                            
-                            <div class="type">
-                                <p>{{post.PostType}}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div *ngIf="post.Price">
-                    <h6> {{post.Price}} coins</h6>
-                </div>
-                <div class="card-details" style="font-size:medium;">
-                    <p>{{post.PostDescription}}
-                    </p>
-                    <div *ngIf="post.PostType == 'Sale'">
-
-
-
-    <div *ngIf='attemptToBuy == true' class="container">
-        <div *ngIf='broughtCard'>
-            <h2 class="row display: flex justify-content-center">{{broughtCard.Output}}</h2>
-            <div class="row display: flex justify-content-center">
-                <div *ngIf="broughtCard.RarityId == 1" class="card1 text-center border-dark mb-3"
-                    style="width: 18rem; margin: 1rem;">
-                    <img class="card-img-top" src={{broughtCard.SpriteLink}} alt="{{broughtCard.PokemonName}} Image">
-                    <div class="card-body">
-                        <h6>Common</h6>
-                        <h5 *ngIf="broughtCard.IsShiny as true; else elseBlock" class="card-title">★
-                            {{broughtCard.PokemonName}} ★</h5>
-                        <ng-template #elseBlock>
-                            <h5 class="card-title">{{broughtCard.PokemonName}}</h5>
-                        </ng-template>
-                        <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a>
-                        <!-- make button hyperlink to pokemon info page or remove -->
-                    </div>
-                </div>
-                <div *ngIf="broughtCard.RarityId == 2" class="card2 text-center border-dark mb-3"
-                    style="width: 18rem; margin: 1rem;">
-                    <img class="card-img-top" src={{broughtCard.SpriteLink}} alt="{{broughtCard.PokemonName}} Image">
-                    <div class="card-body">
-                        <h6>Uncommon</h6>
-                        <h5 *ngIf="broughtCard.IsShiny as true; else elseBlock" class="card-title">★
-                            {{broughtCard.PokemonName}} ★</h5>
-                        <ng-template #elseBlock>
-                            <h5 class="card-title">{{broughtCard.PokemonName}}</h5>
-                        </ng-template>
-                        <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a>
-                        <!-- make button hyperlink to pokemon info page or remove -->
-                    </div>
-                </div>
-                <div *ngIf="broughtCard.RarityId == 3" class="card3 text-center border-dark mb-3"
-                    style="width: 18rem; margin: 1rem;">
-                    <img class="card-img-top" src={{broughtCard.SpriteLink}} alt="{{broughtCard.PokemonName}} Image">
-                    <div class="card-body">
-                        <h6>Rare</h6>
-                        <h5 *ngIf="broughtCard.IsShiny as true; else elseBlock" class="card-title">★
-                            {{broughtCard.PokemonName}} ★</h5>
-                        <ng-template #elseBlock>
-                            <h5 class="card-title">{{broughtCard.PokemonName}}</h5>
-                        </ng-template>
-                        <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a>
-                        <!-- make button hyperlink to pokemon info page or remove -->
-                    </div>
-                </div>
-                <div *ngIf="broughtCard.RarityId == 4" class="card4 text-center border-dark mb-3"
-                    style="width: 18rem; margin: 1rem;">
-                    <img class="card-img-top" src={{broughtCard.SpriteLink}} alt="{{broughtCard.PokemonName}} Image">
-                    <div class="card-body">
-                        <h6>Super Rare</h6>
-                        <h5 *ngIf="broughtCard.IsShiny as true; else elseBlock" class="card-title">★
-                            {{broughtCard.PokemonName}} ★</h5>
-                        <ng-template #elseBlock>
-                            <h5 class="card-title">{{broughtCard.PokemonName}}</h5>
-                        </ng-template>
-                        <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a>
-                        <!-- make button hyperlink to pokemon info page or remove -->
-                    </div>
-                </div>
-                <div *ngIf="broughtCard.RarityId == 5" class="card5 text-center border-dark mb-3"
-                    style="width: 18rem; margin: 1rem;">
-                    <img class="card-img-top" src={{broughtCard.SpriteLink}} alt="{{broughtCard.PokemonName}} Image">
-                    <div class="card-body">
-                        <h6>Specially Super Rare</h6>
-                        <h5 *ngIf="broughtCard.IsShiny as true; else elseBlock" class="card-title">★
-                            {{broughtCard.PokemonName}} ★</h5>
-                        <ng-template #elseBlock>
-                            <h5 class="card-title">{{broughtCard.PokemonName}}</h5>
-                        </ng-template>
-                        <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a>
-                        <!-- make button hyperlink to pokemon info page or remove -->
-                    </div>
-                </div>
-                <div *ngIf="broughtCard.RarityId == 6 " class="card6 text-center border-dark mb-3"
-                    style="width: 18rem; margin: 1rem;">
-                    <div class="card-body">
-                    <h6>No Card Attached</h6>
-                    <img class="card-img-top" src="assets/img/missigno.png" alt="Eternamax img">
-                    <div class="card-body">
-                    <h6>Not a Sale</h6>
-                    <h5 class="card-title">missigno</h5>
-                    <a href="https://bulbapedia.bulbagarden.net/wiki/MissingNo." target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a>
-
-                    </div>
-                </div>
-            </div>
+</div>

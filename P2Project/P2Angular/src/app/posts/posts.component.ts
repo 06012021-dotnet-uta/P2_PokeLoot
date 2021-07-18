@@ -10,7 +10,7 @@ import { IPost } from '../Models/IPost';
   styleUrls: ['./posts.component.css']
 })
 export class PostsComponent implements OnInit {
-  @Input() search?: string;
+  @Input() search!: string;
   displayBoard!: IPost[];
   attemptToBuy: boolean = false;
   broughtCard?: IBuy;
@@ -127,12 +127,6 @@ export class PostsComponent implements OnInit {
       default:
         return 'No Card Attached'
         break;
-    }
-  }
-
-  Search() {
-    if (this.search != null) {
-      this.displayBoard.filter(post => post.PokemonName == this.search)
     }
   }
 }

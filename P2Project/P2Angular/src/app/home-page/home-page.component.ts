@@ -17,8 +17,7 @@ export class HomePageComponent implements OnInit {
   broughtCard?: IBuy;
   private userId: any = localStorage.getItem('userId');
 
-  searchString!: string;
-  filterString!: string;
+  filterString: string = '';
   bublapedia: string = 'https://bulbapedia.bulbagarden.net/wiki/';
 
   constructor(private _displayService: DisplayServiceService) {
@@ -89,6 +88,7 @@ export class HomePageComponent implements OnInit {
 
   OnSubmit(searchForm: NgForm) {
     this.filterString = searchForm.value.search;
+    console.log(this.filterString)
   }
 
 }
