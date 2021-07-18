@@ -15,6 +15,7 @@ export class HomePageComponent implements OnInit {
   attemptToBuy: boolean = false;
   broughtCard?: IBuy;
   private userId: any = localStorage.getItem('userId');
+  bublapedia: string = 'https://bulbapedia.bulbagarden.net/wiki/';
   
   constructor(private _displayService : DisplayServiceService) {
     this.displayBoard = [];

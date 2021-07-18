@@ -16,6 +16,7 @@ export class UnlockCardPageComponent implements OnInit {
   newCard : IUnlockCard;
   currentUserCoinBalance : any;
   tooPoor: boolean = false;
+  bublapedia: string = 'https://bulbapedia.bulbagarden.net/wiki/';
 
   constructor(private _cardcollectionService: UnlockCardService) { 
     this.newCard = {} as IUnlockCard;

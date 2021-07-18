@@ -1,7 +1,7 @@
 
 <h3>Profile</h3>
 
-<div class="ProfileCard">
+<div class="ProfileCard" style="font-size:large;">
      <div>
      <p ><b>User ID:</b> {{currentProfile.UserId}}</p>
      <p ><b>Level:</b> {{currentProfile.AccountLevel}}</p>
@@ -24,7 +24,7 @@
      </div>
 </div> -->
 
-<div class="container-fluid" >
+<div class="container-fluid"  style="font-size:medium;">
      <button (click)='ViewJohto(this.currentProfile,this.JohtoBadges)'>View Account Achievements</button>
      <div class="row">
           <div class="col" *ngFor="let b of JohtoBadges; let i = index">

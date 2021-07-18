@@ -24,7 +24,7 @@
             <div class="outer-column">
                 <div class="car-header">
                     <img class="btn btn-circle btn-lg" src ='https://www.popsockets.com/dw/image/v2/BDFW_PRD/on/demandware.static/-/Sites-popsockets-master-catalog/default/dwc69e17a6/images/hi-res/Master-Ball-Gloss_01_Top-View.png?sw=200&sh=200' alt='profile pictures'>
-                    <div class="column">
+                    <div class="column" style="font-size:medium;">
                         <div class="card-username">
                             <p>@{{post.UserName}}</p>
                         </div>
@@ -42,7 +42,7 @@
                 <div *ngIf="post.Price">
                     <h6> {{post.Price}} coins</h6>
                 </div>
-                <div class="card-details">
+                <div class="card-details" style="font-size:medium;">
                     <p>{{post.PostDescription}}
                     </p>
                     <div *ngIf="post.PostType == 'Sale'">
@@ -60,7 +60,7 @@
                     <h6>Common</h6>
                     <h5 *ngIf="post.IsShiny as true; else elseBlock" class="card-title">★ {{post.PokemonName}} ★</h5>
                     <ng-template #elseBlock><h5 class="card-title">{{post.PokemonName}}</h5></ng-template>
-                    <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+                    <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
                     </div>
                 </div>
                 <div *ngIf="post.RarityId == 2" class="card2 text-center border-dark mb-3" style="width: 16rem; margin: 1rem;" >
@@ -69,7 +69,7 @@
                     <h6>Uncommon</h6>
                     <h5 *ngIf="post.IsShiny as true; else elseBlock" class="card-title">★ {{post.PokemonName}} ★</h5>
                     <ng-template #elseBlock><h5 class="card-title">{{post.PokemonName}}</h5></ng-template>
-                    <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+                    <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
                     </div>
                 </div>
                 <div *ngIf="post.RarityId == 3" class="card3 text-center border-dark mb-3" style="width: 16rem; margin: 1rem;" >
@@ -78,7 +78,7 @@
                     <h6>Rare</h6>
                     <h5 *ngIf="post.IsShiny as true; else elseBlock" class="card-title">★ {{post.PokemonName}} ★</h5>
                     <ng-template #elseBlock><h5 class="card-title">{{post.PokemonName}}</h5></ng-template>
-                    <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+                    <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
                     </div>
                 </div>
                 <div *ngIf="post.RarityId == 4" class="card4 text-center border-dark mb-3" style="width: 16rem; margin: 1rem;" >
@@ -87,7 +87,7 @@
                     <h6>Super Rare</h6>
                     <h5 *ngIf="post.IsShiny as true; else elseBlock" class="card-title">★ {{post.PokemonName}} ★</h5>
                     <ng-template #elseBlock><h5 class="card-title">{{post.PokemonName}}</h5></ng-template>
-                    <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+                    <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
                     </div>
                 </div>
                 <div *ngIf="post.RarityId == 5" class="card5 text-center border-dark mb-3" style="width: 16rem; margin: 1rem;" >
@@ -96,7 +96,7 @@
                     <h6>Specially Super Rare</h6>
                     <h5 *ngIf="post.IsShiny as true; else elseBlock" class="card-title">★ {{post.PokemonName}} ★</h5>
                     <ng-template #elseBlock><h5 class="card-title">{{post.PokemonName}}</h5></ng-template>
-                    <a href="#" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
+                    <a href="{{bublapedia}}{{post.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
                     </div>
                 </div>
                 <div *ngIf="!post.RarityId"class="card6 text-center border-dark mb-3" style="width: 16rem; margin: 1rem;" >
@@ -106,6 +106,7 @@
                     <div class="card-body">
                     <h6>Not a Sale</h6>
                     <h5 class="card-title">missigno</h5>
+                    <a href="https://bulbapedia.bulbagarden.net/wiki/MissingNo." target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a>
                     </div>
                 </div>
                 </div>
