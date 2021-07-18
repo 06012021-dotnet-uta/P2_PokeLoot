@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,6 +7,7 @@ using Microsoft.Extensions.Logging;
 using P2DbContext.Models;
 using BusinessLayer;
 using Newtonsoft.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace P2Api.Controllers
 {
@@ -205,6 +206,53 @@ namespace P2Api.Controllers
             User currentUser = _businessModel.GetUserById(userId);
             _businessModel.incrementUserBalance(currentUser, -100);
             return currentUser.CoinBalance;
+        }
+
+        /// <summary>
+        /// https://localhost:44307/api/P2/Signup
+        /// Gets all the pokemon objects and their quanity in realtion to the input userId
+        /// </summary>
+        /// <param name="userId">id of desired users collection</param>
+        /// <returns>Serialized string of dict containing PokemonCard object and its relation to the users collection for quanities</returns>
+        [HttpPost("Signup")]
+        public ActionResult Signup(User userObj) 
+        {
+            bool isCreated = _businessModel.signUp(userObj);
+               
+            if(isCreated) 
+            { 
+            return CreatedAtAction("Signup", new { name = userObj.FirstName, ok = true }, new {ok = true, newUser = userObj});
+            }
+
+            return BadRequest(new { message="Error User already Exist", status=-1});
+        }
+
+        /// <summary>
+        /// https://localhost:44307/api/P2/DeleteUser/18
+        /// Removes a user from the database.
+        /// </summary>
+        /// <param name="userId">id of desired users collection</param>
+        /// <returns>A status code back to the user</returns>
+        [HttpDelete("DeleteUser/{userId:int}")]
+        public ActionResult DeleteUser(int userId)
+        {
+            bool isDeleted;
+            try
+            {
+               isDeleted = _businessModel.RemoveUser(userId);
+
+               if (!isDeleted)
+                {
+                    return NotFound($"Employee with Id = {userId} not found");
+                }
+
+                return Ok();
+            }
+            catch
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting data");
+            }
         }
 
         ///<summary>

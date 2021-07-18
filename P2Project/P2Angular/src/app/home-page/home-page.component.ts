@@ -15,18 +15,20 @@ export class HomePageComponent implements OnInit {
   attemptToBuy: boolean = false;
   broughtCard?: IBuy;
   private userId: any = localStorage.getItem('userId');
-  
-  constructor(private _displayService : DisplayServiceService) {
-    this.displayBoard = [];
-   }
 
-  
-   //we should edit the api to also recieve the original username of poster
+  searchString!: string;
+
+  constructor(private _displayService: DisplayServiceService) {
+    this.displayBoard = [];
+  }
+
+
+  //we should edit the api to also recieve the original username of poster
   ngOnInit(): void {
     this.attemptToBuy = false;
     this._displayService.DisplayBoard().subscribe(
       result => {
-        for(let i = 0; i < result.length; i++){
+        for (let i = 0; i < result.length; i++) {
           let PostId = result[i].postId;
           let PokemonId = result[i].pokemonId;
           let PostTime = result[i].postTime;
@@ -39,25 +41,25 @@ export class HomePageComponent implements OnInit {
           let UserName = result[i].userName;
           let SpriteLink = result[i].spriteLink;
           let PostType = '';
-          if(type == 1){
+          if (type == 1) {
             PostType = 'Discussion';
           }
-          else if(type == 2){
+          else if (type == 2) {
             PostType = 'Sale';
           }
-          else{
+          else {
             PostType = 'Display';
           }
           let PokemonName = result[i].pokemonName;
           let RarityId = result[i].rarityId;
 
-          let Post: IPost = {PostId, PokemonId, PostTime, PostDescription, Price, StillAvailable, IsShiny, UserId, UserName, SpriteLink, PostType, PokemonName, RarityId}
+          let Post: IPost = { PostId, PokemonId, PostTime, PostDescription, Price, StillAvailable, IsShiny, UserId, UserName, SpriteLink, PostType, PokemonName, RarityId }
           this.displayBoard.push(Post);
         }
       }
     )
   }
-  buy(post :IPost):void{
+  buy(post: IPost): void {
     this.attemptToBuy = true;
     //Ouput: string,
     //Result: boolean,
@@ -72,15 +74,15 @@ export class HomePageComponent implements OnInit {
       result => {
         let Output = result[0].Key;
         let Result = result[0].Value;
-        if(Result == false){
+        if (Result == false) {
           RarityId = 6;
         }
 
-        this.broughtCard = {Output, Result, Price, UserName, SpriteLink, PokemonName, RarityId, IsShiny};
+        this.broughtCard = { Output, Result, Price, UserName, SpriteLink, PokemonName, RarityId, IsShiny };
       }
     )
-  
-    
+
+
   }
 
 }
