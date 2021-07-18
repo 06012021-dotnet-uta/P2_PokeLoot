@@ -813,6 +813,7 @@ namespace UnitTests
             Dictionary<string, bool> failUnavailable;
             Dictionary<string, bool> resultTrue;
             Dictionary<string, bool> falseBalance;
+            Dictionary<string, bool> falseSame;
             Dictionary<string, bool> trueNewShiny;
             User resultSeller;
             User resultUser;
@@ -854,6 +855,7 @@ namespace UnitTests
                 testPost3.PostId = 3;
                 testPost4.PostId = 4;
 
+                falseSame = testBusinessModel.buyFromPost(testPost1, testSeller);
                 failUnavailable = testBusinessModel.buyFromPost(testPost4, testUser); //false unavailble
                 resultTrue = testBusinessModel.buyFromPost(testPost1, testUser); //true
                 falseBalance = testBusinessModel.buyFromPost(testPost2, testUser); //false no balance
@@ -868,6 +870,7 @@ namespace UnitTests
                 failPost = context.Posts.Where(x => x.PostId == 2).FirstOrDefault();
 
                 // Assert
+                Assert.True(!falseSame.Values.ToArray()[0]);
                 Assert.True(!resultPost.StillAvailable);
                 Assert.True(failPost.StillAvailable);
                 Assert.True(resultTrue.Values.ToArray()[0]);
@@ -976,6 +979,70 @@ namespace UnitTests
 
             }
         }
+        [Fact]
+        public void buildWithContext()
+        {
+            // Arange
+            Post testPost1 = new Post()
+            {
+                PokemonId = 150,
+                PostTime = DateTime.Now,
+                PostDescription = "this is a sales post",
+                Price = 20,
+                StillAvailable = true,
+            };
+
+            Post realPost;
+    
+
+            // Act
+            using (var context = new P2DbClass(options))    // creates in memory database
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                BusinessModel testBusinessModel = new BusinessModel(context);
+
+
+                context.Posts.Add(testPost1);
+                context.SaveChanges();
+
+              
+                realPost = context.Posts.Where(x => x.PostId == 1).FirstOrDefault();
+
+                // Assert
+                Assert.Equal(context, testBusinessModel.context);
+                Assert.Equal(1, realPost.PostId);
+                Assert.Equal("this is a sales post", realPost.PostDescription);
+
+            }
+        }
+
+        [Fact]
+        public void buildNoContext()
+        {
+            // Arange
+           
+
+            User realUser;
+
+
+            // Act
+                      
+
+                BusinessModel testBusinessModel = new BusinessModel();
+
+
+
+                realUser = testBusinessModel.context.Users.Where(x => x.UserId == 1).FirstOrDefault();
+
+                // Assert
+                Assert.True(testBusinessModel.context != null);
+                Assert.Equal(1, realUser.UserId);
+                Assert.Equal("alain.duplan", realUser.UserName);
+
+            
+        }
 
         [Fact]
         public void getPostInfoTest()
@@ -1019,6 +1086,8 @@ namespace UnitTests
             }
         }
         }
+
+        
     }
 
 
