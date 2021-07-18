@@ -113,8 +113,16 @@ namespace BusinessLayer
                 return result;
             }
 
+            
+
             int sellerID = (int)context.DisplayBoards.Where(x => x.PostId == post.PostId).Select(x => x.UserId).FirstOrDefault();
             User seller = context.Users.Where(x => x.UserId == sellerID).FirstOrDefault();
+
+            if(sellerID == user.UserId){ // checks if user buys fromy themselves
+                output = "You can't buy from yourself!";
+                result.Add(output, false);
+                return result;
+            }
 
             currentUser.CoinBalance-= (int)post.Price; //decrement  current user coin balance
             context.Users.Attach(currentUser);
