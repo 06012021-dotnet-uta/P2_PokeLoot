@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -255,7 +255,21 @@ namespace P2Api.Controllers
             }
         }
 
-
+        ///<summary>
+        ///Returns new coin balance
+        /// </summary>
+        /// <param name="userId"> UserId who's balance was adjusted</param>
+        /// <summary>
+        /// Returns User object by Id
+        /// </summary>
+        /// <param name="userId">user id to get object for</param>
+        /// <returns>User object</returns>
+        [HttpGet("Balance/{userId}")]
+        public int Balance(int userId)
+        {
+            User currentUser = _businessModel.GetUserById(userId);
+            return currentUser.CoinBalance;
+        }
 
     } // end class
 } // end namespace
