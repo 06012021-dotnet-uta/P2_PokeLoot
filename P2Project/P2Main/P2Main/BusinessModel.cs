@@ -15,7 +15,7 @@ namespace BusinessLayer
 
 
 
-        //public P2DbClass context;
+        
 
         /// <summary>
         /// Constructor for business class that takes a Db context
@@ -123,7 +123,7 @@ namespace BusinessLayer
             int sellerID = (int)context.DisplayBoards.Where(x => x.PostId == post.PostId).Select(x => x.UserId).FirstOrDefault();
             User seller = context.Users.Where(x => x.UserId == sellerID).FirstOrDefault();
 
-            if(sellerID == user.UserId){ // checks if user buys fromy themselves
+            if(sellerID == currentUser.UserId){ // checks if user buys fromy themselves
                 output = "You can't buy from yourself!";
                 result.Add(output, false);
                 return result;
