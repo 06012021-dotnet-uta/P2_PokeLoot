@@ -4,81 +4,15 @@ pr: none
 
 pool:
   vmImage: 'windows-latest'
-
 variables:
-  solution: '**/*.sln'
+  solution: 'P2Project/P2Angular'
   buildPlatform: 'Any CPU'
   buildConfiguration: 'Release'
 
-
 stages:
-- stage: API
-  jobs:
-  - job: apijob
-    steps:
-    - task: SonarCloudPrepare@1
-      inputs:
-        SonarCloud: 'SonarCloudToken'
-        organization: 'p2project-1'
-        scannerMode: 'MSBuild'
-        projectKey: 'P2Project_P2'
-        projectName: 'P2'
-
-    - task: DotNetCoreCLI@2
-      displayName: buildproj
-      inputs:
-        command: 'build'
-        projects: '$(solution)'
-        arguments: '--configuration $(buildConfiguration)'
-
-    - task: DotNetCoreCLI@2
-      displayName: testproj
-      inputs:
-        command: 'test'
-        projects: '$(solution)'
-        arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
-
-    - task: PublishCodeCoverageResults@1
-      inputs:
-        codeCoverageTool: 'Cobertura'
-        summaryFileLocation: '**/coburtura/coverage.xml'
-
-    - task: SonarCloudAnalyze@1
-    - task: SonarCloudPublish@1
-      inputs:
-        pollingTimeoutSec: '300'
-
-    - task: DotNetCoreCLI@2
-      displayName: publishproj
-      inputs:
-        command: 'publish'
-        publishWebProjects: false
-        projects: '$(solution)'
-        zipAfterPublish: true
-        arguments:
-
-    - task: AzureRmWebAppDeployment@4
-      displayName: deployproj
-      inputs:
-        ConnectionType: 'AzureRM'
-        azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-        appType: 'apiApp'
-        WebAppName: 'PokeLoot'
-        deployToSlotOrASE: true
-        ResourceGroupName: 'PokeLoot'
-        SlotName: 'production'
-        packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
-
 - stage: Angular
   displayName: Angular
   dependsOn: API
-  pool:
-    vmImage: 'windows-latest'
-  variables:
-    solution: 'P2Project/P2Angular'
-    buildPlatform: 'Any CPU'
-    buildConfiguration: 'Release'
-
   jobs:
   - job: angularjob
     steps:
@@ -104,19 +38,19 @@ stages:
     #     workingDir: $(solution)
     #     customCommand: 'run test-headless'
 
-    # - task: ArchiveFiles@2
-    #   inputs:
-    #     rootFolderOrFile: '$(solution)/dist'
-    #     includeRootFolder: true
-    #     archiveType: 'zip'
-    #     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-    #     replaceExistingArchive: true
+    - task: ArchiveFiles@2
+      inputs:
+        rootFolderOrFile: '$(solution)/dist'
+        includeRootFolder: true
+        archiveType: 'zip'
+        archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        replaceExistingArchive: true
 
-    # - task: PublishBuildArtifacts@1
-    #   inputs:
-    #     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    #     ArtifactName: 'dist'
-    #     publishLocation: 'Container'
+    - task: PublishBuildArtifacts@1
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'dist'
+        publishLocation: 'Container'
 
     - task: AzureRmWebAppDeployment@4
       inputs:
@@ -125,71 +59,3 @@ stages:
         appType: 'webApp'
         WebAppName: 'PokeLoot'
         packageForLinux: '$(System.DefaultWorkingDirectory)/P2Project/P2Angular/dist/P2Angular'
-
-# deployToSlotOrASE: true
-# ResourceGroupName: 'PokeLoot'
-# SlotName: 'production'
-# trigger:
-#   - main
-# pr: none
-
-# pool:
-#   vmImage: 'windows-latest'
-
-# variables:
-#   solution: 'P2Project/P2Angular'
-#   buildPlatform: 'Any CPU'
-#   buildConfiguration: 'Release'
-
-# stages:
-# - stage: Angular
-#   jobs:
-#   - job:
-#     steps:
-#     - task: NodeTool@0
-#       inputs:
-#         versionSpec: '14.x'
-
-#     - task: Npm@1
-#       inputs:
-#         command: 'install'
-#         workingDir: $(solution)
-
-#     - task: Npm@1
-#       inputs:
-#         command: 'custom'
-#         workingDir: $(solution)
-#         customCommand: 'run build-prodf'
-    
-#     # - task: Npm@1
-#     #   displayName: 'NPM Test'
-#     #   inputs:
-#     #     command: 'custom'
-#     #     workingDir: $(solution)
-#     #     customCommand: 'run test-headless'
-
-
-#     - task: ArchiveFiles@2
-#       inputs:
-#         rootFolderOrFile: '$(solution)/dist'
-#         includeRootFolder: true
-#         archiveType: 'zip'
-#         archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-#         replaceExistingArchive: true
-
-#     - task: PublishBuildArtifacts@1
-#       inputs:
-#         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#         ArtifactName: 'dist'
-#         publishLocation: 'Container'
-
-#     - task: AzureRmWebAppDeployment@4
-#       inputs:
-#         ConnectionType: 'AzureRM'
-#         azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-#         appType: 'webApp'
-#         WebAppName: 'PokeLoot'
-#         deployToSlotOrASE: true
-#         ResourceGroupName: 'PokeLoot'
-#         SlotName: 'production'
-#         packageForLinux: '$(System.DefaultWorkingDirectory)/P2Project/P2Angular/dist/P2Angular'
