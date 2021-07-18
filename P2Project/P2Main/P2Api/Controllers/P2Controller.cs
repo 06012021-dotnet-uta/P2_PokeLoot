@@ -20,14 +20,6 @@ namespace P2Api.Controllers
 
         private readonly IBusinessModel _businessModel;
 
-        /// <summary>
-        /// This constructor is only used for testing
-        /// </summary>
-        /// <param name="rpsGame">Business model object</param>
-        //public P2Controller(IBusinessModel businessModel)
-        //{
-        //    this._businessModel = businessModel;
-        //}
 
         /// <summary>
         /// Constructor to inject the business layer
@@ -136,14 +128,6 @@ namespace P2Api.Controllers
         }
 
 
-        //          This method throws error in swagger 
-        //          "TypeError: Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body."
-        //[HttpGet("Lootbox/{currentUser}")]
-        //public Dictionary<PokemonCard, bool> Get(User currentUser)
-        //{
-        //    Dictionary<PokemonCard, bool> newCard = _businessModel.rollLootbox(currentUser);
-        //    return newCard;
-        //}
 
         /// <summary>
         /// https://localhost:44307/api/P2/Lootbox/2
@@ -157,11 +141,6 @@ namespace P2Api.Controllers
         {
             User currentUser = _businessModel.GetUserById(userId);
             Dictionary<PokemonCard, bool> newCard = _businessModel.rollLootbox(currentUser);
-            //string json = JsonConvert.SerializeObject(newCard.ToList(),
-            //    new JsonSerializerSettings()
-            //    {
-            //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            //    });
             string json = JsonConvert.SerializeObject(newCard.ToList());
             return json;
         }
@@ -194,7 +173,6 @@ namespace P2Api.Controllers
             User currentUser = _businessModel.GetUserById(userId);
             string json = JsonConvert.SerializeObject(currentUser);
             return json;
-            //return currentUser;
         }
 
         /// <summary>
@@ -272,6 +250,13 @@ namespace P2Api.Controllers
             User currentUser = _businessModel.GetUserById(userId);
             return currentUser.CoinBalance;
         }
+
+        [HttpGet("RarityTypes")]
+        public List<RarityType> RarityTypes()
+        {
+            return _businessModel.GetRarityTypes();
+        }
+
 
     } // end class
 } // end namespace

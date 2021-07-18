@@ -15,6 +15,16 @@ stages:
   jobs:
   - job:
     steps:
+    # - task: SonarCloudPrepare@1
+    #   inputs:
+    #     SonarCloud: 'SonarCloudToken'
+    #     organization: 'p2project-1'
+    #     scannerMode: 'CLI'
+    #     configMode: 'manual'
+    #     cliProjectKey: 'P2Project_P2'
+    #     cliProjectName: 'P2Angular'
+    #     cliSources: '$(solution)/src'
+    #     extraProperties: 'sonar.javascript.lcov.reportPaths=$(solution)/coverage/P2Angular/lcov.info'
     - task: NodeTool@0
       inputs:
         versionSpec: '14.x'
@@ -28,7 +38,19 @@ stages:
       inputs:
         command: 'custom'
         workingDir: $(solution)
-        customCommand: 'run build-prod'
+        customCommand: 'run build-proddafasdf'
+    
+    # - task: Npm@1
+    #   displayName: 'NPM Test'
+    #   inputs:
+    #     command: 'custom'
+    #     workingDir: $(solution)
+    #     customCommand: 'run test-headless'
+
+    # - task: SonarCloudAnalyze@1
+    # - task: SonarCloudPublish@1
+    #   inputs:
+    #     pollingTimeoutSec: '300'
 
     - task: ArchiveFiles@2
       inputs:
@@ -53,7 +75,7 @@ stages:
         deployToSlotOrASE: true
         ResourceGroupName: 'PokeLoot'
         SlotName: 'production'
-        packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/P2Project/P2Angular/dist/P2Angular'
 
 
 
