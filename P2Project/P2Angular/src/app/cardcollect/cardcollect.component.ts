@@ -36,12 +36,6 @@ export class CardCollectComponent implements OnInit {
 
   ngOnInit(): void {
 
-    // this.raritiesList.push(1);
-    // this.raritiesList.push(2);
-    // this.raritiesList.push(3);
-    // this.raritiesList.push(4);
-    // this.raritiesList.push(5);
-
     if(this.userId != null)
     {
       this._cardcollectionService.GetCardsList(this.userId).subscribe(
