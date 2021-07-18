@@ -1,16 +1,10 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
-  branches:
-    include:
-    - main
+  - main
 pr: none     
 
 pool:
   vmImage: 'windows-latest'
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
@@ -31,17 +25,18 @@ stages:
         projectName: 'P2'
 
     - task: DotNetCoreCLI@2
+      displayName: buildproj
       inputs:
         command: 'build'
         projects: '$(solution)'
         arguments: '--configuration $(buildConfiguration)'
 
     - task: DotNetCoreCLI@2
+      displayName: testproj
       inputs:
         command: 'test'
         projects: '$(solution)'
         arguments: '--configuration $(buildConfiguration) --collect "Code Coverage"'
-        workingDirectory: 'P2Pokeloot/P2Project/P2Main'
 
     - task: PublishCodeCoverageResults@1
       inputs:
@@ -51,6 +46,7 @@ stages:
     - task: SonarCloudAnalyze@1
 
     - task: DotNetCoreCLI@2
+      displayName: publishproj
       inputs:
         command: 'publish'
         publishWebProjects: false
@@ -59,6 +55,7 @@ stages:
         arguments:
 
     - task: AzureRmWebAppDeployment@4
+      displayName: deployproj
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
