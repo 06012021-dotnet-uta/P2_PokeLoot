@@ -2,7 +2,7 @@
 
 ## Project Description
 
-Here goes your awesome project description!
+This application is a game to attract users for their interest in Pokemon and desire to grow a collection. This creates a platform for users to create and grow a card collection, connect with other users to exchange pokemon, and earn coins by engaging in various, repeatable tasks provided by the application. Users will have secure, personalized accounts that enable them to view and show off their collection to the display board. Users will be able to spend earned currency to buy and open card loot boxes. All information and pictures for the specific Pokemon cards will be obtained through the Pokemon API saving on database space and logic for the detailed information that the game is created upon.
 
 ## Technologies Used
 
