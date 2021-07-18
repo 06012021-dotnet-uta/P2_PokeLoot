@@ -63,13 +63,13 @@ export class UnlockCardPageComponent implements OnInit {
             console.log(this.newCard);
           }
         );
-        this._cardcollectionService.GetBalance().subscribe(
-          result => {
-            let coinBalance   = result;
+        // this._cardcollectionService.GetBalance().subscribe(
+        //   result => {
+        //     let coinBalance   = result;
   
-            this.currentUserCoinBalance = coinBalance;
-          }
-        );
+        //     this.currentUserCoinBalance = coinBalance;
+        //   }
+        // );
       }
       else
       {

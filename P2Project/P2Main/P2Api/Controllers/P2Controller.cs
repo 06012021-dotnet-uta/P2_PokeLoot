@@ -139,7 +139,10 @@ namespace P2Api.Controllers
         //public Dictionary<PokemonCard, bool> Lootbox(int userId)
         public string Lootbox(int userId)
         {
+            const int lootBoxCost = 100;
             User currentUser = _businessModel.GetUserById(userId);
+            _businessModel.incrementUserBalance(currentUser, -lootBoxCost);
+
             Dictionary<PokemonCard, bool> newCard = _businessModel.rollLootbox(currentUser);
             string json = JsonConvert.SerializeObject(newCard.ToList());
             return json;
@@ -180,13 +183,13 @@ namespace P2Api.Controllers
         /// </summary>
         /// <param name="userId">user id to get object for</param>
         /// <returns>User object</returns>
-        [HttpGet("CoinBalance/{userId}")]
-        public int CoinBalance(int userId)
-        {
-            User currentUser = _businessModel.GetUserById(userId);
-            _businessModel.incrementUserBalance(currentUser, -100);
-            return currentUser.CoinBalance;
-        }
+        //[HttpGet("CoinBalance/{userId}")]
+        //public int CoinBalance(int userId)
+        //{
+        //    User currentUser = _businessModel.GetUserById(userId);
+        //    _businessModel.incrementUserBalance(currentUser, -100);
+        //    return currentUser.CoinBalance;
+        //}
 
         /// <summary>
         /// https://localhost:44307/api/P2/Signup
