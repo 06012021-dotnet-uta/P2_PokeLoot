@@ -96,10 +96,39 @@ namespace P2ConsoleTesting
                 }
                 return true;
             }
-            updaterq(8);
-            updaterq(19);
-            updaterq(21);
+            //updaterq(8);
+            //updaterq(35);
+            //updaterq(47);
+            void secondUpdate(int id){
+                Post post = context.Posts.Where(x => x.PostId == id).FirstOrDefault();
+                post.PostDescription = "I got 4 arms like Ben 10";
+                context.Posts.Attach(post);
+                context.Entry(post).Property(x => x.PostDescription).IsModified = true;
+                context.SaveChanges();
+            };
+            //secondUpdate(15);
+            //secondUpdate(14);
+            //secondUpdate(13);
 
+            void giveRaises()
+            {
+                var users = context.Users.ToList();
+                foreach (User user in users)
+                {
+                    user.CoinBalance += 500;
+                    user.AccountLevel -= 5;
+                    user.TotalCoinsEarned += 500;
+
+                    context.Users.Attach(user);
+                    context.Entry(user).Property(x => x.CoinBalance).IsModified = true;
+                    context.Entry(user).Property(x => x.AccountLevel).IsModified = true;
+                    context.Entry(user).Property(x => x.TotalCoinsEarned).IsModified = true;
+                    context.SaveChanges();
+
+                }
+            }
+
+            //giveRaises();
 
             /* void PopulateDbPokemon(int searchid)
             {
