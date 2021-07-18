@@ -1,6 +1,6 @@
 {
     "/api": {
-        "target": "https://localhost:44307/api",
+        "target": "https://pokeloot.azurewebsites.net/api",
         "secure": true,
         "changeOrigin": true,
         "pathRewrite": {
