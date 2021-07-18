@@ -374,7 +374,7 @@ namespace BusinessLayer
         public bool RemoveUser(int id)
         {
             // Grab the Object by id
-            User user = context.Users.Single(x => x.UserId == id);
+            User user = context.Users.Where(x => x.UserId == id).FirstOrDefault();
 
             // Remove the user.
             if (user != null)

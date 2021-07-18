@@ -889,6 +889,136 @@ namespace UnitTests
 
             }
         }
+
+        [Fact]
+        public void deleteUserTest()
+        {
+            // Arange
+            User testUser = new User()
+            {
+                FirstName = "Test",
+                LastName = "User",
+                Email = "generic@email.com",
+                UserName = "genericUser",
+                Password = "Password",
+                AccountLevel = 0,
+                CoinBalance = 10,
+                TotalCoinsEarned = 10,
+
+            };
+            bool resultPass;
+            User resultUser;
+            bool resultFail;
+
+            // Act
+            using (var context = new P2DbClass(options))    // creates in memory database
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                BusinessModel testBusinessModel = new BusinessModel(context);
+
+                context.Users.Add(testUser);
+                context.SaveChanges();
+
+                resultPass = testBusinessModel.RemoveUser(1);
+                resultFail = testBusinessModel.RemoveUser(2);
+                resultUser = context.Users.Where(x => x.UserId == 1).FirstOrDefault();
+
+                // Assert
+                Assert.True(resultPass);
+                Assert.True(resultUser == null);
+                Assert.True(!resultFail);
+
+            }
+        }
+
+        [Fact]
+        public void getPostbyIdTest()
+        {
+            // Arange
+            Post testPost1 = new Post()
+            {
+                PokemonId = 150,
+                PostTime = DateTime.Now,
+                PostDescription = "this is a sales post",
+                Price = 20,
+                StillAvailable = true,
+            };
+
+            Post failPost;
+            Post resultPost;
+            Post realPost;
+            
+
+            // Act
+            using (var context = new P2DbClass(options))    // creates in memory database
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                BusinessModel testBusinessModel = new BusinessModel(context);
+
+
+                context.Posts.Add(testPost1);
+                context.SaveChanges();
+
+                resultPost = testBusinessModel.getPostById(1);
+                failPost = testBusinessModel.getPostById(2);
+                realPost = context.Posts.Where(x => x.PostId == 1).FirstOrDefault();
+
+                // Assert
+                Assert.True(resultPost != null);
+                Assert.True(failPost == null);
+                Assert.Equal(resultPost.PostId, realPost.PostId);
+                Assert.Equal(resultPost.PostTime, realPost.PostTime);
+                Assert.Equal(resultPost.PostDescription, realPost.PostDescription);
+
+            }
+        }
+
+        [Fact]
+        public void getPostInfoTest()
+        {
+            // Arange
+            DisplayBoard displayBoard1 = new DisplayBoard()
+            {
+                UserId = 1,
+                PostId = 1,
+                PostType = 2,
+            };
+
+            DisplayBoard failPost;
+            DisplayBoard resultPost;
+            DisplayBoard realPost;
+
+
+            // Act
+            using (var context = new P2DbClass(options))    // creates in memory database
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                BusinessModel testBusinessModel = new BusinessModel(context);
+
+
+                context.DisplayBoards.Add(displayBoard1);
+                context.SaveChanges();
+
+                resultPost = testBusinessModel.getPostInfo(1);
+                failPost = testBusinessModel.getPostInfo(2);
+                realPost = context.DisplayBoards.Where(x => x.PostId == 1).FirstOrDefault();
+
+                // Assert
+                Assert.True(resultPost != null);
+                Assert.True(failPost == null);
+                Assert.Equal(resultPost.PostId, realPost.PostId);
+                Assert.Equal(resultPost.UserId, realPost.UserId);
+                Assert.Equal(resultPost.PostType, realPost.PostType);
+
+            }
+        }
+        }
     }
-}
+
 
