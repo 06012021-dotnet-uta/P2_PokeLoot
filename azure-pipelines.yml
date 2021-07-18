@@ -12,7 +12,6 @@ variables:
 stages:
 - stage: Angular
   displayName: Angular
-  dependsOn: API
   jobs:
   - job: angularjob
     steps:
