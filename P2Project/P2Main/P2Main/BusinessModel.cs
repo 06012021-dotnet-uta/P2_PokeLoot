@@ -9,8 +9,16 @@ namespace BusinessLayer
     public class BusinessModel : IBusinessModel
         {
 
+        private P2DbClass _context;
 
-        public P2DbClass context;
+        public P2DbClass context
+        {
+            get { return context; }
+            set { context = _context; }
+        }
+
+
+        //public P2DbClass context;
 
         /// <summary>
         /// Constructor for business class that takes a Db context
@@ -234,7 +242,7 @@ namespace BusinessLayer
         /// <returns>Returns whether post has been inserted succefully</returns>
         public bool newPost(Post newPost, User currentUser){
 
-            //add new post to database after filling possible blank data            DateTime now = DateTime.Now;
+            //add new post to database after filling possible blank data         
             DateTime now = DateTime.Now;
             newPost.PostTime = now;
             newPost.StillAvailable = true;
