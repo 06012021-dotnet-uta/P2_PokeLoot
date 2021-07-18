@@ -25,6 +25,7 @@ import { CardServiceService } from './card-service.service';
 import { AccountService } from './account.service';
 import { AddCardComponent } from './add-card/add-card.component';
 import { CommonModule } from '@angular/common';
+import { FilterPipe } from './Pipes/filter.pipe';
 
 
 @NgModule({
@@ -43,7 +44,7 @@ import { CommonModule } from '@angular/common';
     TopNavBarComponent,
     PostsComponent,
     CardCollectComponent, 
-    AddCardComponent
+    AddCardComponent, FilterPipe
   ],
   imports: [
     BrowserModule,
