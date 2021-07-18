@@ -1,5 +1,5 @@
 
-<div class="container">
+<div *ngIf='attemptToBuy == true' class="container">
     <div *ngIf='broughtCard'>
         <h2 class="row display: flex justify-content-center">{{broughtCard.Output}}.</h2>
         <div class="row display: flex justify-content-center">
@@ -89,7 +89,7 @@
     </div>
 </div>
 
-<div>
+<div *ngIf='attemptToBuy == false'>
     <div *ngFor="let post of displayBoard">
     <div  class="container mt-4 mb-3 shadow-sm p-3 bg-body rounded">
         <div *ngIf="attemptToBuy == false" class="row">
