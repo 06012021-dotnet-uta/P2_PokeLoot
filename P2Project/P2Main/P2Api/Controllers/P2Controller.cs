@@ -273,6 +273,13 @@ namespace P2Api.Controllers
             return currentUser.CoinBalance;
         }
 
+        [HttpGet("RarityTypes")]
+        public List<RarityType> RarityTypes()
+        {
+            return _businessModel.GetRarityTypes();
+        }
+
+
     } // end class
 } // end namespace
 

@@ -24,6 +24,8 @@ export class CardServiceService {
 
   private baseUrlLogin: string = 'https://pokeloot.azurewebsites.net/api/P2/UserCollection/'
 
+  private raritiesUrlPath: string = 'https://localhost:44307/api/P2/RarityTypes'  //needs updating to azure link?
+
   private rootUrl: string = 'https://pokeloot.azurewebsites.net'
   
 
@@ -36,5 +38,8 @@ export class CardServiceService {
     return this.http.get<any>(this.baseUrlLogin + userId)
   }
 
+  GetRarityList():Observable<any[]>{
+    return this.http.get<any>(this.raritiesUrlPath)
+  }
 
 }

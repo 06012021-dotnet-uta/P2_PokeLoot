@@ -403,5 +403,10 @@ namespace BusinessLayer
             return context.Posts.Where(x => x.PostId == id).FirstOrDefault();
         }
 
+        public List<RarityType> GetRarityTypes()
+        {
+            return context.RarityTypes.ToList();
+        }
+
     }//class BusinessModel
 }// namespace BusinessLayer

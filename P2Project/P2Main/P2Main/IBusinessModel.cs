@@ -34,5 +34,7 @@ namespace BusinessLayer
         public DisplayBoard getPostInfo(int id);
 
         public Post getPostById(int id);//tested
+
+        public List<RarityType> GetRarityTypes();
     }
 }
