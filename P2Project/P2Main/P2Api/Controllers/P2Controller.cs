@@ -1,3 +1,4 @@
+﻿
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -84,6 +85,7 @@ namespace P2Api.Controllers
                 };
                 result.Add(instance);
             }
+            result.Reverse();
             return result;
         }
 
@@ -273,3 +275,4 @@ namespace P2Api.Controllers
 
     } // end class
 } // end namespace
+

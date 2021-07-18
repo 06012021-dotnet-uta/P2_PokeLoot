@@ -17,8 +17,10 @@ export class HomePageComponent implements OnInit {
   private userId: any = localStorage.getItem('userId');
 
   searchString!: string;
+  bublapedia: string = 'https://bulbapedia.bulbagarden.net/wiki/';
 
   constructor(private _displayService: DisplayServiceService) {
+
     this.displayBoard = [];
   }
 
