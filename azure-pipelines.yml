@@ -19,10 +19,12 @@ stages:
       inputs:
         SonarCloud: 'SonarCloudToken'
         organization: 'p2project-1'
-        scannerMode: 'MSBuild'
-        projectKey: 'P2Project_P2'
-        projectName: 'P2Angular'
-        extraProperties: 'extra'
+        scannerMode: 'CLI'
+        configMode: 'manual'
+        cliProjectKey: 'P2Project_P2'
+        cliProjectName: 'P2Angular'
+        cliSources: '$(solution)/src'
+        extraProperties: 'sonar.javascript.lcov.reportPaths=$(solution)/coverage/P2Angular/lcov.info'
     - task: NodeTool@0
       inputs:
         versionSpec: '14.x'
@@ -37,6 +39,14 @@ stages:
         command: 'custom'
         workingDir: $(solution)
         customCommand: 'run build-prod'
+    
+    # - task: Npm@1
+    #   displayName: 'NPM Test'
+    #   inputs:
+    #     command: 'custom'
+    #     workingDir: $(solution)
+    #     customCommand: 'run test-headless'
+
     - task: SonarCloudAnalyze@1
     - task: SonarCloudPublish@1
       inputs:
