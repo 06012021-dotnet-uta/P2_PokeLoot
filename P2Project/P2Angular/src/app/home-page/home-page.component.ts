@@ -19,8 +19,10 @@ export class HomePageComponent implements OnInit {
 
   searchString!: string;
   filterString!: string;
+  bublapedia: string = 'https://bulbapedia.bulbagarden.net/wiki/';
 
   constructor(private _displayService: DisplayServiceService) {
+
     this.displayBoard = [];
   }
 

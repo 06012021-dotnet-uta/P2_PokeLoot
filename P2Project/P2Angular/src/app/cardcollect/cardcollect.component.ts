@@ -15,6 +15,7 @@ export class CardCollectComponent implements OnInit {
 
   userCollection: ICard[];
   private userId = localStorage.getItem('userId');
+  bublapedia: string = 'https://bulbapedia.bulbagarden.net/wiki/';
 
 
 
