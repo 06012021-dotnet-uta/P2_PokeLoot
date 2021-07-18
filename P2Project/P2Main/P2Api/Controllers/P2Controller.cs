@@ -251,11 +251,31 @@ namespace P2Api.Controllers
             return currentUser.CoinBalance;
         }
 
+        /// <summary>
+        /// returns list of rarity type objects from Db
+        /// </summary>
+        /// <returns>List of rarity type objects</returns>
         [HttpGet("RarityTypes")]
         public List<RarityType> RarityTypes()
         {
             return _businessModel.GetRarityTypes();
         }
+
+
+        /// <summary>
+        /// adds a specified number of coins to the users account
+        /// </summary>
+        /// <param name="userId">user to add coins to</param>
+        /// <param name="coinsAmount">amount of coins to add</param>
+        /// <returns></returns>
+        [HttpGet("EarnCoins/{userId}/{coinsAmount}")]
+        public int EarnCoins(int userId, int coinsAmount)
+        {
+            User currentUser = _businessModel.GetUserById(userId);
+            _businessModel.incrementUserBalance(currentUser, coinsAmount);
+            return currentUser.CoinBalance;
+        }
+
 
 
     } // end class
