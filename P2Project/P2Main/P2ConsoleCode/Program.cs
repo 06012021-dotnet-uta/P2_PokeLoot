@@ -39,13 +39,13 @@ namespace P2ConsoleTesting
 
             
 
-            bool updaterq(){
+            bool updaterq(int id){
                 Post newPost = new Post();
 
-                newPost.PokemonId = 801;
+                newPost.PokemonId = id;
                 newPost.IsShiny = false;
                 newPost.Price = 20;
-                newPost.PostDescription = "I got for arms like ben";
+                newPost.PostDescription = "I have way too many cards to blow, buy this for cheap";
                 DateTime now = DateTime.Now;
                 newPost.PostTime = now;
                 newPost.StillAvailable = true;
@@ -96,9 +96,9 @@ namespace P2ConsoleTesting
                 }
                 return true;
             }
-            //updaterq();
-            //updaterq();
-            //updaterq();
+            updaterq(8);
+            updaterq(19);
+            updaterq(21);
 
 
             /* void PopulateDbPokemon(int searchid)
