@@ -16,7 +16,7 @@ List of features ready and TODOs for future development
 * Users are able to accumalate coins into a saved account balance through various tasks and activties.
 * Users are able to use coins to open lootboxes that would randomly generate pokemon cards or buy cards from the message boards which reflect on their collection.
 * Users are able to store their collected cards and sell them on the message boards.
-* Users are able to view various posts on the message board which dynamocally updates.
+* Users are able to view and insert various posts on the message board which dynamocally updates.
 
 To-do list:
 * Increase options available to users to earn coins
@@ -26,7 +26,7 @@ To-do list:
 * Display discovered and undiscovered cards in a users collection view.
 * Allow users to see other users collections
 * Leaderboards
-* Allow user to add a card to “purchase” Coins
+* Allow pagination to decrease loading time.
 
 ## Getting Started
    
