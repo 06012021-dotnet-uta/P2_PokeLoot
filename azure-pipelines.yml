@@ -19,17 +19,7 @@ stages:
       inputs:
         versionSpec: '14.x'
 
-    - task: SonarCloudPrepare@1
-      inputs:
-        SonarCloud: 'SonarCloudToken'
-        organization: 'p2project-1'
-        scannerMode: 'CLI'
-        configMode: 'manual'
-        cliProjectKey: 'P2Project_P2'
-        cliProjectName: 'P2Angular'
-        cliSources: '$(solution)/src'
-        extraProperties: 'sonar.javascript.lcov.reportPaths=$(solution)/coverage/P2Angular/lcov.info'
-        
+
 
     - task: Npm@1
       inputs:
@@ -48,10 +38,7 @@ stages:
     #     command: 'custom'
     #     workingDir: $(solution)
     #     customCommand: 'run test-headless'
-    - task: SonarCloudAnalyze@1
-    - task: SonarCloudPublish@1
-      inputs:
-        pollingTimeoutSec: '300'
+
     - task: ArchiveFiles@2
       inputs:
         rootFolderOrFile: '$(solution)/dist'
