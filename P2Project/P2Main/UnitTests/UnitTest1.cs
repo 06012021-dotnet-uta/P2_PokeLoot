@@ -1045,6 +1045,42 @@ namespace UnitTests
         }
 
         [Fact]
+        public void getRarityTypesTest()
+        {
+            // Arange
+            RarityType testRarity1 = new RarityType()
+            {
+                RarityId = 1,
+                RarityCategory = "common"
+            };
+            RarityType testRarity2 = new RarityType()
+            {
+                RarityId = 2,
+                RarityCategory = "uncommon"
+            };
+
+            // Act
+            using (var context = new P2DbClass(options))    // creates in memory database
+            {
+                context.Database.EnsureDeleted();
+                context.Database.EnsureCreated();
+
+                BusinessModel testBusinessModel = new BusinessModel(context);
+
+
+                context.RarityTypes.Add(testRarity1);
+                context.RarityTypes.Add(testRarity2);
+                context.SaveChanges();
+
+                List<RarityType> resultList = testBusinessModel.GetRarityTypes();
+
+                // Assert
+                Assert.Equal(2, resultList.Count);
+
+            }
+        }
+
+        [Fact]
         public void getPostInfoTest()
         {
             // Arange
@@ -1085,7 +1121,9 @@ namespace UnitTests
 
             }
         }
-        }
+
+
+    }
 
         
     }
