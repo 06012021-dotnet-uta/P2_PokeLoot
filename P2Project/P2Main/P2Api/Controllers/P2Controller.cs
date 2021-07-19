@@ -260,18 +260,17 @@ namespace P2Api.Controllers
         /// </summary>
         /// <param name="userId">id of desired users collection</param>
         /// <returns>A status code back to the user</returns>
-        [HttpPost("Post/Create")]
-        public bool newPost(FullPost newPost)
+        [HttpGet("Post/{pokemonId}/{postPrice}/{isShiny}/{userId}/{descr}")]
+        public bool newPost(int pokemonId, int postPrice, bool isShiny, int userId, string descr)
         {
-            User currentUser = _businessModel.GetUserById((int)newPost.UserId);
-
+            User currentUser = _businessModel.GetUserById(userId);
             Post post = new()
             {
-                PokemonId = newPost.PokemonId,
-                PostDescription = newPost.PostDescription,
-                Price = newPost.Price,
-                StillAvailable = newPost.StillAvailable,
-                IsShiny = newPost.IsShiny
+                PokemonId = pokemonId,
+                PostDescription = descr,
+                Price = postPrice == 0 ? null : postPrice,
+                StillAvailable = true,
+                //IsShiny = isShiny
             };
 
             if (currentUser != null)
