@@ -30,9 +30,8 @@ To-do list:
 
 ## Getting Started
    
-* Run `https://github.com/06012021-dotnet-uta/P2_PokeLoot` in your terminal.
-* GitBash to `/P2Project/P2Angular`
-* Run with `ng serve -- open`
+* [PokeLoot](https://pokelootapi.azurewebsites.net/).
+
 
 ## Usage
 
