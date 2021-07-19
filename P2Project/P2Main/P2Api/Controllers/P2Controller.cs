@@ -255,6 +255,24 @@ namespace P2Api.Controllers
         }
 
         /// <summary>
+        /// https://localhost:44307/api/P2/Post/Create
+        /// Creates a new Post
+        /// </summary>
+        /// <param name="userId">id of desired users collection</param>
+        /// <returns>A status code back to the user</returns>
+        [HttpPost("Post/Create")]
+        public bool newPost(Post newPost)
+        {
+            User currentUser = _businessModel.GetUserById((int)newPost.userId);
+
+            if(currentUser != null)
+            {
+                bool isCreated = _businessModel.newPost(newPost, currentUser);
+                return isCreated;
+            }
+            return false;
+        }
+
         /// returns list of rarity type objects from Db
         /// </summary>
         /// <returns>List of rarity type objects</returns>

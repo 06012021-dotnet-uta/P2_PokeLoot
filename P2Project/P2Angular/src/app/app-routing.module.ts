@@ -27,6 +27,7 @@ const routes: Routes = [
   { path: 'UnlockCard', component: UnlockCardPageComponent, canActivate: [AuthGuard] },
   { path: 'ViewInformation', component: ViewInformationPageComponent, canActivate: [AuthGuard] },
   { path: 'ViewBalance', component: ViewBalancePageComponent, canActivate: [AuthGuard] },
+  { path: 'PostForm', component: CreatePostComponent, canActivate: [AuthGuard] },
   { path: '**', component: HomePageComponent },
 
 ];
