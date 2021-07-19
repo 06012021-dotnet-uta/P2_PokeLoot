@@ -42,12 +42,12 @@ stages:
         workingDir: $(solution)
         customCommand: 'run build-prod'
 
-    - task: Npm@1
-      displayName: 'NPM Test'
-      inputs:
-        command: 'custom'
-        workingDir: $(solution)
-        customCommand: 'run test-headless'
+    # - task: Npm@1
+    #   displayName: 'NPM Test'
+    #   inputs:
+    #     command: 'custom'
+    #     workingDir: $(solution)
+    #     customCommand: 'run test-headless'
     - task: SonarCloudAnalyze@1
     - task: SonarCloudPublish@1
       inputs:
