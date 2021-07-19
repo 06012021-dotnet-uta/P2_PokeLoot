@@ -305,9 +305,14 @@ namespace P2Api.Controllers
             return currentUser.CoinBalance;
         }
 
-        [HttpGet("RemovePost/{postId}")]
-        public bool RemovePost(int postID){
-            bool result = _businessModel.hidePost(postID);
+        /// <summary>
+        /// Removes a post
+        /// </summary>
+        /// <param name="postID">PostID</param>
+        /// <returns>if successful removal</returns>
+        [HttpGet("RemovePost/{idpost}")]
+        public bool RemovePost(int idpost){
+            bool result = _businessModel.hidePost(idpost);
             return result;
         }
 
