@@ -136,6 +136,7 @@ export class CreatePostComponent implements OnInit {
 
     this._createPostService.CreatePost(post).subscribe(
       result => {
+        console.log("we added an post" + result);
       },
       error => {
         console.log(error)
