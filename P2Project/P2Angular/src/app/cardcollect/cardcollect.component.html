@@ -59,7 +59,7 @@
         <h5 class="card-title text-left" style="font-size: 1.45em; text-align: left;">x{{card.Quantity}}</h5>
         <img class="card-img-top" src="{{card.SpriteLink}}" alt="{{card.PokemonName}} Image">
         <div class="card-body">
-        <h6>Super Rare</h6>
+        <h6>Mythic</h6>
         <h5 *ngIf="card.IsShiny as true; else elseBlock" class="card-title">★ {{card.PokemonName}} ★</h5>
         <ng-template #elseBlock><h5 class="card-title">{{card.PokemonName}}</h5></ng-template>
         <a href="{{bublapedia}}{{card.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
@@ -70,7 +70,7 @@
         <h5 class="card-title text-left" style="font-size: 1.45em; text-align: left;">x{{card.Quantity}}</h5>
         <img class="card-img-top" src="{{card.SpriteLink}}" alt="{{card.PokemonName}} Image">
         <div class="card-body">
-        <h6>Specially Super Rare</h6>
+        <h6>Legendary</h6>
         <h5 *ngIf="card.IsShiny as true; else elseBlock" class="card-title">★ {{card.PokemonName}} ★</h5>
         <ng-template #elseBlock><h5 class="card-title">{{card.PokemonName}}</h5></ng-template>
         <a href="{{bublapedia}}{{card.PokemonName}}" target="_blank" rel="noopener noreferrer" class="btn btn-primary">View Details</a> <!-- make button hyperlink to pokemon info page or remove -->
