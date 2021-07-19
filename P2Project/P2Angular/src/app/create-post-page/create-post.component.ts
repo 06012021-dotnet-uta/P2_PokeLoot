@@ -3,6 +3,8 @@ import { NgForm } from '@angular/forms';
 import { CardServiceService } from '../card-service.service';
 import { ICard } from '../cardcollect/ICard';
 import { IPost } from '../Models/IPost';
+import { FullPost } from '../Models/Post';
+import { CreatePostService } from '../service/createPost/create-post.service';
 
 
 @Component({
@@ -14,16 +16,20 @@ export class CreatePostComponent implements OnInit {
 
   isPriceValid: boolean = false;
   isPostTypeSelect = false;
+  isCardChosen = false;
+  isDescription = false;
+  isPokemonId = false;
   submittedSuccesfully = false;
   private userId = localStorage.getItem('userId') as string;
   user = localStorage.getItem('user') as string
   userName!: string;
   bublapedia: string = 'https://bulbapedia.bulbagarden.net/wiki/';
   userCollection: ICard[];
-  postType = [{ type: "Display" }, { type: "Sale" }, { type: "Discussion" }];
+  postType = [{ type: "Display" }, { type: "Sale" }];
 
 
-  constructor(private _cardcollectionService: CardServiceService) {
+
+  constructor(private _cardcollectionService: CardServiceService, private _createPostService: CreatePostService) {
     this.userCollection = []
   }
 
@@ -70,6 +76,10 @@ export class CreatePostComponent implements OnInit {
   OnSubmit(postForm: NgForm) {
     this.isPriceValid = false;
     this.isPostTypeSelect = false;
+    this.isPokemonId = false;
+    this.isDescription = false;
+
+
 
     if (postForm.value.postType === 'Sale') {
       this.isPriceValid
@@ -81,6 +91,16 @@ export class CreatePostComponent implements OnInit {
 
     if (postForm.value.postType === "") {
       this.isPostTypeSelect = true;
+      return;
+    }
+
+    if (postForm.value.textDescription === "") {
+      this.isDescription = true;
+      return;
+    }
+
+    if (postForm.value.PokemonId.length == 0) {
+      this.isPokemonId = true;
       return;
     }
 
@@ -96,19 +116,31 @@ export class CreatePostComponent implements OnInit {
       }
     }
 
-    let post = {
-      PokemonId: card.PokemonId,
-      PostDescription: postForm.value.textDescription,
-      Price: postForm.value.postType === 'Sale' ? postForm.value.Price : 0,
-      StillAvailable: postForm.value.postType === 'Sale' ? true : false,
-      IsShiny: card.IsShiny,
-      UserId: parseInt(this.userId),
-      UserName: this.userName,
-      SpriteLink: card.SpriteLink,
-      PostType: postForm.value.postType,
-      PokemonName: card.PokemonName,
-      RarityId: card.RarityId,
+    let post: FullPost = {
+      pokemonId: card.PokemonId,
+      postTime: new Date(),
+      postDescription: postForm.value.textDescription,
+      price: postForm.value.postType === 'Sale' ? postForm.value.Price : 0,
+      stillAvailable: postForm.value.postType === 'Sale' ? true : false,
+      isShiny: card.IsShiny,
+      userId: parseInt(this.userId),
+      userName: this.userName,
+      spriteLink: card.SpriteLink,
+      postType: postForm.value.postType,
+      pokemonName: card.PokemonName,
+      rarityId: card.RarityId,
     }
+
+    console.log(post);
+
+    this._createPostService.CreatePost(post).subscribe(
+      result => {
+        console.log(result);
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 
   GetRarityDisplay(rarityId: any): string {
