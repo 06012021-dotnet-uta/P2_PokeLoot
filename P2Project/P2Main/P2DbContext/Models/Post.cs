@@ -15,8 +15,6 @@ namespace P2DbContext.Models
         public bool StillAvailable { get; set; }
         public bool? IsShiny { get; set; }
 
-        public int? userId { get; set; }
-
         public virtual PokemonCard Pokemon { get; set; }
         public virtual DisplayBoard DisplayBoard { get; set; }
     }
