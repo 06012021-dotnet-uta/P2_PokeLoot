@@ -113,7 +113,7 @@ export class CreatePostComponent implements OnInit {
         card = cards;
         break;
       } else {
-        card = null
+        card = null;
       }
     }
 
@@ -130,7 +130,7 @@ export class CreatePostComponent implements OnInit {
       postType: postForm.value.postType,
       pokemonName: card.PokemonName,
       rarityId: card.RarityId,
-    }
+    };
 
     console.log(post);
 
@@ -142,7 +142,7 @@ export class CreatePostComponent implements OnInit {
       }
     );
 
-    console.log("Going HOme")
+    console.log("Going HOme");
     this.route.navigate(['Home']);
 
   }
