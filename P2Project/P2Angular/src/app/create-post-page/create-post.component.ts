@@ -1,3 +1,4 @@
+import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { CardServiceService } from '../card-service.service';
@@ -29,7 +30,7 @@ export class CreatePostComponent implements OnInit {
 
 
 
-  constructor(private _cardcollectionService: CardServiceService, private _createPostService: CreatePostService) {
+  constructor(private _cardcollectionService: CardServiceService, private _createPostService: CreatePostService, private route: Router) {
     this.userCollection = []
   }
 
@@ -135,12 +136,15 @@ export class CreatePostComponent implements OnInit {
 
     this._createPostService.CreatePost(post).subscribe(
       result => {
-        console.log(result);
       },
       error => {
         console.log(error)
       }
-    )
+    );
+
+    console.log("Going HOme")
+    this.route.navigate(['Home']);
+
   }
 
   GetRarityDisplay(rarityId: any): string {
