@@ -270,7 +270,7 @@ namespace P2Api.Controllers
                 PostDescription = descr,
                 Price = postPrice == 0 ? null : postPrice,
                 StillAvailable = true,
-                //IsShiny = isShiny
+                IsShiny = isShiny
             };
 
             if (currentUser != null)
