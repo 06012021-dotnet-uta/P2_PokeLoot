@@ -17,7 +17,13 @@ stages:
   - job: apijob
     steps:
 
-
+    - task: SonarCloudPrepare@1
+      inputs:
+        SonarCloud: 'SonarCloudToken'
+        organization: 'p2project-1'
+        scannerMode: 'MSBuild'
+        projectKey: 'P2Project_P2'
+        projectName: 'P2Api'
     - task: DotNetCoreCLI@2
       displayName: buildproj
       inputs:
@@ -37,7 +43,10 @@ stages:
         codeCoverageTool: 'Cobertura'
         summaryFileLocation: '**/coburtura/coverage.xml'
 
-
+    - task: SonarCloudAnalyze@1
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
     - task: DotNetCoreCLI@2
       displayName: publishproj
       inputs:
