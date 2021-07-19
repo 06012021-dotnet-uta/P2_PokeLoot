@@ -1,16 +1,10 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
-
 trigger:
-  branches:
-    include:
-    - main
-pr: none     
+- main
+pr: none    
 
 pool:
   vmImage: 'windows-latest'
+
 variables:
   solution: '**/*.sln'
   buildPlatform: 'Any CPU'
@@ -31,12 +25,14 @@ stages:
         projectName: 'P2'
 
     - task: DotNetCoreCLI@2
+      displayName: buildproj
       inputs:
         command: 'build'
         projects: '$(solution)'
         arguments: '--configuration $(buildConfiguration)'
 
     - task: DotNetCoreCLI@2
+      displayName: testproj
       inputs:
         command: 'test'
         projects: '$(solution)'
@@ -48,8 +44,12 @@ stages:
         summaryFileLocation: '**/coburtura/coverage.xml'
 
     - task: SonarCloudAnalyze@1
+    - task: SonarCloudPublish@1
+      inputs:
+        pollingTimeoutSec: '300'
 
     - task: DotNetCoreCLI@2
+      displayName: publishproj
       inputs:
         command: 'publish'
         publishWebProjects: false
@@ -58,12 +58,14 @@ stages:
         arguments:
 
     - task: AzureRmWebAppDeployment@4
+      displayName: deployproj
       inputs:
         ConnectionType: 'AzureRM'
         azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-        appType: 'apiApp'
+        appType: 'webApp'
         WebAppName: 'PokeLoot'
         deployToSlotOrASE: true
         ResourceGroupName: 'PokeLoot'
         SlotName: 'production'
         packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+

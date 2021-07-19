@@ -20,14 +20,6 @@ namespace P2Api.Controllers
 
         private readonly IBusinessModel _businessModel;
 
-        /// <summary>
-        /// This constructor is only used for testing
-        /// </summary>
-        /// <param name="rpsGame">Business model object</param>
-        //public P2Controller(IBusinessModel businessModel)
-        //{
-        //    this._businessModel = businessModel;
-        //}
 
         /// <summary>
         /// Constructor to inject the business layer
@@ -136,14 +128,6 @@ namespace P2Api.Controllers
         }
 
 
-        //          This method throws error in swagger 
-        //          "TypeError: Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body."
-        //[HttpGet("Lootbox/{currentUser}")]
-        //public Dictionary<PokemonCard, bool> Get(User currentUser)
-        //{
-        //    Dictionary<PokemonCard, bool> newCard = _businessModel.rollLootbox(currentUser);
-        //    return newCard;
-        //}
 
         /// <summary>
         /// https://localhost:44307/api/P2/Lootbox/2
@@ -155,13 +139,11 @@ namespace P2Api.Controllers
         //public Dictionary<PokemonCard, bool> Lootbox(int userId)
         public string Lootbox(int userId)
         {
+            const int lootBoxCost = 100;
             User currentUser = _businessModel.GetUserById(userId);
+            _businessModel.incrementUserBalance(currentUser, -lootBoxCost);
+
             Dictionary<PokemonCard, bool> newCard = _businessModel.rollLootbox(currentUser);
-            //string json = JsonConvert.SerializeObject(newCard.ToList(),
-            //    new JsonSerializerSettings()
-            //    {
-            //        ReferenceLoopHandling = ReferenceLoopHandling.Ignore
-            //    });
             string json = JsonConvert.SerializeObject(newCard.ToList());
             return json;
         }
@@ -194,7 +176,6 @@ namespace P2Api.Controllers
             User currentUser = _businessModel.GetUserById(userId);
             string json = JsonConvert.SerializeObject(currentUser);
             return json;
-            //return currentUser;
         }
 
         /// <summary>
@@ -202,13 +183,13 @@ namespace P2Api.Controllers
         /// </summary>
         /// <param name="userId">user id to get object for</param>
         /// <returns>User object</returns>
-        [HttpGet("CoinBalance/{userId}")]
-        public int CoinBalance(int userId)
-        {
-            User currentUser = _businessModel.GetUserById(userId);
-            _businessModel.incrementUserBalance(currentUser, -100);
-            return currentUser.CoinBalance;
-        }
+        //[HttpGet("CoinBalance/{userId}")]
+        //public int CoinBalance(int userId)
+        //{
+        //    User currentUser = _businessModel.GetUserById(userId);
+        //    _businessModel.incrementUserBalance(currentUser, -100);
+        //    return currentUser.CoinBalance;
+        //}
 
         /// <summary>
         /// https://localhost:44307/api/P2/Signup
@@ -291,6 +272,32 @@ namespace P2Api.Controllers
             }
             return false;
         }
+
+        /// returns list of rarity type objects from Db
+        /// </summary>
+        /// <returns>List of rarity type objects</returns>
+        [HttpGet("RarityTypes")]
+        public List<RarityType> RarityTypes()
+        {
+            return _businessModel.GetRarityTypes();
+        }
+
+
+        /// <summary>
+        /// adds a specified number of coins to the users account
+        /// </summary>
+        /// <param name="userId">user to add coins to</param>
+        /// <param name="coinsAmount">amount of coins to add</param>
+        /// <returns></returns>
+        [HttpGet("EarnCoins/{userId}/{coinsAmount}")]
+        public int EarnCoins(int userId, int coinsAmount)
+        {
+            User currentUser = _businessModel.GetUserById(userId);
+            _businessModel.incrementUserBalance(currentUser, coinsAmount);
+            return currentUser.CoinBalance;
+        }
+
+
 
     } // end class
 } // end namespace

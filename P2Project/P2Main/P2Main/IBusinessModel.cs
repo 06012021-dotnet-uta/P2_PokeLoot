@@ -29,10 +29,12 @@ namespace BusinessLayer
 
         public User GetUserById(int id); //tested
 
-        public bool RemoveUser(int id); 
+        public bool RemoveUser(int id); //tested
 
         public DisplayBoard getPostInfo(int id);
 
-        public Post getPostById(int id);
+        public Post getPostById(int id);//tested
+
+        public List<RarityType> GetRarityTypes();
     }
 }

@@ -2,8 +2,11 @@ import { HttpClientModule } from '@angular/common/http';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { AccountService } from '../account.service';
 import { MockAccountService } from './MockAccountService';
+import { MockUser } from './MockUser';
+import { Badge } from './IBadge';
 
 import { ProfilePageComponent } from './profile-page.component';
+import { MockBadges } from './MockBadges';
 
 describe('ProfilePageComponent', () => {
   let component: ProfilePageComponent;
@@ -32,8 +35,9 @@ describe('ProfilePageComponent', () => {
   it('should return a User oject with accessible properties', () => {
     
   })
-  //testing ViewBadges()
-  it('should modify an array of boolean values corresponding to unique logical expressions', () =>{
+  //testing ViewJohto()
+  it('should modify an array of type Badge by evaluating property values of a User object', () =>{
+    component.ViewJohto(MockUser,MockBadges)
     expect()
   })
   it('should create', () => {

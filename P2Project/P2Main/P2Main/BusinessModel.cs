@@ -10,7 +10,12 @@ namespace BusinessLayer
         {
 
 
+
         public P2DbClass context;
+
+
+
+        
 
         /// <summary>
         /// Constructor for business class that takes a Db context
@@ -113,8 +118,16 @@ namespace BusinessLayer
                 return result;
             }
 
+            
+
             int sellerID = (int)context.DisplayBoards.Where(x => x.PostId == post.PostId).Select(x => x.UserId).FirstOrDefault();
             User seller = context.Users.Where(x => x.UserId == sellerID).FirstOrDefault();
+
+            if(sellerID == currentUser.UserId){ // checks if user buys fromy themselves
+                output = "You can't buy from yourself!";
+                result.Add(output, false);
+                return result;
+            }
 
             currentUser.CoinBalance-= (int)post.Price; //decrement  current user coin balance
             context.Users.Attach(currentUser);
@@ -159,7 +172,7 @@ namespace BusinessLayer
                 userCollection.QuantityShiny++;
                 context.CardCollections.Attach(userCollection);
                 context.Entry(userCollection).Property(x => x.QuantityShiny).IsModified = true;
-                output = $"You brought a shiny {context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from {seller.UserName} for ${post.Price} coins!";
+                output = $"You brought a shiny {context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from {seller.UserName} for {post.Price} coins!";
             }
             else{ //updates user and seller collection if normal card
                 sellerCollection.QuantityNormal--;
@@ -186,7 +199,7 @@ namespace BusinessLayer
                 userCollection.QuantityNormal++;
                 context.CardCollections.Attach(userCollection);
                 context.Entry(userCollection).Property(x => x.QuantityNormal).IsModified = true;
-                output = $"You brought a {context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from {seller.UserName} for ${post.Price} coins!";
+                output = $"You brought a {context.PokemonCards.Where(x => x.PokemonId == post.PokemonId).Select(x => x.PokemonName).FirstOrDefault()} from {seller.UserName} for {post.Price} coins!";
 
             }
             try{
@@ -234,7 +247,7 @@ namespace BusinessLayer
         /// <returns>Returns whether post has been inserted succefully</returns>
         public bool newPost(Post newPost, User currentUser){
 
-            //add new post to database after filling possible blank data            DateTime now = DateTime.Now;
+            //add new post to database after filling possible blank data         
             DateTime now = DateTime.Now;
             newPost.PostTime = now;
             newPost.StillAvailable = true;
@@ -374,7 +387,7 @@ namespace BusinessLayer
         public bool RemoveUser(int id)
         {
             // Grab the Object by id
-            User user = context.Users.Single(x => x.UserId == id);
+            User user = context.Users.Where(x => x.UserId == id).FirstOrDefault();
 
             // Remove the user.
             if (user != null)
@@ -401,6 +414,11 @@ namespace BusinessLayer
         /// <returns>Post object or null</returns>
         public Post getPostById(int id){
             return context.Posts.Where(x => x.PostId == id).FirstOrDefault();
+        }
+
+        public List<RarityType> GetRarityTypes()
+        {
+            return context.RarityTypes.ToList();
         }
 
     }//class BusinessModel

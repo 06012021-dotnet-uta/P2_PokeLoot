@@ -1,10 +1,9 @@
 trigger:
   - main
-pr: none
+pr: none     
 
 pool:
   vmImage: 'windows-latest'
-
 variables:
   solution: 'P2Project/P2Angular'
   buildPlatform: 'Any CPU'
@@ -12,8 +11,9 @@ variables:
 
 stages:
 - stage: Angular
+  displayName: Angular
   jobs:
-  - job:
+  - job: angularjob
     steps:
     - task: NodeTool@0
       inputs:
@@ -29,6 +29,13 @@ stages:
         command: 'custom'
         workingDir: $(solution)
         customCommand: 'run build-prod'
+    
+    # - task: Npm@1
+    #   displayName: 'NPM Test'
+    #   inputs:
+    #     command: 'custom'
+    #     workingDir: $(solution)
+    #     customCommand: 'run test-headless'
 
     - task: ArchiveFiles@2
       inputs:
@@ -49,37 +56,8 @@ stages:
         ConnectionType: 'AzureRM'
         azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
         appType: 'webApp'
-        WebAppName: 'PokeLoot'
+        WebAppName: 'pokelootapi'
         deployToSlotOrASE: true
         ResourceGroupName: 'PokeLoot'
         SlotName: 'production'
-        packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-
-
-
-# - task: ArchiveFiles@2
-#   inputs:
-#     rootFolderOrFile: '$(solution)/dist'
-#     includeRootFolder: true
-#     archiveType: 'zip'
-#     archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-#     replaceExistingArchive: true
-
-# - task: PublishBuildArtifacts@1
-#   inputs:
-#     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#     artifactName: 'dist'
-#     publishLocation: 'Container'
-
-# - task: AzureRmWebAppDeployment@4
-#   inputs:
-#     ConnectionType: 'AzureRM'
-#     azureSubscription: 'P2(6b99bb29-57fd-4673-b918-0d515335b837)'
-#     appType: 'webApp'
-#     WebAppName: 'PokeLoot'
-#     deployToSlotOrASE: true
-#     ResourceGroupName: 'PokeLoot'
-#     SlotName: 'production'
-#     packageForLinux: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
-
-#packageForLinux: '$(System.DefaultWorkingDirectory)/**/*.zip'
+        packageForLinux: '$(System.DefaultWorkingDirectory)/P2Project/P2Angular/dist/P2Angular'

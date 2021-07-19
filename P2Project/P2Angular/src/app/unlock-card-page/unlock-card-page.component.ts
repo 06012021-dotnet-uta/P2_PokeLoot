@@ -63,7 +63,7 @@ export class UnlockCardPageComponent implements OnInit {
             console.log(this.newCard);
           }
         );
-        this._cardcollectionService.GetBalance().subscribe(
+        this._cardcollectionService.Balance().subscribe(
           result => {
             let coinBalance   = result;
   
