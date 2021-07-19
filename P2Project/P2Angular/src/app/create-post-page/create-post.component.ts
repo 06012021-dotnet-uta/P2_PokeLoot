@@ -143,9 +143,6 @@ export class CreatePostComponent implements OnInit {
       }
     );
 
-    console.log("Going HOme");
-    this.route.navigate(['Home']);
-
   }
 
   GetRarityDisplay(rarityId: any): string {
