@@ -260,18 +260,27 @@ namespace P2Api.Controllers
         /// </summary>
         /// <param name="userId">id of desired users collection</param>
         /// <returns>A status code back to the user</returns>
-        //[HttpPost("Post/Create")]
-        //public bool newPost(Post newPost)
-        //{
-        //    User currentUser = _businessModel.GetUserById((int)newPost.userId);
+        [HttpPost("Post/Create")]
+        public bool newPost(FullPost newPost)
+        {
+            User currentUser = _businessModel.GetUserById((int)newPost.UserId);
 
-        //    if(currentUser != null)
-        //    {
-        //        bool isCreated = _businessModel.newPost(newPost, currentUser);
-        //        return isCreated;
-        //    }
-        //    return false;
-        //}
+            Post post = new()
+            {
+                PokemonId = newPost.PokemonId,
+                PostDescription = newPost.PostDescription,
+                Price = newPost.Price,
+                StillAvailable = newPost.StillAvailable,
+                IsShiny = newPost.IsShiny
+            };
+
+            if (currentUser != null)
+            {
+                bool isCreated = _businessModel.newPost(post, currentUser);
+                return isCreated;
+            }
+            return false;
+        }
 
         /// returns list of rarity type objects from Db
         /// </summary>

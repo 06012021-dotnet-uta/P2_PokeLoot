@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { CardServiceService } from '../card-service.service';
 import { ICard } from '../cardcollect/ICard';
 import { IPost } from '../Models/IPost';
+import { CreatePostService } from '../service/createPost/create-post.service';
 
 
 @Component({
@@ -23,7 +24,7 @@ export class CreatePostComponent implements OnInit {
   postType = [{ type: "Display" }, { type: "Sale" }, { type: "Discussion" }];
 
 
-  constructor(private _cardcollectionService: CardServiceService) {
+  constructor(private _cardcollectionService: CardServiceService, private _createPostService: CreatePostService) {
     this.userCollection = []
   }
 
@@ -109,6 +110,15 @@ export class CreatePostComponent implements OnInit {
       PokemonName: card.PokemonName,
       RarityId: card.RarityId,
     }
+
+    this._createPostService.CreatePost(post).subscribe(
+      result => {
+        console.log(result);
+      },
+      error => {
+        console.log(error)
+      }
+    )
   }
 
   GetRarityDisplay(rarityId: any): string {
