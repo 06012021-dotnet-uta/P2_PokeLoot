@@ -54,6 +54,8 @@ export class PostsComponent implements OnInit {
           let Post: IPost = { PostId, PokemonId, PostTime, PostDescription, Price, StillAvailable, IsShiny, UserId, UserName, SpriteLink, PostType, PokemonName, RarityId }
           this.displayBoard.push(Post);
         }
+
+        console.log(this.displayBoard)
       }
     )
   }

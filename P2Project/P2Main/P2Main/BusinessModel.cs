@@ -245,15 +245,24 @@ namespace BusinessLayer
         /// <param name="newPost">post to be inserted</param>
         /// <param name="currentUser">Current user posting</param>
         /// <returns>Returns whether post has been inserted succefully</returns>
-        public bool newPost(Post newPost, User currentUser){
+        public bool newPost(FullPost newPost, User currentUser){
+
+            Post post = new() {
+                PostId = newPost.PostId,
+                PokemonId = newPost.PokemonId,
+                PostDescription = newPost.PostDescription,
+                Price = newPost.Price,
+                StillAvailable = newPost.StillAvailable,
+                IsShiny = newPost.IsShiny
+            };
 
             //add new post to database after filling possible blank data         
             DateTime now = DateTime.Now;
-            newPost.PostTime = now;
-            newPost.StillAvailable = true;
+            post.PostTime = now;
+            post.StillAvailable = true;
             try
             {
-                context.Posts.Add(newPost);
+                context.Posts.Add(post);
                 context.SaveChanges();
             }
             catch (Exception e)
@@ -265,10 +274,10 @@ namespace BusinessLayer
 
             //check post details to determine post type.
             int postType = 0;
-            if(newPost.PokemonId == null && newPost.Price == null){
+            if(post.PokemonId == null && post.Price == null){
                 postType = 1; //discussion
             }
-            else if(newPost.Price == null){
+            else if(post.Price == null){
                 postType = 3; //display
             }
             else{

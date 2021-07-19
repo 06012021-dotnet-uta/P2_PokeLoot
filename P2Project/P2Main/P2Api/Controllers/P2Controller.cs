@@ -261,9 +261,9 @@ namespace P2Api.Controllers
         /// <param name="userId">id of desired users collection</param>
         /// <returns>A status code back to the user</returns>
         [HttpPost("Post/Create")]
-        public bool newPost(Post newPost)
+        public bool newPost(FullPost newPost)
         {
-            User currentUser = _businessModel.GetUserById((int)newPost.userId);
+            User currentUser = _businessModel.GetUserById((int)newPost.UserId);
 
             if(currentUser != null)
             {
