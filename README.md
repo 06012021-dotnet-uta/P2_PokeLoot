@@ -2,11 +2,11 @@
 
 ## Project Description
 
-This application is a game to attract users for their interest in Pokemon and desire to grow a collection. This creates a platform for users to create and grow a card collection, connect with other users to exchange pokemon, and earn coins by engaging in various, repeatable tasks provided by the application. Users will have secure, personalized accounts that enable them to view and show off their collection to the display board. Users will be able to spend earned currency to buy and open card loot boxes. All information and pictures for the specific Pokemon cards will be obtained through the Pokemon API saving on database space and logic for the detailed information that the game is created upon.
+This project develops a game service by using a database first approach to create an original RESTful API that coordinates with an Angular application, leveraging Azure services to ensure continuous deployment to end users. Implemented user stories such as: allowing users to own a dynamically growing collection through loot boxes, earn in-app currency through tasks, user achievements that display their profile, and more. Leveraged testing frameworks just as Jasmine and Karma, xUnit, and SonarCloud to execute test driven development and deliver a robust product.
 
 ## Technologies Used
 
-* Angular CLI, , Azure DevOps Services, SonarCloud C# Programming, ASP.NET MVC, ADO.NET Entity Framework, Testing Process / SDLC, HTML5, CSS3, Defect Logging, Microsoft SQL Server, SQL, XML, AngularJS, TypeScript, JavaScript, Jasmine, Karma  - version 1.0
+* Azure DevOps, ASP.NET Core Web API, Entity Framework, HTML, CSS, TypeScript, Jasmine, Karma, xUnit Testing, Sql Server, Sonarcloud, C#, REST, Angular 2+, SQL, Visual Studio, Swagger, Git, Requirements Gathering, Routing & Switching, User Stories, Agile-Scrum, XML, JavaScript, Azure SQL Databases, Asp.Net Core, Defect Logging   - version 1.0
 
 
 ## Features
@@ -14,18 +14,20 @@ This application is a game to attract users for their interest in Pokemon and de
 List of features ready and TODOs for future development
 * Allow users to create new accounts and log in with previous creditials.
 * Users are able to accumalate coins into a saved account balance through various tasks and activties.
-* Users are able to use coins to open lootboxes that would randomly generate pokemon cards or buy cards from the message boards which reflect on their collection.
+* Users are able to use coins to open lootboxes that would randomly generate pokemon cards at varying rarities or buy cards from the message boards which reflect on their collection.
 * Users are able to store their collected cards and sell them on the message boards.
 * Users are able to view and insert various posts on the message board which dynamocally updates.
 
 To-do list:
-* Increase options available to users to earn coins
-* Make earning new cards more exciting with css styling
-* Sort Message board by tags / descriptions
-* Improve card trading and selling featuresr
+* Increase options available to users to earn coins.
+* Add the ability to comment on posts.
+* Add the ability for users to privately message eachother.
+* Make earning new cards more exciting with css styling.
+* Sort Message board by tags / descriptions.
+* Improve card trading and selling features.
 * Display discovered and undiscovered cards in a users collection view.
 * Allow users to see other users collections
-* Leaderboards
+* Implementation of leaderboards.
 * Allow pagination to decrease loading time.
 
 ## Getting Started
